@@ -269,7 +269,6 @@ if (leadForm && leadSuccess) {
       leadForm.hidden           = true;
       leadSuccess.hidden        = false;
       leadSuccess.style.display = 'flex';
-      window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
     }, 1800);
   });
 }
