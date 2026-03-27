@@ -130,3 +130,24 @@ const sectionObserver = new IntersectionObserver(
 );
 
 sections.forEach((s) => sectionObserver.observe(s));
+
+// ----------------------------------------------------------
+// 6. STICKY BAR — show after hero, dismiss on close
+// ----------------------------------------------------------
+const stickyBar   = document.getElementById('stickyBar');
+const stickyClose = document.getElementById('stickyBarClose');
+const heroSection = document.getElementById('hero');
+
+if (stickyBar && stickyClose && heroSection) {
+  let dismissed = false;
+
+  window.addEventListener('scroll', () => {
+    if (dismissed) return;
+    stickyBar.classList.toggle('visible', heroSection.getBoundingClientRect().bottom < 0);
+  }, { passive: true });
+
+  stickyClose.addEventListener('click', () => {
+    dismissed = true;
+    stickyBar.classList.remove('visible');
+  });
+}
