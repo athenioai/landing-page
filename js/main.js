@@ -223,6 +223,17 @@ if (leadForm && leadSuccess) {
     });
   }
 
+  function validateConsent() {
+    const checkbox = document.getElementById('f-consent');
+    const errEl    = document.getElementById('err-consent');
+    if (!checkbox?.checked) {
+      errEl.textContent = 'Você precisa aceitar para continuar.';
+      return false;
+    }
+    errEl.textContent = '';
+    return true;
+  }
+
   // Valida ao sair do campo e limpa erro ao corrigir
   Object.keys(RULES).forEach((name) => {
     const input = leadForm.querySelector(`[name="${name}"]`);
@@ -230,6 +241,8 @@ if (leadForm && leadSuccess) {
     input.addEventListener('blur',  () => validateField(name));
     input.addEventListener('input', () => { if (input.classList.contains('invalid')) validateField(name); });
   });
+
+  document.getElementById('f-consent')?.addEventListener('change', validateConsent);
 
   // Rate limit: bloqueia reenvio em menos de 10s
   let lastSubmit = 0;
@@ -243,8 +256,8 @@ if (leadForm && leadSuccess) {
     // Rate limit
     if (Date.now() - lastSubmit < 10000) return;
 
-    // Valida todos os campos
-    const allValid = Object.keys(RULES).map(validateField).every(Boolean);
+    // Valida todos os campos + consentimento
+    const allValid = Object.keys(RULES).map(validateField).every(Boolean) & validateConsent();
     if (!allValid) {
       leadForm.classList.add('shake');
       leadForm.addEventListener('animationend', () => leadForm.classList.remove('shake'), { once: true });
