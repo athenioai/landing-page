@@ -1653,7 +1653,27 @@ details[open] .faq-question { color: var(--accent); }
   width: 100%;
   justify-content: center;
   margin-top: 8px;
+  position: relative;
+  gap: 10px;
 }
+
+.lead-submit-spinner {
+  display: none;
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.lead-submit.loading .lead-submit-text   { opacity: 0.6; }
+.lead-submit.loading .lead-submit-spinner { display: block; }
+.lead-submit.loading { pointer-events: none; cursor: not-allowed; }
 
 .lead-success {
   display: none;
