@@ -161,23 +161,92 @@ const waBtn = document.getElementById('whatsappBtn');
 if (waBtn) waBtn.href = `https://wa.me/${WA_NUMBER}`;
 
 // ----------------------------------------------------------
-// 8. LEAD FORM — envia para WhatsApp ao submeter
+// 8. LEAD FORM — validação, sanitização, honeypot, rate limit
 // ----------------------------------------------------------
 const leadForm    = document.getElementById('leadForm');
 const leadSuccess = document.getElementById('leadSuccess');
 
 if (leadForm && leadSuccess) {
+
+  // Remove caracteres que podem causar injeção
+  function sanitize(str) {
+    return String(str).replace(/[<>"'`\\]/g, '').trim().slice(0, 200);
+  }
+
+  // Regras de validação por campo
+  const RULES = {
+    nome:     (v) => !v ? 'Preencha seu nome completo.'
+                       : v.length < 2 ? 'Nome muito curto.' : null,
+    empresa:  (v) => !v ? 'Preencha o nome da empresa.'
+                       : v.length < 2 ? 'Nome muito curto.' : null,
+    email:    (v) => !v ? 'Preencha seu e-mail.'
+                       : !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? 'E-mail inválido.' : null,
+    whatsapp: (v) => {
+      if (!v) return 'Preencha seu WhatsApp.';
+      const d = v.replace(/\D/g, '');
+      return (d.length < 10 || d.length > 13) ? 'Número inválido. Ex: (11) 99999-9999' : null;
+    },
+  };
+
+  function validateField(name) {
+    const input = leadForm.querySelector(`[name="${name}"]`);
+    const errEl = document.getElementById(`err-${name}`);
+    if (!input || !errEl) return true;
+    const error = RULES[name](sanitize(input.value));
+    if (error) {
+      input.classList.add('invalid');
+      input.classList.remove('valid');
+      errEl.textContent = error;
+      return false;
+    }
+    input.classList.remove('invalid');
+    input.classList.add('valid');
+    errEl.textContent = '';
+    return true;
+  }
+
+  // Valida ao sair do campo e limpa erro ao corrigir
+  Object.keys(RULES).forEach((name) => {
+    const input = leadForm.querySelector(`[name="${name}"]`);
+    if (!input) return;
+    input.addEventListener('blur',  () => validateField(name));
+    input.addEventListener('input', () => { if (input.classList.contains('invalid')) validateField(name); });
+  });
+
+  // Rate limit: bloqueia reenvio em menos de 10s
+  let lastSubmit = 0;
+
   leadForm.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    // Honeypot: bot preencheu o campo oculto → ignora silenciosamente
+    if ((leadForm.querySelector('[name="_hp"]')?.value || '').trim()) return;
+
+    // Rate limit
+    if (Date.now() - lastSubmit < 10000) return;
+
+    // Valida todos os campos
+    const allValid = Object.keys(RULES).map(validateField).every(Boolean);
+    if (!allValid) {
+      leadForm.classList.add('shake');
+      leadForm.addEventListener('animationend', () => leadForm.classList.remove('shake'), { once: true });
+      leadForm.querySelector('.invalid')?.focus();
+      return;
+    }
+
+    lastSubmit = Date.now();
+
     const data    = new FormData(leadForm);
-    const nome    = (data.get('nome')    || '').trim();
-    const empresa = (data.get('empresa') || '').trim();
+    const nome    = sanitize(data.get('nome')    || '');
+    const empresa = sanitize(data.get('empresa') || '');
     const msg     = encodeURIComponent(
       `Olá! Me chamo ${nome}, da empresa ${empresa}.\n\nGostaria de agendar meu Diagnóstico Gratuito com a Athenio.`
     );
-    leadForm.hidden        = true;
-    leadSuccess.hidden     = false;
+
+    leadForm.hidden           = true;
+    leadSuccess.hidden        = false;
     leadSuccess.style.display = 'flex';
+
     setTimeout(() => {
       window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
     }, 800);

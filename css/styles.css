@@ -1593,12 +1593,66 @@ details[open] .faq-question { color: var(--accent); }
 .lead-form input:focus {
   border-color: var(--accent);
   background: rgba(79, 209, 197, 0.07);
+  box-shadow: 0 0 0 3px rgba(79, 209, 197, 0.1);
 }
+
+/* Field wrapper */
+.lead-field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Error state */
+.lead-form input.invalid {
+  border-color: #FC8181;
+  background: rgba(252, 129, 129, 0.07);
+  box-shadow: 0 0 0 3px rgba(252, 129, 129, 0.12);
+}
+
+.lead-form input.invalid:focus {
+  border-color: #FC8181;
+  background: rgba(252, 129, 129, 0.07);
+  box-shadow: 0 0 0 3px rgba(252, 129, 129, 0.18);
+}
+
+/* Valid state */
+.lead-form input.valid {
+  border-color: rgba(79, 209, 197, 0.45);
+}
+
+/* Error message */
+.lead-error {
+  display: block;
+  font-size: 11.5px;
+  color: #FC8181;
+  margin-top: 5px;
+  min-height: 16px;
+  line-height: 1.3;
+}
+
+/* Honeypot — completamente invisível */
+.lead-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px; height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Shake on invalid submit */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-7px); }
+  40%       { transform: translateX(7px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+.lead-form.shake { animation: shake 0.38s ease; }
 
 .lead-submit {
   width: 100%;
   justify-content: center;
-  margin-top: 4px;
+  margin-top: 8px;
 }
 
 .lead-success {

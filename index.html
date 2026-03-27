@@ -58,7 +58,7 @@
     "description": "A Athenio desenvolve produtos de inteligência artificial que automatizam processos, ampliam capacidades e criam vantagens competitivas reais.",
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "contato@athenios.ai",
+      "email": "contato@athenio.ai",
       "contactType": "customer support",
       "availableLanguage": "Portuguese"
     },
@@ -677,15 +677,29 @@
         </div>
         <div class="footer-form-side">
           <form class="lead-form" id="leadForm" novalidate>
+            <!-- Honeypot — invisível para humanos; bots preenchem e são bloqueados -->
+            <input class="lead-honeypot" type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="lead-form-row">
-              <input type="text" name="nome" placeholder="Seu nome completo" required autocomplete="name">
-              <input type="text" name="empresa" placeholder="Nome da empresa" required autocomplete="organization">
+              <div class="lead-field">
+                <input type="text" name="nome" id="f-nome" placeholder="Seu nome completo" required maxlength="100" autocomplete="name">
+                <span class="lead-error" id="err-nome" role="alert"></span>
+              </div>
+              <div class="lead-field">
+                <input type="text" name="empresa" id="f-empresa" placeholder="Nome da empresa" required maxlength="100" autocomplete="organization">
+                <span class="lead-error" id="err-empresa" role="alert"></span>
+              </div>
             </div>
             <div class="lead-form-row">
-              <input type="email" name="email" placeholder="Seu melhor e-mail" required autocomplete="email">
-              <input type="tel" name="whatsapp" placeholder="WhatsApp com DDD" required autocomplete="tel">
+              <div class="lead-field">
+                <input type="email" name="email" id="f-email" placeholder="Seu melhor e-mail" required maxlength="150" autocomplete="email">
+                <span class="lead-error" id="err-email" role="alert"></span>
+              </div>
+              <div class="lead-field">
+                <input type="tel" name="whatsapp" id="f-whatsapp" placeholder="WhatsApp com DDD" required maxlength="20" autocomplete="tel">
+                <span class="lead-error" id="err-whatsapp" role="alert"></span>
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg lead-submit">Quero meu Diagnóstico Gratuito →</button>
+            <button type="submit" class="btn btn-primary btn-lg lead-submit" id="leadSubmit">Quero meu Diagnóstico Gratuito →</button>
           </form>
           <div class="lead-success" id="leadSuccess" hidden>
             <div class="lead-success-icon">✓</div>
@@ -740,7 +754,7 @@
           <div class="footer-col">
             <h4>Contato</h4>
             <ul>
-              <li><a href="mailto:contato@athenios.ai">contato@athenios.ai</a></li>
+              <li><a href="mailto:contato@athenio.ai">contato@athenio.ai</a></li>
               <li><a href="#" rel="noopener">Suporte</a></li>
               <li><a href="#" rel="noopener">Documentação</a></li>
             </ul>
