@@ -151,3 +151,81 @@ if (stickyBar && stickyClose && heroSection) {
     stickyBar.classList.remove('visible');
   });
 }
+
+// ----------------------------------------------------------
+// 7. WHATSAPP FAB — número e link dinâmico
+// ----------------------------------------------------------
+const WA_NUMBER = '5511999999999'; // ← Substitua pelo número real (DDI+DDD+número)
+
+const waBtn = document.getElementById('whatsappBtn');
+if (waBtn) waBtn.href = `https://wa.me/${WA_NUMBER}`;
+
+// ----------------------------------------------------------
+// 8. LEAD FORM — envia para WhatsApp ao submeter
+// ----------------------------------------------------------
+const leadForm    = document.getElementById('leadForm');
+const leadSuccess = document.getElementById('leadSuccess');
+
+if (leadForm && leadSuccess) {
+  leadForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data    = new FormData(leadForm);
+    const nome    = (data.get('nome')    || '').trim();
+    const empresa = (data.get('empresa') || '').trim();
+    const msg     = encodeURIComponent(
+      `Olá! Me chamo ${nome}, da empresa ${empresa}.\n\nGostaria de agendar meu Diagnóstico Gratuito com a Athenio.`
+    );
+    leadForm.hidden    = true;
+    leadSuccess.hidden = false;
+    setTimeout(() => {
+      window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
+    }, 800);
+  });
+}
+
+// ----------------------------------------------------------
+// 9. COUNTDOWN — vagas de abril (deadline: 30/04/2026)
+// ----------------------------------------------------------
+const DEADLINE = new Date('2026-04-30T23:59:59-03:00');
+
+function updateCountdown() {
+  const diff = DEADLINE - Date.now();
+  if (diff <= 0) return;
+
+  const days  = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins  = Math.floor((diff % 3600000)  / 60000);
+  const pad   = (n) => String(n).padStart(2, '0');
+
+  const cdDays  = document.getElementById('cdDays');
+  const cdHours = document.getElementById('cdHours');
+  const cdMins  = document.getElementById('cdMins');
+  if (cdDays)  cdDays.textContent  = days;
+  if (cdHours) cdHours.textContent = pad(hours);
+  if (cdMins)  cdMins.textContent  = pad(mins);
+
+  const stickyCD = document.getElementById('stickyCountdown');
+  if (stickyCD) stickyCD.textContent = `${days}d ${pad(hours)}h`;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 30000);
+
+// ----------------------------------------------------------
+// 10. SPOTS PROGRESS BAR — anima ao entrar na viewport
+// ----------------------------------------------------------
+const spotsBarFill = document.querySelector('.spots-bar-fill');
+if (spotsBarFill) {
+  const spotsObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          spotsBarFill.classList.add('animate');
+          spotsObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+  spotsObserver.observe(spotsBarFill.closest('.spots-progress'));
+}
