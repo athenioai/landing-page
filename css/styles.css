@@ -4,6 +4,57 @@
    Brand: #0F3D3E · #1F4E5F · #3A3F45
    ============================================================ */
 
+/* ----------------------------------------------------------
+   BRAND FONTS — self-hosted from official company CDNs
+   ---------------------------------------------------------- */
+/* Degular Display (Zapier) */
+@font-face {
+  font-family: 'Degular Display';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url('../public/assets/fonts/DegularDisplay-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Degular Display';
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url('../public/assets/fonts/DegularDisplay-Semibold.woff2') format('woff2');
+}
+
+/* Geomanist (n8n) */
+@font-face {
+  font-family: 'Geomanist';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('../public/assets/fonts/Geomanist-Bold.woff2') format('woff2');
+}
+
+/* TOTVS (TOTVS) */
+@font-face {
+  font-family: 'TOTVS';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('../public/assets/fonts/TOTVS-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'TOTVS';
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url('../public/assets/fonts/TOTVS-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'TOTVS';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('../public/assets/fonts/TOTVS-Bold.woff2') format('woff2');
+}
+
 /* Visually hidden — accessible to screen readers and search engines */
 .sr-only {
   position: absolute;
@@ -526,16 +577,44 @@ section { padding: var(--section-y) 0; }
 .logos-overflow:hover .logos-track {
   animation-play-state: paused;
 }
-.logos-track span {
-  font-family: var(--font-title);
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--text-subtle);
-  transition: color var(--ease);
+.logos-track .logo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  opacity: 0.75;
+  transition: opacity var(--ease);
+}
+.logos-track .logo-item:hover { opacity: 1; }
+.logos-track .logo-item img,
+.logos-track .logo-item svg {
+  display: block;
   flex-shrink: 0;
 }
-.logos-track span:hover { color: var(--text-muted); }
+.logos-track .logo-item span {
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* Per-brand fonts & colors — sourced from official brand guidelines */
+/* Zapier: #FF6B00 — Degular Display (fonte oficial, self-hosted) */
+.logos-track .logo-item[data-brand="zapier"] span     { font-family: 'Degular Display', sans-serif; font-weight: 600; color: #FF6B00; }
+/* n8n: #EE4F27 — Geomanist (fonte oficial, self-hosted) */
+.logos-track .logo-item[data-brand="n8n"] span        { font-family: 'Geomanist', sans-serif; font-weight: 700; color: #EE4F27; }
+/* HubSpot: #FF7A59 — Lexend (fonte oficial HubSpot, Google Fonts) */
+.logos-track .logo-item[data-brand="hubspot"] span    { font-family: 'Lexend', sans-serif; color: #FF7A59; }
+/* Salesforce: #00A1E0 — Source Sans 3 (≈ Salesforce Sans, fonte não pública) */
+.logos-track .logo-item[data-brand="salesforce"] span { font-family: 'Source Sans 3', sans-serif; color: #00A1E0; }
+/* Slack: #ECB22E — DM Sans (≈ Circular Pro, fonte não pública) */
+.logos-track .logo-item[data-brand="slack"] span      { font-family: 'DM Sans', sans-serif; color: #ECB22E; }
+/* WhatsApp: #25D366 — DM Sans */
+.logos-track .logo-item[data-brand="whatsapp"] span   { font-family: 'DM Sans', sans-serif; color: #25D366; }
+/* SAP: #008FD3 — Ubuntu (≈ SAP72, fonte não pública) */
+.logos-track .logo-item[data-brand="sap"] span        { font-family: 'Ubuntu', sans-serif; color: #008FD3; }
+/* TOTVS: #00DBFF — TOTVS (fonte oficial, self-hosted) */
+.logos-track .logo-item[data-brand="totvs"] span      { font-family: 'TOTVS', sans-serif; font-weight: 700; color: #00DBFF; }
 
 /* ----------------------------------------------------------
    12. PRODUCTS
@@ -1829,8 +1908,264 @@ details[open] .faq-question { color: var(--accent); }
 }
 
 /* ----------------------------------------------------------
-   24. REDUCED MOTION
+   24. COMPARISON SECTION
    ---------------------------------------------------------- */
+.comparison {
+  padding: var(--section-pad) 0;
+}
+
+.comparison-table {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  margin-top: 56px;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.comparison-col {
+  padding: 40px 36px;
+}
+
+.comparison-col--before {
+  background: rgba(252, 129, 129, 0.04);
+  border-right: 1px solid var(--border);
+}
+
+.comparison-col--after {
+  background: rgba(79, 209, 197, 0.04);
+  border-left: 1px solid var(--border);
+}
+
+.comparison-col-header {
+  margin-bottom: 28px;
+}
+
+.comparison-label {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: var(--r-pill);
+}
+
+.comparison-label--bad {
+  background: rgba(252, 129, 129, 0.12);
+  color: #FC8181;
+  border: 1px solid rgba(252, 129, 129, 0.25);
+}
+
+.comparison-label--good {
+  background: rgba(79, 209, 197, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(79, 209, 197, 0.25);
+}
+
+.comparison-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.comparison-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.comparison-item::before {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 1px;
+}
+
+.comparison-item--bad::before {
+  content: "✕";
+  background: rgba(252, 129, 129, 0.12);
+  color: #FC8181;
+}
+
+.comparison-item--good::before {
+  content: "✓";
+  background: rgba(79, 209, 197, 0.12);
+  color: var(--accent);
+}
+
+.comparison-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.comparison-cta {
+  text-align: center;
+  margin-top: 44px;
+}
+
+@media (max-width: 768px) {
+  .comparison-table {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-divider {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    padding: 18px 36px;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison-col--before { border-right: none; }
+  .comparison-col--after  { border-left: none; }
+}
+
+/* ----------------------------------------------------------
+   25. PIONEERS SECTION
+   ---------------------------------------------------------- */
+.pioneers {
+  padding: var(--section-pad) 0;
+  background: var(--bg-elevated);
+}
+
+.pioneers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 56px;
+}
+
+.pioneer-card {
+  position: relative;
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 36px 30px 32px;
+  transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
+  display: flex;
+  flex-direction: column;
+}
+
+.pioneer-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(79, 209, 197, 0.3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+.pioneer-card--featured {
+  border-color: rgba(79, 209, 197, 0.35);
+  background: linear-gradient(145deg, rgba(79, 209, 197, 0.05) 0%, var(--bg-base) 60%);
+}
+
+.pioneer-badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, var(--brand-primary), var(--accent));
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 16px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+
+.pioneer-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(79, 209, 197, 0.1);
+  border: 1px solid rgba(79, 209, 197, 0.2);
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.pioneer-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.pioneer-features li {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  padding-left: 18px;
+  position: relative;
+}
+
+.pioneer-features li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.pioneers-cta {
+  text-align: center;
+  margin-top: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.pioneers-note {
+  font-size: 15px;
+  color: var(--text-secondary);
+  background: rgba(79, 209, 197, 0.06);
+  border: 1px solid rgba(79, 209, 197, 0.2);
+  padding: 12px 28px;
+  border-radius: var(--r-pill);
+}
+
+.pioneers-note strong {
+  color: var(--accent);
+}
+
+@media (max-width: 1024px) {
+  .pioneers-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .pioneers-grid { grid-template-columns: 1fr; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .text-gradient  { animation: none; }
   .logos-track    { animation: none; }
