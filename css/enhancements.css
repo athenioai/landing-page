@@ -948,6 +948,12 @@ body::before {
   gap: 20px !important;
   align-items: stretch !important;
 }
+@media (max-width: 768px) {
+  .steps-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
 
 /* ----------------------------------------------------------
    R4.2  HERO ICP — callout nota de qualificação
@@ -1453,5 +1459,91 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .mobile-sticky-cta {
     transition: none !important;
+  }
+}
+
+/* ----------------------------------------------------------
+   MOBILE FIXES — sticky-bar, FAB e padding de conteúdo
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Oculta sticky-bar — mobile-sticky-cta assume o papel em mobile */
+  .sticky-bar { display: none !important; }
+
+  /* FAB do WhatsApp: sobe quando a barra CTA está visível */
+  body:has(.mobile-sticky-cta.is-visible) .whatsapp-fab {
+    bottom: 80px;
+  }
+
+  /* Evita que o último conteúdo fique oculto atrás da barra fixa */
+  body:has(.mobile-sticky-cta.is-visible) {
+    padding-bottom: 72px;
+  }
+}
+
+/* ----------------------------------------------------------
+   MOBILE BUTTONS — btn-lg 100% de largura sem limite de max-width
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+  .btn-lg,
+  .hero-actions .btn,
+  .cta-actions .btn {
+    max-width: none !important;
+    width: 100% !important;
+  }
+}
+
+/* ----------------------------------------------------------
+   MOBILE ALIGNMENT — consistência de centralização
+   ---------------------------------------------------------- */
+
+/* hero-icp: border-left fica assimétrico quando o elemento está
+   centralizado (margin: auto) — no mobile troca por border-top */
+@media (max-width: 768px) {
+  .hero-icp {
+    border-left: 1px solid rgba(79, 209, 197, 0.12) !important;
+    border-top: 2px solid rgba(79, 209, 197, 0.45) !important;
+    max-width: 100% !important;
+    text-align: left;
+  }
+}
+
+/* footer-form-info: centraliza o bloco de info no mobile,
+   para manter consistência com o hero (também centrado) */
+@media (max-width: 768px) {
+  .footer-form-info {
+    text-align: center;
+  }
+  /* Move a linha de acento para o centro */
+  .footer-form-info::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  /* Paragrafo ICP: ocupa largura total e centraliza */
+  .footer-form-icp {
+    max-width: 100% !important;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  /* Lista de trust points: alinha itens ao centro */
+  .footer-form-trust {
+    align-items: center;
+  }
+}
+
+/* footer-brand: centraliza logo + texto + social ao colapsar
+   para coluna única (≤1024px já é single col, mas só centralizamos no mobile) */
+@media (max-width: 768px) {
+  .footer-brand {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-brand > p {
+    max-width: 100%;
+  }
+  .social-links {
+    justify-content: center;
   }
 }
