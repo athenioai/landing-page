@@ -133,6 +133,8 @@
    1. CUSTOM PROPERTIES
    ---------------------------------------------------------- */
 :root {
+  color-scheme: dark;
+
   /* Brand */
   --brand-primary:   #0F3D3E;
   --brand-secondary: #1F4E5F;
@@ -2021,26 +2023,65 @@ details[open] .faq-question { color: var(--accent); }
   color: var(--text-subtle);
   margin-top: 6px;
   line-height: 1.4;
+  max-width: 100%;
 }
 
+/* Select: tema escuro consistente (Safari / iOS / Chrome) — evita controle “claro” nativo */
 .lead-form select {
+  display: block;
   width: 100%;
-  padding: 14px 16px;
-  background: rgba(15, 61, 62, 0.3);
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 12px 44px 12px 16px;
+  min-height: 48px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.35;
+  color: var(--text-primary);
+  cursor: pointer;
   border: 1px solid var(--border-strong);
   border-radius: var(--r-md);
-  color: var(--text-primary);
-  font-family: var(--font-body);
-  font-size: 14px;
-  cursor: pointer;
+  background-color: rgba(15, 61, 62, 0.45);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%237D9F9F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: border-color var(--ease), background-color var(--ease), box-shadow var(--ease);
+}
+
+.lead-form select:focus {
   outline: none;
-  transition: border-color var(--ease), background var(--ease);
+  border-color: var(--accent);
+  background-color: rgba(79, 209, 197, 0.1);
+  box-shadow: 0 0 0 3px rgba(79, 209, 197, 0.12);
 }
 
 .lead-form select:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-color: var(--accent);
+}
+
+.lead-form select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.lead-form select option,
+.lead-form select optgroup {
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+@media (min-width: 769px) {
+  .lead-form select {
+    font-size: 14px;
+    padding: 14px 44px 14px 16px;
+    min-height: unset;
+  }
 }
 
 .form-trust-seal {
@@ -2077,6 +2118,9 @@ details[open] .faq-question { color: var(--accent); }
 .lead-field {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  width: 100%;
 }
 
 .lead-label {
