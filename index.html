@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NG6MGQG7');</script>
+  <!-- End Google Tag Manager -->
+
   <!-- Primary Meta Tags -->
   <title>Athenio — Inteligência Artificial que Transforma Negócios</title>
   <meta name="title" content="Athenio — Inteligência Artificial que Transforma Negócios">
@@ -160,6 +168,9 @@
   </script>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NG6MGQG7" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
 
@@ -220,6 +231,7 @@
           <span>✓ Sem contrato de fidelidade</span>
           <span>✓ Resultado em semanas</span>
         </div>
+        <p class="hero-icp" data-animate>Foco em empresas com operações repetitivas (financeiro, comercial, suporte ou backoffice) — típico de times de cerca de <strong>15 a 500</strong> pessoas. Se encaixar, o diagnóstico mostra o retorno no seu cenário.</p>
       </div>
       <div class="hero-visual" aria-hidden="true" data-animate>
         <div class="dashboard-mockup">
@@ -991,6 +1003,7 @@
         <div class="footer-form-info">
           <h3 id="footer-form-heading">Agende seu<br>Diagnóstico Gratuito</h3>
           <p>Nosso especialista analisa seu negócio e mostra onde a IA gera mais valor — sem custo, sem compromisso.</p>
+          <p class="footer-form-icp" id="footer-form-icp">Costuma fazer mais sentido para equipes operacionais e processos com volume (aprox. <strong>15–500</strong> pessoas). Fora desse perfil, ainda avaliamos no diagnóstico.</p>
           <ul class="footer-form-trust">
             <li>✓ Diagnóstico 100% gratuito</li>
             <li>✓ Sem contrato de fidelidade</li>
@@ -1001,6 +1014,16 @@
           <form class="lead-form" id="leadForm" novalidate aria-labelledby="footer-form-heading">
             <!-- Honeypot — invisível para humanos; bots preenchem e são bloqueados -->
             <input class="lead-honeypot" type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <!-- Atribuição (Ads / campanhas) — preenchido via URL ?utm_*= ou sessionStorage -->
+            <div class="lead-utm-fields" aria-hidden="true">
+              <input type="hidden" name="utm_source" id="utm_source" value="" autocomplete="off">
+              <input type="hidden" name="utm_medium" id="utm_medium" value="" autocomplete="off">
+              <input type="hidden" name="utm_campaign" id="utm_campaign" value="" autocomplete="off">
+              <input type="hidden" name="utm_content" id="utm_content" value="" autocomplete="off">
+              <input type="hidden" name="utm_term" id="utm_term" value="" autocomplete="off">
+              <input type="hidden" name="gclid" id="gclid" value="" autocomplete="off">
+              <input type="hidden" name="fbclid" id="fbclid" value="" autocomplete="off">
+            </div>
             <div class="lead-form-row">
               <div class="lead-field">
                 <label class="lead-label" for="f-nome">Nome completo</label>
@@ -1025,22 +1048,32 @@
                 <span class="lead-error" id="err-whatsapp" role="alert"></span>
               </div>
             </div>
+            <div class="lead-form-row">
+              <div class="lead-field lead-field--full">
+                <label class="lead-label" for="f-dor">Principal dor hoje <span class="lead-optional">(opcional)</span></label>
+                <select name="dor_principal" id="f-dor" aria-describedby="hint-dor">
+                  <option value="">Prefiro não informar agora</option>
+                  <option value="automacao_backoffice">Automação / backoffice</option>
+                  <option value="dados_relatorios">Dados, relatórios e decisão</option>
+                  <option value="atendimento_whatsapp">Atendimento / WhatsApp</option>
+                  <option value="comercial_crm">Comercial / CRM / vendas</option>
+                  <option value="outro">Outro / ainda estou mapeando</option>
+                </select>
+                <span id="hint-dor" class="lead-hint">Ajuda a priorizar o que conversar nos 30 minutos — não é obrigatório.</span>
+              </div>
+            </div>
             <label class="lead-consent" for="f-consent">
               <input type="checkbox" name="consent" id="f-consent" required aria-required="true" aria-invalid="false" aria-describedby="err-consent privacy-consent-text">
               <span id="privacy-consent-text">Concordo em receber contato da Athenio e aceito a <a href="privacidade.html" rel="noopener">Política de Privacidade</a>.</span>
             </label>
             <span class="lead-error" id="err-consent" role="alert"></span>
+            <p class="form-trust-seal" id="form-trust-seal">Diagnóstico sem cartão · sem compromisso · sem fidelidade</p>
             <button type="submit" class="btn btn-primary btn-lg lead-submit" id="leadSubmit">
               <span class="lead-submit-text">Quero meu Diagnóstico Gratuito →</span>
               <span class="lead-submit-spinner" aria-hidden="true"></span>
             </button>
-            <p class="form-next-step">→ Um especialista entra em contato em até 2 horas úteis para agendar sua sessão.</p>
+            <p class="form-next-step">→ Após enviar, você será direcionado para a confirmação. Um especialista entra em contato em até 2 horas úteis.</p>
           </form>
-          <div class="lead-success" id="leadSuccess" role="status" aria-live="polite" aria-atomic="true">
-            <div class="lead-success-icon" aria-hidden="true">✓</div>
-            <h3 id="lead-success-heading" tabindex="-1">Recebemos seu contato!</h3>
-            <p>Confira o WhatsApp e o e-mail: um especialista responde em até <strong>2 horas úteis</strong> para agendar seus 30 minutos gratuitos.</p>
-          </div>
         </div>
       </div>
 
@@ -1082,6 +1115,8 @@
             <h4>Empresa</h4>
             <ul>
               <li><a href="#sobre">Sobre nós</a></li>
+              <li><a href="automacao-financeira.html">Automação financeira</a></li>
+              <li><a href="atendimento-whatsapp.html">Atendimento WhatsApp</a></li>
               <li><a href="#" rel="noopener">Blog</a></li>
               <li><a href="#" rel="noopener">Carreiras</a></li>
             </ul>
@@ -1131,6 +1166,7 @@
     </svg>
   </a>
 
+  <script src="js/analytics.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

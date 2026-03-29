@@ -798,6 +798,18 @@ section { padding: var(--section-y) 0; }
   letter-spacing: 0.04em;
 }
 
+.hero-icp {
+  margin-top: 22px;
+  max-width: 520px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.hero-icp strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
 /* Scroll hint */
 .scroll-hint {
   position: absolute;
@@ -1956,6 +1968,19 @@ details[open] .faq-question { color: var(--accent); }
   margin-bottom: 24px;
 }
 
+.footer-form-icp {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-subtle);
+  margin-top: -12px;
+  margin-bottom: 20px;
+  max-width: 400px;
+}
+.footer-form-icp strong {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
 .footer-form-trust {
   display: flex;
   flex-direction: column;
@@ -1979,6 +2004,52 @@ details[open] .faq-question { color: var(--accent); }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+}
+
+.lead-field--full {
+  grid-column: 1 / -1;
+}
+
+.lead-optional {
+  font-weight: 400;
+  color: var(--text-subtle);
+}
+
+.lead-hint {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-subtle);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.lead-form select {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(15, 61, 62, 0.3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-md);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--ease), background var(--ease);
+}
+
+.lead-form select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-color: var(--accent);
+}
+
+.form-trust-seal {
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  margin: 6px 0 10px;
 }
 
 .lead-form input {
@@ -2634,6 +2705,109 @@ details[open] .faq-question { color: var(--accent); }
   border-top: none;
   padding-top: 0;
   justify-content: center;
+}
+
+.thank-you-page {
+  text-align: center;
+  max-width: 560px;
+}
+.thank-you-page .legal-lead {
+  text-align: left;
+}
+.thank-you-page h2 {
+  text-align: left;
+}
+.thank-you-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: rgba(79, 209, 197, 0.15);
+  color: var(--accent);
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.thank-you-list {
+  list-style: disc;
+  text-align: left;
+  margin: 16px 0 24px;
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+.thank-you-list li {
+  margin-bottom: 10px;
+}
+.thank-you-list a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ----------------------------------------------------------
+   Satellite landing pages
+   ---------------------------------------------------------- */
+.satellite-body {
+  background: var(--bg-base);
+}
+.satellite-hero {
+  padding: 120px 0 72px;
+  border-bottom: 1px solid var(--border);
+}
+.satellite-hero .section-tag {
+  margin-bottom: 14px;
+}
+.satellite-hero h1 {
+  font-size: clamp(28px, 4.5vw, 48px);
+  max-width: 720px;
+  margin-bottom: 18px;
+}
+.satellite-hero > .container > p {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.65;
+  margin-bottom: 28px;
+}
+.satellite-section {
+  padding: 72px 0;
+  border-bottom: 1px solid var(--border);
+}
+.satellite-section h2 {
+  font-size: clamp(22px, 3vw, 32px);
+  margin-bottom: 20px;
+}
+.satellite-section ul,
+.satellite-section ol {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.75;
+  max-width: 640px;
+  padding-left: 1.25rem;
+}
+.satellite-section li {
+  margin-bottom: 12px;
+}
+.satellite-section ul {
+  list-style: disc;
+}
+.satellite-section ol {
+  list-style: decimal;
+}
+.satellite-footer-note {
+  font-size: 13px;
+  color: var(--text-subtle);
+  margin-top: 24px;
+  text-align: center;
+}
+.satellite-footer-note a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .stats .section-header {

@@ -77,71 +77,73 @@ const statsSection = document.querySelector('.stats');
 if (statsSection) statsObserver.observe(statsSection);
 
 // ----------------------------------------------------------
-// 4. MOBILE MENU — toggle
+// 4. MOBILE MENU — toggle (só na home / páginas com menu completo)
 // ----------------------------------------------------------
 const menuToggle = document.getElementById('menuToggle');
 const navLinks   = document.getElementById('navLinks');
 
-function openMenu() {
-  navbar.classList.add('menu-open');
-  menuToggle.setAttribute('aria-expanded', 'true');
-  menuToggle.setAttribute('aria-label', 'Fechar menu');
-  document.body.style.overflow = 'hidden';
+if (menuToggle && navLinks && navbar) {
+  function openMenu() {
+    navbar.classList.add('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    menuToggle.setAttribute('aria-label', 'Fechar menu');
+    document.body.style.overflow = 'hidden';
 
-  const [s1, , s3] = menuToggle.querySelectorAll('span');
-  menuToggle.querySelectorAll('span')[1].style.opacity = '0';
-  s1.style.transform = 'translateY(6.5px) rotate(45deg)';
-  s3.style.transform = 'translateY(-6.5px) rotate(-45deg)';
-}
+    const [s1, , s3] = menuToggle.querySelectorAll('span');
+    menuToggle.querySelectorAll('span')[1].style.opacity = '0';
+    s1.style.transform = 'translateY(6.5px) rotate(45deg)';
+    s3.style.transform = 'translateY(-6.5px) rotate(-45deg)';
+  }
 
-function closeMenu() {
-  navbar.classList.remove('menu-open');
-  menuToggle.setAttribute('aria-expanded', 'false');
-  menuToggle.setAttribute('aria-label', 'Abrir menu');
-  document.body.style.overflow = '';
+  function closeMenu() {
+    navbar.classList.remove('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Abrir menu');
+    document.body.style.overflow = '';
 
-  menuToggle.querySelectorAll('span').forEach((s) => {
-    s.style.transform = '';
-    s.style.opacity   = '';
+    menuToggle.querySelectorAll('span').forEach((s) => {
+      s.style.transform = '';
+      s.style.opacity   = '';
+    });
+  }
+
+  menuToggle.addEventListener('click', () => {
+    navbar.classList.contains('menu-open') ? closeMenu() : openMenu();
+  });
+
+  navLinks.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navbar.classList.contains('menu-open')) closeMenu();
   });
 }
-
-menuToggle.addEventListener('click', () => {
-  navbar.classList.contains('menu-open') ? closeMenu() : openMenu();
-});
-
-// Close on nav link click
-navLinks.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', closeMenu);
-});
-
-// Close on Escape key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && navbar.classList.contains('menu-open')) closeMenu();
-});
 
 // ----------------------------------------------------------
 // 5. ACTIVE NAV LINK — highlight on scroll
 // ----------------------------------------------------------
-const sections  = document.querySelectorAll('section[id], footer[id]');
-const navItems  = document.querySelectorAll('.nav-links a[href^="#"]');
+const sections = document.querySelectorAll('section[id], footer[id]');
+const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
 
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        navItems.forEach((link) => {
-          const active = link.getAttribute('href') === `#${id}`;
-          link.style.color = active ? 'var(--text-primary)' : '';
-        });
-      }
-    });
-  },
-  { threshold: 0.35 }
-);
+if (navItems.length) {
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navItems.forEach((link) => {
+            const active = link.getAttribute('href') === `#${id}`;
+            link.style.color = active ? 'var(--text-primary)' : '';
+          });
+        }
+      });
+    },
+    { threshold: 0.35 }
+  );
 
-sections.forEach((s) => sectionObserver.observe(s));
+  sections.forEach((s) => sectionObserver.observe(s));
+}
 
 // ----------------------------------------------------------
 // 6. STICKY BAR — show after hero, dismiss on close
@@ -192,12 +194,81 @@ const waBtn = document.getElementById('whatsappBtn');
 if (waBtn) waBtn.href = `https://wa.me/${WA_NUMBER}`;
 
 // ----------------------------------------------------------
-// 8. LEAD FORM — validação, sanitização, honeypot, rate limit
+// 8. LEAD FORM — validação, sanitização, honeypot, rate limit, UTMs, obrigado
 // ----------------------------------------------------------
-const leadForm    = document.getElementById('leadForm');
-const leadSuccess = document.getElementById('leadSuccess');
+const ATTR_KEYS     = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'];
+const ATTR_STORAGE  = 'athenio_attr_v1';
+const THANK_YOU_PAGE = 'obrigado.html';
 
-if (leadForm && leadSuccess) {
+function mergeAttributionFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  let pack = {};
+  try {
+    pack = JSON.parse(sessionStorage.getItem(ATTR_STORAGE) || '{}');
+  } catch (_) {
+    pack = {};
+  }
+  let changed = false;
+  ATTR_KEYS.forEach((k) => {
+    const v = params.get(k);
+    if (v != null && String(v).trim() !== '') {
+      pack[k] = String(v).trim().slice(0, 240);
+      changed = true;
+    }
+  });
+  if (changed) sessionStorage.setItem(ATTR_STORAGE, JSON.stringify(pack));
+}
+
+function applyAttributionToLeadForm(form) {
+  if (!form) return;
+  let pack = {};
+  try {
+    pack = JSON.parse(sessionStorage.getItem(ATTR_STORAGE) || '{}');
+  } catch (_) {
+    pack = {};
+  }
+  const params = new URLSearchParams(window.location.search);
+  ATTR_KEYS.forEach((k) => {
+    const input = form.querySelector(`[name="${k}"]`);
+    if (!input) return;
+    const fromUrl = params.get(k);
+    if (fromUrl != null && String(fromUrl).trim() !== '') {
+      input.value = String(fromUrl).trim().slice(0, 240);
+    } else if (pack[k]) {
+      input.value = String(pack[k]).slice(0, 240);
+    }
+  });
+}
+
+mergeAttributionFromUrl();
+
+function applySatelliteDefaults(form) {
+  if (!form) return;
+  const b = document.body;
+  const camp = b.getAttribute('data-default-utm-campaign');
+  if (!camp) return;
+  const pairs = [
+    ['utm_campaign', camp],
+    ['utm_source', b.getAttribute('data-default-utm-source') || 'satellite'],
+    ['utm_medium', b.getAttribute('data-default-utm-medium') || 'landing_satelite'],
+  ];
+  pairs.forEach(([name, val]) => {
+    if (!val) return;
+    const el = form.querySelector(`[name="${name}"]`);
+    if (el && !String(el.value || '').trim()) el.value = String(val).slice(0, 240);
+  });
+}
+
+const leadForm = document.getElementById('leadForm');
+
+if (leadForm) {
+  applyAttributionToLeadForm(leadForm);
+  applySatelliteDefaults(leadForm);
+  const preDor = document.body.getAttribute('data-prefill-dor');
+  if (preDor) {
+    const sel = leadForm.querySelector('[name="dor_principal"]');
+    if (sel && !String(sel.value || '').trim()) sel.value = preDor;
+  }
 
   // Remove caracteres que podem causar injeção
   function sanitize(str) {
@@ -309,16 +380,21 @@ if (leadForm && leadSuccess) {
       `Olá! Me chamo ${nome}, da empresa ${empresa}.\n\nGostaria de agendar meu Diagnóstico Gratuito com a Athenio.`
     );
 
-    // Loading state
+    // Loading state → página de obrigado (UTMs na query para analytics / CRM)
     const submitBtn = document.getElementById('leadSubmit');
     submitBtn.classList.add('loading');
 
     setTimeout(() => {
-      leadForm.style.display    = 'none';
-      leadSuccess.style.display = 'flex';
-      const successHeading = document.getElementById('lead-success-heading');
-      if (successHeading) successHeading.focus({ preventScroll: true });
-    }, 1800);
+      const q = new URLSearchParams();
+      ATTR_KEYS.forEach((k) => {
+        const v = (leadForm.querySelector(`[name="${k}"]`)?.value || '').trim();
+        if (v) q.set(k, v);
+      });
+      const dor = (leadForm.querySelector('[name="dor_principal"]')?.value || '').trim();
+      if (dor) q.set('dor_principal', dor.slice(0, 80));
+      const qs = q.toString();
+      window.location.href = THANK_YOU_PAGE + (qs ? `?${qs}` : '');
+    }, 900);
   });
 }
 
