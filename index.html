@@ -386,6 +386,12 @@
     .wl-form-header { text-align: center; margin-bottom: 44px; }
     .wl-form-header h2 { font-size: clamp(26px,3.5vw,40px); margin-bottom: 10px; }
     .wl-form-header p { font-size: 16px; color: var(--text-muted); line-height: 1.7; }
+    .wl-waitlist-count {
+      font-size: 15px; color: var(--text-muted); margin-top: 14px; line-height: 1.6;
+      padding: 12px 18px; border-radius: var(--r-md); border: 1px solid var(--border);
+      background: rgba(79,209,197,.06); max-width: 420px; margin-left: auto; margin-right: auto;
+    }
+    .wl-waitlist-count strong { color: #4FD1C5; font-variant-numeric: tabular-nums; }
     .waitlist-form { display: flex; flex-direction: column; gap: 14px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .form-field { display: flex; flex-direction: column; gap: 5px; }
@@ -769,9 +775,9 @@
       </a>
       <div class="wl-social-proof">
         <div class="wl-avatars" aria-hidden="true">
-          <div class="av av-1">MR</div>
-          <div class="av av-2">FL</div>
-          <div class="av av-3">CF</div>
+          <div class="av av-1">FF</div>
+          <div class="av av-2">ML</div>
+          <div class="av av-3">JF</div>
           <div class="av av-4">+</div>
         </div>
         <span>⚡ <strong id="heroCount">…</strong> empresários já na fila · Últimas vagas disponíveis</span>
@@ -970,10 +976,10 @@
         <div class="testi-stars">★★★★★</div>
         <p class="testi-quote">"Entrei na lista sem saber exatamente o que era. O que me convenceu foi a promessa de implementação sem TI e a <strong>garantia de 15 dias</strong>. Se não funcionar, peço o dinheiro de volta. É honesto demais para ignorar."</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#0F3D3E,#4FD1C5)">CH</div>
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#0F3D3E,#4FD1C5)">FF</div>
           <div class="testi-info">
-            <div class="testi-name">Carlos Henrique</div>
-            <div class="testi-role">CEO · Distribuidora · São Paulo, SP</div>
+            <div class="testi-name">Francisco Ferreira</div>
+            <div class="testi-role">Empresário · Atacadista · Maringá, PR</div>
           </div>
         </div>
       </div>
@@ -982,10 +988,10 @@
         <div class="testi-stars">★★★★★</div>
         <p class="testi-quote">"Passamos anos tentando digitalizar processos. Cada solução exigia consultor, projeto, orçamento. A proposta da Athenio é diferente: <strong>resultado em semanas</strong>. Quero ver isso acontecer de verdade."</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#1F4E5F,#81E6D9)">FL</div>
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#1F4E5F,#81E6D9)">ML</div>
           <div class="testi-info">
-            <div class="testi-name">Fernanda Lima</div>
-            <div class="testi-role">Diretora Operacional · Rede de Clínicas · BH, MG</div>
+            <div class="testi-name">Marcelo Lopes</div>
+            <div class="testi-role">Endodontista · Lopes e Salazar Odontologia · Maringá, PR</div>
           </div>
         </div>
       </div>
@@ -994,10 +1000,10 @@
         <div class="testi-stars">★★★★★</div>
         <p class="testi-quote">"Nossa operação vive em planilhas e e-mails. Qualquer coisa que me tire dessa realidade em semanas, <strong>sem precisar de TI, sem consultor</strong>, eu preciso testar. Entrei na lista imediatamente."</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#3A3F45,#4FD1C5)">RA</div>
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#3A3F45,#4FD1C5)">JF</div>
           <div class="testi-info">
-            <div class="testi-name">Ricardo Alves</div>
-            <div class="testi-role">Sócio · Escritório Contábil · Curitiba, PR</div>
+            <div class="testi-name">Jeferson Ayres</div>
+            <div class="testi-role">Contador · Alvorada Contabilidade · Arapongas, PR</div>
           </div>
         </div>
       </div>
@@ -1083,6 +1089,9 @@
       <p class="section-tag" style="text-align:center">// Reserve sua vaga agora</p>
       <h2>Gratuito. Sem compromisso.<br>Sua vaga garantida.</h2>
       <p>Você só paga em 4 de maio, se quiser. Mas sua vaga precisa ser reservada <strong style="color:var(--text-primary)">agora</strong> — restam apenas <strong id="formSpots" style="color:#4FD1C5">…</strong> vagas.</p>
+      <p class="wl-waitlist-count" id="waitlistCountWrap" aria-live="polite">
+        <span id="waitlistCountLabel">Já são <strong id="waitlistCount">—</strong> pessoas na lista de espera.</span>
+      </p>
     </div>
     <form class="waitlist-form" id="waitlistForm" novalidate>
       <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
@@ -1582,9 +1591,58 @@
 
 /* ── FORM ──────────────────────────────────────────────────── */
 (function () {
+  var SUPABASE_URL = 'https://lxkfjfcapcxznamipelp.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_VUU90I0U5kQwCfjwXMZ76g_FsCOYTTl';
   var ATTR_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
   var STORAGE   = 'athenio_attr_v1';
   var THANK_YOU = 'obrigado.html';
+
+  function supabaseHeaders() {
+    return {
+      'apikey':        SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type':  'application/json'
+    };
+  }
+
+  function parseRpcCount(data) {
+    if (data == null || data === '') return null;
+    if (typeof data === 'number' && !isNaN(data)) return Math.max(0, Math.floor(data));
+    if (Array.isArray(data) && data.length) {
+      var row = data[0];
+      if (row && typeof row === 'object' && row.count != null)
+        return Math.max(0, Math.floor(Number(row.count)));
+      if (typeof row === 'number') return Math.max(0, Math.floor(row));
+    }
+    return null;
+  }
+
+  function fetchWaitlistCount() {
+    var el = document.getElementById('waitlistCount');
+    if (!el) return;
+    var ctrl = new AbortController();
+    var t = setTimeout(function() { ctrl.abort(); }, 6000);
+    fetch(SUPABASE_URL + '/rest/v1/rpc/get_waitlist_count', {
+      method:  'POST',
+      signal:  ctrl.signal,
+      headers: supabaseHeaders(),
+      body:    '{}'
+    })
+      .then(function(res) { return res.json().catch(function() { return null; }); })
+      .then(function(data) {
+        clearTimeout(t);
+        var n = parseRpcCount(data);
+        if (n != null) {
+          el.textContent = n.toLocaleString('pt-BR');
+        } else {
+          el.textContent = '—';
+        }
+      })
+      .catch(function() {
+        clearTimeout(t);
+        el.textContent = '—';
+      });
+  }
 
   function mergeAttribution() {
     var params = new URLSearchParams(window.location.search);
@@ -1630,6 +1688,7 @@
 
   applyAttribution(form);
   maskPhone(form.querySelector('[name="whatsapp"]'));
+  fetchWaitlistCount();
 
   var lastSubmit = 0;
 
@@ -1704,14 +1763,10 @@
     var controller = new AbortController();
     var timeout    = setTimeout(function() { controller.abort(); }, 8000);
 
-    fetch('https://lxkfjfcapcxznamipelp.supabase.co/rest/v1/rpc/submit_lead', {
+    fetch(SUPABASE_URL + '/rest/v1/rpc/submit_lead', {
       method:  'POST',
       signal:  controller.signal,
-      headers: {
-        'apikey':        'sb_publishable_VUU90I0U5kQwCfjwXMZ76g_FsCOYTTl',
-        'Authorization': 'Bearer sb_publishable_VUU90I0U5kQwCfjwXMZ76g_FsCOYTTl',
-        'Content-Type':  'application/json'
-      },
+      headers: supabaseHeaders(),
       body: JSON.stringify(payload)
     })
     .then(function(res) {
