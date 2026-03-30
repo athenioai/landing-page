@@ -1678,6 +1678,8 @@
     lastSubmit = Date.now();
     submitBtn.disabled    = true;
     submitBtn.textContent = 'RESERVANDO SUA VAGA...';
+    var staleErr = document.getElementById('form-submit-error');
+    if (staleErr) staleErr.textContent = '';
 
     var payload = {
       name:          nome,
@@ -1719,7 +1721,7 @@
         window.location.href = THANK_YOU;
         return;
       }
-      return res.json().then(function(data) {
+      return res.json().catch(function() { return {}; }).then(function(data) {
         throw new Error(data && data.code === '23505' ? 'duplicate' : 'server');
       });
     })
