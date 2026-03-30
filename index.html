@@ -1679,16 +1679,66 @@
     submitBtn.disabled    = true;
     submitBtn.textContent = 'RESERVANDO SUA VAGA...';
 
-    var params = new URLSearchParams(window.location.search);
-    ATTR_KEYS.forEach(function(k) {
-      var input = form.querySelector('[name="' + k + '"]');
-      if (input && input.value) params.set(k, input.value);
-    });
-    params.set('origem', 'lista_espera');
+    var payload = {
+      name:          nome,
+      company:       empresa,
+      email:         email,
+      whatsapp:      phone,
+      company_size:  sanitize(form.tamanho_empresa.value) || null,
+      intent:        'waitlist',
+      utm_source:    sanitize(form.utm_source.value)   || null,
+      utm_medium:    sanitize(form.utm_medium.value)   || null,
+      utm_campaign:  sanitize(form.utm_campaign.value) || null,
+      utm_content:   sanitize(form.utm_content.value)  || null,
+      utm_term:      sanitize(form.utm_term.value)     || null,
+      referrer:      String(document.referrer).slice(0, 500) || null,
+      landing_url:   String(window.location.href).slice(0, 500),
+      user_agent:    String(navigator.userAgent).slice(0, 500),
+      screen_width:  screen.width,
+      screen_height: screen.height,
+      consent:       true
+    };
 
-    setTimeout(function() {
-      window.location.href = THANK_YOU + '?' + params.toString();
-    }, 900);
+    var controller = new AbortController();
+    var timeout    = setTimeout(function() { controller.abort(); }, 8000);
+
+    fetch('https://lxkfjfcapcxznamipelp.supabase.co/rest/v1/leads', {
+      method:  'POST',
+      signal:  controller.signal,
+      headers: {
+        'apikey':        'sb_publishable_VUU90I0U5kQwCfjwXMZ76g_FsCOYTTl',
+        'Authorization': 'Bearer sb_publishable_VUU90I0U5kQwCfjwXMZ76g_FsCOYTTl',
+        'Content-Type':  'application/json',
+        'Prefer':        'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res) {
+      clearTimeout(timeout);
+      if (res.status === 201) {
+        window.location.href = THANK_YOU;
+        return;
+      }
+      return res.json().then(function(data) {
+        throw new Error(data && data.code === '23505' ? 'duplicate' : 'server');
+      });
+    })
+    .catch(function(err) {
+      clearTimeout(timeout);
+      submitBtn.disabled    = false;
+      submitBtn.textContent = 'GARANTIR MINHA VAGA DE FUNDADOR →';
+      var msg = err.name === 'AbortError'   ? 'Conexão lenta. Tente novamente.' :
+                err.message === 'duplicate' ? 'Este e-mail já está na lista.' :
+                'Erro ao salvar. Tente novamente.';
+      var errEl = document.getElementById('form-submit-error');
+      if (!errEl) {
+        errEl = document.createElement('p');
+        errEl.id = 'form-submit-error';
+        errEl.style.cssText = 'color:#a15c5c;font-size:13px;text-align:center;margin-top:4px';
+        submitBtn.insertAdjacentElement('afterend', errEl);
+      }
+      errEl.textContent = msg;
+    });
   });
 
   form.querySelectorAll('input').forEach(function(input) {
