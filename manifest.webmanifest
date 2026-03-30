@@ -1,5 +1,5 @@
 {
-  "name": "Athenio — Inteligência Artificial que Transforma Negócios",
+  "name": "Athenio · Inteligência Artificial que Transforma Negócios",
   "short_name": "Athenio",
   "description": "Produtos de IA que automatizam processos, ampliam capacidades e criam vantagens competitivas reais.",
   "start_url": "/",
@@ -9,10 +9,10 @@
   "lang": "pt-BR",
   "icons": [
     {
-      "src": "public/assets/logo.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon",
+      "purpose": "any"
     }
   ]
 }

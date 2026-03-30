@@ -495,7 +495,7 @@ function applyScarcityUI(s) {
 
   const spotsLabel = document.getElementById('spots-label');
   if (spotsLabel) {
-    spotsLabel.innerHTML = `${s.filled} de ${s.total} vagas preenchidas — <strong>${s.remaining} restantes</strong>`;
+    spotsLabel.innerHTML = `${s.filled} de ${s.total} vagas preenchidas · <strong>${s.remaining} restantes</strong>`;
   }
 
   const track = document.getElementById('spots-bar-track');
