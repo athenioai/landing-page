@@ -1090,7 +1090,7 @@
       <h2>Gratuito. Sem compromisso.<br>Sua vaga garantida.</h2>
       <p>Você só paga em 4 de maio, se quiser. Mas sua vaga precisa ser reservada <strong style="color:var(--text-primary)">agora</strong> — restam apenas <strong id="formSpots" style="color:#4FD1C5">…</strong> vagas.</p>
       <p class="wl-waitlist-count" id="waitlistCountWrap" aria-live="polite">
-        <span id="waitlistCountLabel">Já são <strong id="waitlistCount">—</strong> pessoas na lista de espera.</span>
+        <span id="waitlistCountLabel">Já são <strong id="waitlistCount">—</strong> empresários na lista de espera.</span>
       </p>
     </div>
     <form class="waitlist-form" id="waitlistForm" novalidate>
@@ -1401,8 +1401,7 @@
 /* ── DYNAMIC QUEUE COUNTER ─────────────────────────────────────
    Regra:
      Antes de abril   → 0 vagas ocupadas
-     1 abr → 1 mai    → cresce com aceleração progressiva
-                        (devagar no início, mais rápido no fim)
+     1 abr → 1 mai    → cresce com aceleração progressiva (mín. 5 na fila)
      1 mai 10h         → 173 ocupadas (27 restantes)
    ─────────────────────────────────────────────────────────── */
 (function () {
@@ -1420,14 +1419,16 @@
     var t = elapsedMs / totalMs; // 0.0 → 1.0 ao longo de abril
 
     // Curva de potência (expoente > 1 = aceleração progressiva)
-    // dia 01/abr → ~0   |  dia 15/abr → ~52  |  dia 25/abr → ~127  |  dia 30/abr → ~171
+    // dia 01/abr → mín. 5   |  dia 15/abr → ~52  |  dia 25/abr → ~127  |  dia 30/abr → ~171
     var base = Math.floor(MAX_TAKEN * Math.pow(t, 1.6));
 
     // Jitter determinístico por dia (±2) — parece orgânico, nunca muda no mesmo dia
     var day    = Math.floor(elapsedMs / 86400000);
     var jitter = ((day * 11 + 7) % 5) - 2;
 
-    return Math.min(MAX_TAKEN, Math.max(0, base + jitter));
+    var raw = Math.min(MAX_TAKEN, Math.max(0, base + jitter));
+    /* A partir de 01/04: mínimo 5 empresários na fila (prova social inicial). */
+    return Math.max(5, raw);
   }
 
   var taken     = spotsTaken(Date.now());
