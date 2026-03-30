@@ -4,6 +4,7 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'">
   <title>Athenio — Lista de Espera · Lançamento 4 de maio</title>
   <meta name="description" content="O software de IA que vai separar quem lidera de quem segue chega em 4 de maio. Garanta sua vaga de fundador — apenas 200 vagas disponíveis.">
   <meta name="robots" content="index, follow">
@@ -1593,7 +1594,7 @@
     var changed = false;
     ATTR_KEYS.forEach(function(k) {
       var v = params.get(k);
-      if (v) { pack[k] = String(v).trim().slice(0, 240); changed = true; }
+      if (v) { pack[k] = sanitize(String(v)); changed = true; }
     });
     if (changed) sessionStorage.setItem(STORAGE, JSON.stringify(pack));
   }
@@ -1606,7 +1607,7 @@
       var input = form.querySelector('[name="' + k + '"]');
       if (!input) return;
       var fromUrl = params.get(k);
-      input.value = fromUrl ? fromUrl.trim().slice(0,240) : (pack[k] || '');
+      input.value = fromUrl ? sanitize(fromUrl) : (pack[k] || '');
     });
   }
 
@@ -1682,55 +1683,56 @@
     if (staleErr) staleErr.textContent = '';
 
     var payload = {
-      name:          nome,
-      company:       empresa,
-      email:         email,
-      whatsapp:      phone,
-      company_size:  sanitize(form.tamanho_empresa.value) || null,
-      intent:        'waitlist',
-      utm_source:    sanitize(form.utm_source.value)   || null,
-      utm_medium:    sanitize(form.utm_medium.value)   || null,
-      utm_campaign:  sanitize(form.utm_campaign.value) || null,
-      utm_content:   sanitize(form.utm_content.value)  || null,
-      utm_term:      sanitize(form.utm_term.value)     || null,
-      referrer:      String(document.referrer).slice(0, 500) || null,
-      landing_url:   String(window.location.href).slice(0, 500),
-      user_agent:    String(navigator.userAgent).slice(0, 500),
-      screen_width:  screen.width,
-      screen_height: screen.height,
-      consent:       true
+      p_name:          nome,
+      p_company:       empresa,
+      p_email:         email,
+      p_whatsapp:      phone,
+      p_company_size:  sanitize(form.tamanho_empresa.value) || null,
+      p_intent:        'waitlist',
+      p_utm_source:    sanitize(form.utm_source.value)   || null,
+      p_utm_medium:    sanitize(form.utm_medium.value)   || null,
+      p_utm_campaign:  sanitize(form.utm_campaign.value) || null,
+      p_utm_content:   sanitize(form.utm_content.value)  || null,
+      p_utm_term:      sanitize(form.utm_term.value)     || null,
+      p_referrer:      String(document.referrer).slice(0, 500) || null,
+      p_landing_url:   String(window.location.href).slice(0, 500),
+      p_user_agent:    String(navigator.userAgent).slice(0, 500),
+      p_screen_width:  screen.width,
+      p_screen_height: screen.height,
+      p_consent:       true
     };
 
     var controller = new AbortController();
     var timeout    = setTimeout(function() { controller.abort(); }, 8000);
 
-    fetch('https://lxkfjfcapcxznamipelp.supabase.co/rest/v1/leads', {
+    fetch('https://lxkfjfcapcxznamipelp.supabase.co/rest/v1/rpc/submit_lead', {
       method:  'POST',
       signal:  controller.signal,
       headers: {
         'apikey':        'sb_publishable_VUU90I0U5kQwCfjwXMZ76g_FsCOYTTl',
         'Authorization': 'Bearer sb_publishable_VUU90I0U5kQwCfjwXMZ76g_FsCOYTTl',
-        'Content-Type':  'application/json',
-        'Prefer':        'return=minimal'
+        'Content-Type':  'application/json'
       },
       body: JSON.stringify(payload)
     })
     .then(function(res) {
+      return res.json().catch(function() { return {}; });
+    })
+    .then(function(data) {
       clearTimeout(timeout);
-      if (res.status === 201) {
+      if (data && data.success) {
         window.location.href = THANK_YOU;
         return;
       }
-      return res.json().catch(function() { return {}; }).then(function(data) {
-        throw new Error(data && data.code === '23505' ? 'duplicate' : 'server');
-      });
+      throw new Error((data && data.error) || 'server_error');
     })
     .catch(function(err) {
       clearTimeout(timeout);
       submitBtn.disabled    = false;
       submitBtn.textContent = 'GARANTIR MINHA VAGA DE FUNDADOR →';
-      var msg = err.name === 'AbortError'   ? 'Conexão lenta. Tente novamente.' :
-                err.message === 'duplicate' ? 'Este e-mail já está na lista.' :
+      var msg = err.name === 'AbortError'            ? 'Conexão lenta. Tente novamente.'    :
+                err.message === 'duplicate_email'    ? 'Este e-mail já está na lista.'      :
+                err.message === 'rate_limited'       ? 'Muitas tentativas. Tente em breve.' :
                 'Erro ao salvar. Tente novamente.';
       var errEl = document.getElementById('form-submit-error');
       if (!errEl) {
