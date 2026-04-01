@@ -10,71 +10,689 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-NG6MGQG7');</script>
   <!-- End Google Tag Manager -->
-  <title>Termos de Uso | Athenio</title>
-  <meta name="description" content="Termos e condições de uso do site e dos canais da Athenio.">
+  <title>Termos de Uso SaaS e Ética em IA | Athenio</title>
+  <meta name="description" content="Termos de Uso de Software (SaaS) e Política de Ética no Uso de Inteligência Artificial da plataforma Athenio.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://athenio.ai/termos.html">
   <link rel="icon" href="https://athenio.ai/favicon.ico" sizes="48x48" type="image/x-icon">
   <link rel="apple-touch-icon" href="https://athenio.ai/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Sora:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=3">
+
+  <style>
+    /* ============================================================
+       TERMS PAGE — EDITORIAL DOCUMENT DESIGN
+       Same design system as privacidade.html
+       ============================================================ */
+
+    body { padding-top: 64px; }
+
+    /* ── READING PROGRESS BAR ──────────────────────────────── */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #4FD1C5, #38B2AC, #81E6D9);
+      z-index: 999;
+      transition: width 60ms linear;
+      box-shadow: 0 0 12px rgba(79, 209, 197, .5);
+    }
+
+    /* ── HERO / HEADER AREA ────────────────────────────────── */
+    .privacy-hero {
+      position: relative;
+      padding: 80px 0 56px;
+      overflow: hidden;
+    }
+    .privacy-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 55% at 75% 35%, rgba(15, 61, 62, .55), transparent),
+        radial-gradient(ellipse 50% 50% at 25% 60%, rgba(31, 78, 95, .3), transparent);
+      pointer-events: none;
+    }
+    .privacy-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent) 70%, transparent);
+      opacity: .2;
+    }
+    .privacy-hero-inner {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+    .privacy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: var(--r-pill);
+      background: rgba(79, 209, 197, .08);
+      border: 1px solid rgba(79, 209, 197, .18);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .privacy-badge svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+    .privacy-hero h1 {
+      font-family: var(--font-title);
+      font-size: clamp(28px, 4.2vw, 44px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      letter-spacing: -.02em;
+    }
+    .privacy-hero h1 span {
+      display: block;
+      font-size: .55em;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 8px;
+      letter-spacing: 0;
+    }
+    .privacy-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+    }
+    .privacy-meta time {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ── LAYOUT: TOC + CONTENT ─────────────────────────────── */
+    .privacy-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 48px;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 48px var(--gutter) 80px;
+      align-items: start;
+    }
+
+    /* ── TABLE OF CONTENTS ─────────────────────────────────── */
+    .privacy-toc {
+      position: sticky;
+      top: 88px;
+      font-family: var(--font-body);
+    }
+    .privacy-toc-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: 16px;
+      padding-left: 14px;
+    }
+    .privacy-toc ol {
+      list-style: none;
+      counter-reset: toc;
+      border-left: 1px solid rgba(79, 209, 197, .1);
+    }
+    .privacy-toc li {
+      counter-increment: toc;
+    }
+    .privacy-toc a {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 7px 14px;
+      font-size: 12.5px;
+      font-weight: 400;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      margin-left: -1px;
+      transition: color .2s, border-color .2s;
+      line-height: 1.4;
+    }
+    .privacy-toc a::before {
+      content: counter(toc, decimal-leading-zero);
+      font-family: var(--font-title);
+      font-weight: 600;
+      font-size: 10px;
+      color: var(--text-subtle);
+      flex-shrink: 0;
+      min-width: 16px;
+      transition: color .2s;
+    }
+    .privacy-toc a:hover,
+    .privacy-toc a.active {
+      color: var(--text-primary);
+      border-left-color: var(--accent);
+    }
+    .privacy-toc a:hover::before,
+    .privacy-toc a.active::before {
+      color: var(--accent);
+    }
+
+    /* ── CONTENT SECTIONS ──────────────────────────────────── */
+    .privacy-content {
+      min-width: 0;
+    }
+    .privacy-intro {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(79, 209, 197, .08);
+    }
+    .privacy-section {
+      margin-bottom: 40px;
+      padding: 28px 32px 32px;
+      border-radius: var(--r-md);
+      background: rgba(12, 24, 24, .5);
+      border: 1px solid rgba(79, 209, 197, .06);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .5s ease, transform .5s ease, border-color .3s, box-shadow .3s;
+    }
+    .privacy-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .privacy-section:hover {
+      border-color: rgba(79, 209, 197, .14);
+      box-shadow: 0 4px 32px rgba(0, 0, 0, .15);
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .section-number {
+      font-family: var(--font-title);
+      font-size: 32px;
+      font-weight: 700;
+      color: rgba(79, 209, 197, .15);
+      line-height: 1;
+      flex-shrink: 0;
+      letter-spacing: -.02em;
+      user-select: none;
+    }
+    .section-header h2 {
+      font-family: var(--font-title);
+      font-size: clamp(16px, 2vw, 19px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin: 0;
+    }
+    .privacy-section p {
+      font-size: 14.5px;
+      line-height: 1.78;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .privacy-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── BULLET LIST INSIDE SECTIONS ───────────────────────── */
+    .privacy-section ul {
+      list-style: none;
+      margin: 12px 0 4px;
+    }
+    .privacy-section ul li {
+      position: relative;
+      padding: 8px 0 8px 22px;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(79, 209, 197, .04);
+    }
+    .privacy-section ul li:last-child {
+      border-bottom: none;
+    }
+    .privacy-section ul li::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 16px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(79, 209, 197, .35);
+    }
+    .privacy-section ul li strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ── POLICY DIVIDER ────────────────────────────────────── */
+    .policy-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 56px 0 40px;
+    }
+    .policy-divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(79, 209, 197, .2), transparent);
+    }
+    .policy-divider-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: var(--r-pill);
+      background: rgba(79, 209, 197, .06);
+      border: 1px solid rgba(79, 209, 197, .15);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: .03em;
+      white-space: nowrap;
+    }
+
+    /* ── FOOTER LINKS ──────────────────────────────────────── */
+    .privacy-footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(79, 209, 197, .08);
+    }
+    .privacy-footer-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .privacy-footer-links a:hover {
+      color: var(--accent);
+    }
+    .privacy-footer-links .sep {
+      color: var(--text-subtle);
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      body { padding-top: 64px; }
+      .privacy-hero { padding: 56px 0 40px; }
+      .privacy-layout {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding-top: 0;
+      }
+      .privacy-toc {
+        position: relative;
+        top: 0;
+        padding: 20px var(--gutter) 24px;
+        margin: 0 calc(-1 * var(--gutter));
+        width: calc(100% + 2 * var(--gutter));
+        border-bottom: 1px solid rgba(79, 209, 197, .08);
+        margin-bottom: 32px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .privacy-toc ol {
+        display: flex;
+        gap: 4px;
+        border-left: none;
+        white-space: nowrap;
+        padding-bottom: 4px;
+      }
+      .privacy-toc a {
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        margin-left: 0;
+        padding: 6px 12px;
+        font-size: 12px;
+        border-radius: var(--r-sm) var(--r-sm) 0 0;
+      }
+      .privacy-toc a:hover,
+      .privacy-toc a.active {
+        border-left-color: transparent;
+        border-bottom-color: var(--accent);
+      }
+      .privacy-section {
+        padding: 22px 20px 24px;
+      }
+      .section-number {
+        font-size: 26px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .privacy-hero h1 { font-size: 24px; }
+      .privacy-meta { gap: 12px; font-size: 12px; }
+      .section-header { gap: 10px; }
+    }
+  </style>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NG6MGQG7" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Reading Progress -->
+  <div class="reading-progress" aria-hidden="true"></div>
+
+  <!-- Navbar -->
   <nav class="navbar scrolled" aria-label="Navegação">
     <div class="container nav-inner legal-nav-inner">
-      <a href="#" class="logo" aria-label="Athenio · página inicial">
+      <a href="#" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">
         <img src="public/assets/logo-full.svg" alt="Athenio" height="28" style="width:auto">
       </a>
-      <a href="index.html" class="btn btn-primary btn-sm">Voltar ao site</a>
     </div>
   </nav>
 
-  <main id="legal-main" class="legal-page container">
-    <h1>Termos de Uso</h1>
-    <p class="legal-lead">Última atualização: março de 2026. Ao acessar o site e utilizar os canais da Athenio, você concorda com estes termos. Se não concordar, interrompa o uso.</p>
+  <!-- Hero -->
+  <header class="privacy-hero">
+    <div class="privacy-hero-inner">
+      <div class="privacy-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3"/><path d="M15 1v3"/><path d="M9 20v3"/><path d="M15 20v3"/><path d="M20 9h3"/><path d="M20 14h3"/><path d="M1 9h3"/><path d="M1 14h3"/></svg>
+        Termos &amp; Ética
+      </div>
+      <h1>
+        Termos de Uso e Ética em Inteligência Artificial
+        <span>Condições de uso da plataforma SaaS e compromisso ético no uso de IA</span>
+      </h1>
+      <div class="privacy-meta">
+        <span>Última atualização: <time datetime="2026-03-31">31 de Março de 2026</time></span>
+        <span>Contato: <a href="mailto:contato@athenio.ai" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">contato@athenio.ai</a></span>
+      </div>
+    </div>
+  </header>
 
-    <h2>1. Quem somos</h2>
-    <p>Estes termos referem-se aos serviços e canais digitais oferecidos sob a marca <strong>Athenio</strong> (“Athenio”, “nós”). Para contato geral: <a href="mailto:contato@athenio.ai">contato@athenio.ai</a>.</p>
+  <!-- Layout: TOC + Content -->
+  <div class="privacy-layout">
 
-    <h2>2. O que estes termos cobrem</h2>
-    <p>Regem o uso deste site, formulários de contato, materiais informativos e demais páginas públicas da Athenio. A contratação de produtos ou serviços pagos será regida por propostas comerciais, contratos ou anexos específicos, que prevalecem sobre este documento naquilo que lhe for incompatível.</p>
+    <!-- Table of Contents -->
+    <aside class="privacy-toc" aria-label="Índice">
+      <div class="privacy-toc-label">Termos SaaS</div>
+      <ol>
+        <li><a href="#saas-objeto">Objeto e Escopo</a></li>
+        <li><a href="#saas-onboarding">Onboarding</a></li>
+        <li><a href="#saas-autonomia">Autonomia Decisória</a></li>
+        <li><a href="#saas-compliance">Compliance e APIs</a></li>
+        <li><a href="#saas-responsabilidade">Responsabilidade</a></li>
+        <li><a href="#saas-rescisao">Rescisão</a></li>
+      </ol>
+      <div class="privacy-toc-label" style="margin-top:20px">Ética em IA</div>
+      <ol style="counter-reset:toc 6">
+        <li><a href="#etica-veracidade">Veracidade</a></li>
+        <li><a href="#etica-transparencia">Transparência</a></li>
+        <li><a href="#etica-fallback">Human Fallback</a></li>
+        <li><a href="#etica-financeira">Ética Financeira</a></li>
+        <li><a href="#etica-privacidade">Privacidade e LGPD</a></li>
+      </ol>
+    </aside>
 
-    <h2>3. Uso permitido</h2>
-    <p>Você compromete-se a utilizar o site de forma lícita, sem violar direitos de terceiros, sem tentar obter acesso não autorizado a sistemas, sem disseminar malware, sem práticas de scraping abusivo ou que sobrecarreguem a infraestrutura, e sem utilizar o conteúdo para fins ilícitos ou concorrentes de má-fé.</p>
+    <!-- Main Content -->
+    <main class="privacy-content">
+      <p class="privacy-intro">
+        Este documento reúne os <strong style="color:var(--text-primary)">Termos de Uso de Software (SaaS)</strong> e a <strong style="color:var(--text-primary)">Política de Ética e Uso de Inteligência Artificial</strong> da plataforma Athenio. Ao utilizar a plataforma, o Cliente declara ter lido e concordado com todas as condições aqui estabelecidas.
+      </p>
 
-    <h2>4. Conteúdo e informações</h2>
-    <p>Textos, números exemplificativos, cases e descrições no site têm caráter informativo e comercial. Resultados reais dependem do contexto de cada cliente. Nada neste site constitui promessa de resultado, garantia de desempenho ou assessoria jurídica, fiscal ou contábil.</p>
+      <!-- ═══════════════════════════════════════════════════════
+           TERMOS DE USO DE SOFTWARE — SaaS
+           ═══════════════════════════════════════════════════════ -->
 
-    <h2>5. Propriedade intelectual</h2>
-    <p>Marcas, logotipos, layout, textos, imagens, ilustrações e demais elementos do site são de titularidade da Athenio ou de licenciantes, salvo indicação em contrário. É proibida a reprodução, distribuição ou modificação sem autorização prévia por escrito, exceto uso pessoal e temporário de visualização no navegador.</p>
+      <!-- 01 — Objeto e Escopo -->
+      <section id="saas-objeto" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <h2>Objeto e Escopo Técnico</h2>
+        </div>
+        <p>O presente contrato tem por objeto o licenciamento de uso da plataforma Athenio, um ecossistema de Inteligência Artificial (IA) composto por agentes autônomos interligados.</p>
+        <ul>
+          <li><strong>Agente de Marketing:</strong> Responsável pela mineração de dados de mercado, criação de anúncios, landing pages dinâmicas e otimização de orçamentos em tempo real (cada 15 minutos) via APIs da Meta e Google.</li>
+          <li><strong>Agente Comercial:</strong> Responsável pela triagem, qualificação (SPIN Selling), negociação de objeções e fechamento de vendas via WhatsApp.</li>
+          <li><strong>Orquestrador Central:</strong> Atua como Diretor de Operações, sincronizando sensores de tráfego e vendas para tomar decisões financeiras autônomas de escala ou pausa de investimentos.</li>
+        </ul>
+      </section>
 
-    <h2>6. Privacidade</h2>
-    <p>O tratamento de dados pessoais segue nossa <a href="privacidade.html">Política de Privacidade</a>, parte integrante da relação com o usuário neste ambiente digital.</p>
+      <!-- 02 — Onboarding -->
+      <section id="saas-onboarding" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h2>Onboarding, Calibragem e Homologação</h2>
+        </div>
+        <p>O Cliente obriga-se a fornecer dados verídicos para a "Ingestão de Conhecimento", incluindo URLs e manuais técnicos.</p>
+        <ul>
+          <li><strong>Manual de Identidade da IA:</strong> A IA operará sob um tom de voz e limites éticos definidos no onboarding. A aprovação deste manual pelo Cliente constitui autorização irrevogável para a IA atuar em nome da empresa.</li>
+          <li><strong>Sandbox de Estresse:</strong> Antes da ativação, o Cliente deve submeter a IA a testes de simulação de venda. A ativação do sistema implica que o Cliente homologou e aceitou o comportamento da IA, isentando a Athenio de responsabilidade por respostas geradas dentro dos parâmetros treinados.</li>
+        </ul>
+      </section>
 
-    <h2>7. Links e serviços de terceiros</h2>
-    <p>O site pode mencionar ou linkar a ferramentas de terceiros. A Athenio não controla esses serviços; o uso deles está sujeito aos termos e políticas dos respectivos fornecedores.</p>
+      <!-- 03 — Autonomia Decisória -->
+      <section id="saas-autonomia" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <h2>Autonomia Decisória e Limites Financeiros</h2>
+        </div>
+        <ul>
+          <li><strong>Gestão de Orçamento (Over-Budget):</strong> O Orquestrador tem autonomia para escalar investimentos além do orçamento diário ("Over-Budget") apenas quando o ROAS (Retorno sobre Anúncio) for superior à meta cadastrada pelo Cliente.</li>
+          <li><strong>Modo de Preservação (Kill-Switch):</strong> O sistema pausará anúncios automaticamente caso o custo por aquisição (CPA) ultrapasse 30% do teto estipulado ou se o orçamento estiver acabando com lucro insuficiente.</li>
+          <li><strong>Controle de Gargalo:</strong> O Orquestrador reduzirá lances de anúncios caso detecte que o tempo de resposta do atendimento comercial exceda 2 minutos, visando preservar a experiência do lead.</li>
+        </ul>
+      </section>
 
-    <h2>8. Limitação de responsabilidade</h2>
-    <p>Na máxima extensão permitida pela lei aplicável, a Athenio não se responsabiliza por danos indiretos, lucros cessantes ou perda de dados decorrentes do uso ou impossibilidade de uso do site, interrupções, erros ou conteúdo de terceiros. O site é oferecido “no estado em que se encontra”.</p>
+      <!-- 04 — Compliance e APIs -->
+      <section id="saas-compliance" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">04</span>
+          <h2>Compliance, APIs e Conectividade</h2>
+        </div>
+        <ul>
+          <li><strong>Conexão WhatsApp:</strong> O Cliente pode optar pela WhatsApp Cloud API (Oficial) ou instâncias via QR Code. A Athenio não se responsabiliza por suspensões de contas de WhatsApp decorrentes de políticas de uso da Meta, sendo o Cliente o único responsável pela legalidade da prospecção.</li>
+          <li><strong>Segurança de Dados (PII Scrubber):</strong> A plataforma implementa limpeza automática de dados sensíveis (CPF, cartões) nos logs, visando conformidade com a LGPD.</li>
+          <li><strong>Prompt Injection:</strong> O Cliente reconhece que o sistema possui camadas de segurança para detectar tentativas de "hackear" a IA, reservando-se a Athenio o direito de bloquear usuários/leads que apresentem comportamento anômalo.</li>
+        </ul>
+      </section>
 
-    <h2>9. Alterações</h2>
-    <p>Podemos atualizar estes termos a qualquer momento. A data no topo desta página indica a última revisão. O uso continuado após alterações constitui ciência e aceitação, salvo quando a lei exigir consentimento adicional.</p>
+      <!-- 05 — Responsabilidade -->
+      <section id="saas-responsabilidade" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">05</span>
+          <h2>Limitação e Responsabilidade</h2>
+        </div>
+        <p>A Athenio não garante lucros específicos, uma vez que o sucesso das campanhas depende de variáveis de mercado, qualidade do produto do Cliente e comportamento do consumidor.</p>
+        <ul>
+          <li><strong>Alucinações de IA:</strong> O Cliente declara estar ciente de que IAs generativas podem, em casos raros, gerar informações imprecisas. O sistema mitiga este risco através do Hallucination Guard e do Human Fallback, que transfere o atendimento para um humano em caso de dúvida técnica não respondida pelo manual.</li>
+          <li><strong>Custos de Terceiros:</strong> Todos os custos de tráfego pago (Meta/Google) e tokens de APIs (OpenAI/Anthropic) são de responsabilidade direta do Cliente, sendo a Athenio apenas a ferramenta de gestão desses recursos.</li>
+        </ul>
+      </section>
 
-    <h2>10. Lei e foro</h2>
-    <p>Estes termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da comarca de domicílio da Athenio, salvo disposição legal imperativa em favor do consumidor.</p>
+      <!-- 06 — Rescisão -->
+      <section id="saas-rescisao" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">06</span>
+          <h2>Rescisão e Retenção</h2>
+        </div>
+        <p>O cancelamento do serviço implica na interrupção imediata dos Agentes e do Orquestrador.</p>
+        <p>A Athenio reserva-se o direito de monitorar o Health Score da operação do Cliente e, caso o score caia abaixo de níveis críticos, realizar intervenções consultivas para evitar a perda de performance.</p>
+      </section>
 
-    <p class="legal-back"><a href="index.html">← Voltar à página inicial</a> · <a href="privacidade.html">Política de Privacidade</a></p>
-  </main>
+      <!-- ═══════════════════════════════════════════════════════
+           POLÍTICA DE ÉTICA E USO DE IA
+           ═══════════════════════════════════════════════════════ -->
+      <div class="policy-divider" id="etica">
+        <span class="policy-divider-line"></span>
+        <span class="policy-divider-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          Ética e Uso de Inteligência Artificial
+        </span>
+        <span class="policy-divider-line"></span>
+      </div>
+
+      <!-- 07 — Veracidade -->
+      <section id="etica-veracidade" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">07</span>
+          <h2>Compromisso com a Veracidade e Prevenção de Alucinações</h2>
+        </div>
+        <p>A Athenio implementa uma arquitetura rigorosa para garantir que os Agentes de Marketing e Comercial não gerem informações falsas ou imprecisas ("alucinações").</p>
+        <ul>
+          <li><strong>Sandbox de Estresse:</strong> Antes de qualquer ativação em ambiente real, a IA é submetida a um ambiente de teste sob pressão para verificar se o sistema "quebra" ou inventa dados.</li>
+          <li><strong>Simulação de Venda:</strong> O proprietário da empresa deve realizar simulações conversando com a IA para validar se as respostas estão em conformidade com o conhecimento ingerido.</li>
+          <li><strong>Validação Lógica:</strong> Se a IA responder incorretamente durante a homologação, o sistema retorna obrigatoriamente para as fases de correção e re-treinamento.</li>
+          <li><strong>Hallucination Guard:</strong> O sistema executa uma última checagem automática e algorítmica de segurança imediatamente antes de cada mensagem ser enviada ao cliente final.</li>
+          <li><strong>Ingestão Técnica de Conhecimento:</strong> O processamento de embeddings vetoriais garante que a IA priorize sempre os documentos e manuais mais recentes fornecidos pelo Cliente, evitando contradições.</li>
+        </ul>
+      </section>
+
+      <!-- 08 — Transparência -->
+      <section id="etica-transparencia" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">08</span>
+          <h2>Identificação do Agente Digital e Transparência</h2>
+        </div>
+        <p>A Athenio defende que a interação com o público deve ser pautada pela honestidade quanto à natureza do assistente.</p>
+        <ul>
+          <li><strong>Personalidade de Branding:</strong> Durante o onboarding, é definido um Manual de Identidade da IA que estabelece os limites éticos, tom de voz e formalismo da comunicação.</li>
+          <li><strong>Manual de Identidade:</strong> Este documento serve como um "contrato de comportamento" que deve ser aprovado pelo Cliente, definindo se a IA utilizará gírias ou manterá um padrão estritamente profissional.</li>
+          <li><strong>Saudação Personalizada:</strong> A primeira interação com o lead utiliza um prompt inicial gerado conforme o tom de voz definido, visando clareza na comunicação desde o primeiro rastro de contato.</li>
+        </ul>
+      </section>
+
+      <!-- 09 — Human Fallback -->
+      <section id="etica-fallback" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">09</span>
+          <h2>Inteligência Emocional e Transbordo Humano (Human Fallback)</h2>
+        </div>
+        <p>O sistema é projetado para reconhecer os limites da automação e solicitar intervenção humana sempre que necessário para preservar o relacionamento comercial.</p>
+        <ul>
+          <li><strong>Monitoramento de Sentimento:</strong> O Agente Comercial identifica sinais emocionais no lead, como irritação ou confusão.</li>
+          <li><strong>Gatilhos de Fallback:</strong> A IA é pausada imediatamente e o atendimento é transferido para um humano caso: o lead demonstre irritação ou insatisfação crítica; o lead faça perguntas técnicas cujas respostas não constem no manual de conhecimento (RAG); o sistema detecte falhas críticas na comunicação ou repetições excessivas.</li>
+          <li><strong>Alerta Imediato:</strong> Nestes casos, o Orquestrador dispara um alerta em tempo real via WhatsApp ou Telegram diretamente para o dono da empresa ou gestor responsável, contendo um link para assumir a negociação.</li>
+          <li><strong>Whale Detection (Detecção de Baleias):</strong> Leads identificados como de alto nível ou potencial de faturamento elevado (high-ticket) podem ser roteados diretamente para consultores humanos, conforme a estratégia de negócio do Cliente.</li>
+        </ul>
+      </section>
+
+      <!-- 10 — Ética Financeira -->
+      <section id="etica-financeira" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">10</span>
+          <h2>Ética nas Decisões Financeiras e Operacionais</h2>
+        </div>
+        <p>O Orquestrador Central atua como um diretor de operações autônomo, mas sempre sob rédeas éticas e financeiras rígidas.</p>
+        <ul>
+          <li><strong>Regra de Segurança de Sensores:</strong> Se qualquer sensor de dados (API de anúncios ou checkout) falhar, o sistema entra em modo de espera e cessa decisões autônomas bruscas até a normalização.</li>
+          <li><strong>Modo de Preservação:</strong> A IA prioriza a saúde financeira do Cliente, pausando anúncios que não atingem a meta de ROI ou ROAS definida, em vez de continuar investindo sem retorno.</li>
+          <li><strong>Proteção contra Ataques:</strong> O sistema monitora padrões estranhos de tráfego e tentativas de prompt injection (tentativas de hackear ou manipular as instruções da IA), bloqueando usuários mal-intencionados instantaneamente.</li>
+        </ul>
+      </section>
+
+      <!-- 11 — Privacidade e LGPD -->
+      <section id="etica-privacidade" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">11</span>
+          <h2>Privacidade e Tratamento de Dados (LGPD)</h2>
+        </div>
+        <p>A ética no uso da IA estende-se à proteção absoluta da privacidade dos dados processados.</p>
+        <ul>
+          <li><strong>Mascaração Automática (PII Scrubber):</strong> Dados sensíveis como CPFs, cartões ou senhas enviados por leads são identificados e mascarados antes de qualquer registro em log ou banco de dados.</li>
+          <li><strong>Seguro de Cancelamento:</strong> O sistema gera relatórios mensais de "vendas salvas", demonstrando de forma transparente o valor real gerado pela IA para a operação do Cliente.</li>
+        </ul>
+      </section>
+
+      <!-- Footer Links -->
+      <div class="privacy-footer-links">
+        <a href="privacidade.html">Política de Privacidade e DPA</a>
+      </div>
+    </main>
+  </div>
 
   <footer class="footer footer--legal" aria-label="Rodapé">
-    <div class="container footer-bottom legal-footer-bottom">
-      <p><small>© <time datetime="2026">2026</time> Athenio.</small></p>
+    <div class="container footer-bottom legal-footer-bottom" style="flex-direction:column;align-items:center;gap:12px;padding-top:32px">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false" aria-label="Voltar ao topo"><img src="public/assets/logo-full.svg" alt="Athenio" height="24" style="width:auto;opacity:.6"></a>
+      <p><small>&copy; <time datetime="2026">2026</time> Athenio &middot; Todos os direitos reservados</small></p>
     </div>
   </footer>
+
+  <script>
+    /* Reading progress bar */
+    (function () {
+      var bar = document.querySelector('.reading-progress');
+      if (!bar) return;
+      window.addEventListener('scroll', function () {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+      }, { passive: true });
+    })();
+
+    /* TOC active state */
+    (function () {
+      var links = document.querySelectorAll('.privacy-toc a');
+      var sections = [];
+      links.forEach(function (a) {
+        var id = a.getAttribute('href').slice(1);
+        var el = document.getElementById(id);
+        if (el) sections.push({ el: el, link: a });
+      });
+
+      function update() {
+        var scrollY = window.scrollY + 120;
+        var atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 40);
+        var current = null;
+        if (atBottom && sections.length) {
+          current = sections[sections.length - 1];
+        } else {
+          sections.forEach(function (s) {
+            if (s.el.offsetTop <= scrollY) current = s;
+          });
+        }
+        links.forEach(function (a) { a.classList.remove('active'); });
+        if (current) current.link.classList.add('active');
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+
+    /* Scroll reveal for sections */
+    (function () {
+      var els = document.querySelectorAll('.privacy-section');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
 </body>
 </html>

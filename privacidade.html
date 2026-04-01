@@ -10,62 +10,908 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-NG6MGQG7');</script>
   <!-- End Google Tag Manager -->
-  <title>Política de Privacidade | Athenio</title>
-  <meta name="description" content="Como a Athenio trata dados pessoais em conformidade com a LGPD.">
+  <title>Política de Privacidade, Cookies e DPA | Athenio</title>
+  <meta name="description" content="Como a Athenio coleta, processa e protege dados pessoais. Política de Privacidade (LGPD), Cookies e Rastreamento e Acordo de Processamento de Dados (DPA).">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://athenio.ai/privacidade.html">
   <link rel="icon" href="https://athenio.ai/favicon.ico" sizes="48x48" type="image/x-icon">
   <link rel="apple-touch-icon" href="https://athenio.ai/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Sora:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=3">
+
+  <style>
+    /* ============================================================
+       PRIVACY PAGE — EDITORIAL DOCUMENT DESIGN
+       ============================================================ */
+
+    body { padding-top: 64px; }
+
+    /* ── READING PROGRESS BAR ──────────────────────────────── */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #4FD1C5, #38B2AC, #81E6D9);
+      z-index: 999;
+      transition: width 60ms linear;
+      box-shadow: 0 0 12px rgba(79, 209, 197, .5);
+    }
+
+    /* ── HERO / HEADER AREA ────────────────────────────────── */
+    .privacy-hero {
+      position: relative;
+      padding: 80px 0 56px;
+      overflow: hidden;
+    }
+    .privacy-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 20% 40%, rgba(15, 61, 62, .6), transparent),
+        radial-gradient(ellipse 50% 60% at 80% 20%, rgba(31, 78, 95, .35), transparent);
+      pointer-events: none;
+    }
+    .privacy-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent) 70%, transparent);
+      opacity: .2;
+    }
+    .privacy-hero-inner {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+    .privacy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: var(--r-pill);
+      background: rgba(79, 209, 197, .08);
+      border: 1px solid rgba(79, 209, 197, .18);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .privacy-badge svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+    .privacy-hero h1 {
+      font-family: var(--font-title);
+      font-size: clamp(28px, 4.2vw, 44px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      letter-spacing: -.02em;
+    }
+    .privacy-hero h1 span {
+      display: block;
+      font-size: .55em;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 8px;
+      letter-spacing: 0;
+    }
+    .privacy-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+    }
+    .privacy-meta time {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ── LAYOUT: TOC + CONTENT ─────────────────────────────── */
+    .privacy-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 48px;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 48px var(--gutter) 80px;
+      align-items: start;
+    }
+
+    /* ── TABLE OF CONTENTS ─────────────────────────────────── */
+    .privacy-toc {
+      position: sticky;
+      top: 88px;
+      font-family: var(--font-body);
+    }
+    .privacy-toc-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: 16px;
+      padding-left: 14px;
+    }
+    .privacy-toc ol {
+      list-style: none;
+      counter-reset: toc;
+      border-left: 1px solid rgba(79, 209, 197, .1);
+    }
+    .privacy-toc li {
+      counter-increment: toc;
+    }
+    .privacy-toc a {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 7px 14px;
+      font-size: 12.5px;
+      font-weight: 400;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      margin-left: -1px;
+      transition: color .2s, border-color .2s;
+      line-height: 1.4;
+    }
+    .privacy-toc a::before {
+      content: counter(toc, decimal-leading-zero);
+      font-family: var(--font-title);
+      font-weight: 600;
+      font-size: 10px;
+      color: var(--text-subtle);
+      flex-shrink: 0;
+      min-width: 16px;
+      transition: color .2s;
+    }
+    .privacy-toc a:hover,
+    .privacy-toc a.active {
+      color: var(--text-primary);
+      border-left-color: var(--accent);
+    }
+    .privacy-toc a:hover::before,
+    .privacy-toc a.active::before {
+      color: var(--accent);
+    }
+
+    /* ── CONTENT SECTIONS ──────────────────────────────────── */
+    .privacy-content {
+      min-width: 0;
+    }
+    .privacy-intro {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(79, 209, 197, .08);
+    }
+    .privacy-section {
+      margin-bottom: 40px;
+      padding: 28px 32px 32px;
+      border-radius: var(--r-md);
+      background: rgba(12, 24, 24, .5);
+      border: 1px solid rgba(79, 209, 197, .06);
+      transition: border-color .3s, box-shadow .3s;
+      /* scroll-reveal */
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .5s ease, transform .5s ease, border-color .3s, box-shadow .3s;
+    }
+    .privacy-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .privacy-section:hover {
+      border-color: rgba(79, 209, 197, .14);
+      box-shadow: 0 4px 32px rgba(0, 0, 0, .15);
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .section-number {
+      font-family: var(--font-title);
+      font-size: 32px;
+      font-weight: 700;
+      color: rgba(79, 209, 197, .15);
+      line-height: 1;
+      flex-shrink: 0;
+      letter-spacing: -.02em;
+      user-select: none;
+    }
+    .section-header h2 {
+      font-family: var(--font-title);
+      font-size: clamp(16px, 2vw, 19px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin: 0;
+    }
+    .section-header h2 .article-ref {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      opacity: .7;
+      margin-top: 3px;
+      letter-spacing: .02em;
+    }
+    .privacy-section p {
+      font-size: 14.5px;
+      line-height: 1.78;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .privacy-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── DATA ITEMS (definition-style lists) ───────────────── */
+    .data-list {
+      margin: 14px 0 4px;
+    }
+    .data-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(79, 209, 197, .05);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .data-item:last-child {
+      border-bottom: none;
+    }
+    .data-label {
+      font-family: var(--font-title);
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 13px;
+      white-space: nowrap;
+      padding-top: 1px;
+    }
+    .data-label::after {
+      content: ':';
+    }
+    .data-desc {
+      color: var(--text-muted);
+    }
+
+    /* ── BULLET LIST INSIDE SECTIONS ───────────────────────── */
+    .privacy-section ul {
+      list-style: none;
+      margin: 12px 0 4px;
+    }
+    .privacy-section ul li {
+      position: relative;
+      padding: 8px 0 8px 22px;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(79, 209, 197, .04);
+    }
+    .privacy-section ul li:last-child {
+      border-bottom: none;
+    }
+    .privacy-section ul li::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 16px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(79, 209, 197, .35);
+    }
+    .privacy-section ul li strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ── CONTACT / DPO SECTION ─────────────────────────────── */
+    .dpo-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 14px;
+      padding: 18px 22px;
+      border-radius: var(--r-sm);
+      background: rgba(79, 209, 197, .05);
+      border: 1px solid rgba(79, 209, 197, .12);
+    }
+    .dpo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(79, 209, 197, .12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+    .dpo-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    .dpo-info {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+    .dpo-info a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(79, 209, 197, .3);
+      transition: text-decoration-color .2s;
+    }
+    .dpo-info a:hover {
+      text-decoration-color: var(--accent);
+    }
+
+    /* ── POLICY DIVIDER (between Privacy & Cookies) ──────── */
+    .policy-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 56px 0 40px;
+    }
+    .policy-divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(79, 209, 197, .2), transparent);
+    }
+    .policy-divider-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: var(--r-pill);
+      background: rgba(79, 209, 197, .06);
+      border: 1px solid rgba(79, 209, 197, .15);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: .03em;
+      white-space: nowrap;
+    }
+
+    /* ── FOOTER LINKS ──────────────────────────────────────── */
+    .privacy-footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(79, 209, 197, .08);
+    }
+    .privacy-footer-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .privacy-footer-links a:hover {
+      color: var(--accent);
+    }
+    .privacy-footer-links .sep {
+      color: var(--text-subtle);
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      body { padding-top: 64px; }
+      .privacy-hero { padding: 56px 0 40px; }
+      .privacy-layout {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding-top: 0;
+      }
+      .privacy-toc {
+        position: relative;
+        top: 0;
+        padding: 20px var(--gutter) 24px;
+        margin: 0 calc(-1 * var(--gutter));
+        width: calc(100% + 2 * var(--gutter));
+        border-bottom: 1px solid rgba(79, 209, 197, .08);
+        margin-bottom: 32px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .privacy-toc ol {
+        display: flex;
+        gap: 4px;
+        border-left: none;
+        white-space: nowrap;
+        padding-bottom: 4px;
+      }
+      .privacy-toc a {
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        margin-left: 0;
+        padding: 6px 12px;
+        font-size: 12px;
+        border-radius: var(--r-sm) var(--r-sm) 0 0;
+      }
+      .privacy-toc a:hover,
+      .privacy-toc a.active {
+        border-left-color: transparent;
+        border-bottom-color: var(--accent);
+      }
+      .privacy-section {
+        padding: 22px 20px 24px;
+      }
+      .section-number {
+        font-size: 26px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .privacy-hero h1 { font-size: 24px; }
+      .privacy-meta { gap: 12px; font-size: 12px; }
+      .section-header { gap: 10px; }
+      .data-item { grid-template-columns: 1fr; gap: 2px; }
+      .data-label { white-space: normal; }
+      .dpo-card { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+  </style>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NG6MGQG7" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Reading Progress -->
+  <div class="reading-progress" aria-hidden="true"></div>
+
+  <!-- Navbar -->
   <nav class="navbar scrolled" aria-label="Navegação">
     <div class="container nav-inner legal-nav-inner">
-      <a href="#" class="logo" aria-label="Athenio · página inicial">
+      <a href="#" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">
         <img src="public/assets/logo-full.svg" alt="Athenio" height="28" style="width:auto">
       </a>
-      <a href="index.html" class="btn btn-primary btn-sm">Voltar ao site</a>
     </div>
   </nav>
 
-  <main id="legal-main" class="legal-page container">
-    <h1>Política de Privacidade</h1>
-    <p class="legal-lead">Última atualização: março de 2026. Esta página descreve como tratamos dados quando você entra em contato ou usa os canais da Athenio.</p>
+  <!-- Hero -->
+  <header class="privacy-hero">
+    <div class="privacy-hero-inner">
+      <div class="privacy-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        LGPD Compliance
+      </div>
+      <h1>
+        Política de Privacidade e Proteção de Dados
+        <span>Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018)</span>
+      </h1>
+      <div class="privacy-meta">
+        <span>Última atualização: <time datetime="2026-03-31">31 de Março de 2026</time></span>
+        <span>Contato DPO: <a href="mailto:privacidade@athenio.ai" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px">privacidade@athenio.ai</a></span>
+      </div>
+    </div>
+  </header>
 
-    <h2>1. Controlador</h2>
-    <p>Responsável pelo tratamento dos dados: <strong>Athenio</strong>. Contato para questões de privacidade: <a href="mailto:contato@athenio.ai">contato@athenio.ai</a>.</p>
+  <!-- Layout: TOC + Content -->
+  <div class="privacy-layout">
 
-    <h2>2. Dados que coletamos</h2>
-    <p>No formulário de contato e canais afins, podemos coletar nome, empresa, e-mail, telefone/WhatsApp e demais informações que você enviar voluntariamente.</p>
+    <!-- Table of Contents -->
+    <aside class="privacy-toc" aria-label="Índice">
+      <div class="privacy-toc-label">Índice</div>
+      <ol>
+        <li><a href="#definicoes">Definições e Escopo</a></li>
+        <li><a href="#dados">Dados Coletados</a></li>
+        <li><a href="#finalidades">Finalidades</a></li>
+        <li><a href="#seguranca">Segurança</a></li>
+        <li><a href="#retencao">Retenção de Dados</a></li>
+        <li><a href="#decisoes">Decisões Automatizadas</a></li>
+        <li><a href="#compartilhamento">Compartilhamento</a></li>
+        <li><a href="#direitos">Direitos do Titular</a></li>
+        <li><a href="#contato">Contato e DPO</a></li>
+      </ol>
+      <div class="privacy-toc-label" style="margin-top:20px">Cookies</div>
+      <ol style="counter-reset:toc 9">
+        <li><a href="#cookies-objetivo">Rastreamento</a></li>
+        <li><a href="#cookies-tracking">Tracking Blindado</a></li>
+        <li><a href="#cookies-atribuicao">Atribuição e ROAS</a></li>
+        <li><a href="#cookies-ltv">LTV e Saúde</a></li>
+      </ol>
+      <div class="privacy-toc-label" style="margin-top:20px">DPA</div>
+      <ol style="counter-reset:toc 13">
+        <li><a href="#dpa-objeto">Objeto e Natureza</a></li>
+        <li><a href="#dpa-obrigacoes">Obrigações</a></li>
+        <li><a href="#dpa-seguranca">Segurança Agêntica</a></li>
+        <li><a href="#dpa-sub">Sub-processadores</a></li>
+        <li><a href="#dpa-direitos">Direitos e Auditoria</a></li>
+        <li><a href="#dpa-incidentes">Incidentes</a></li>
+      </ol>
+    </aside>
 
-    <h2>3. Finalidades</h2>
-    <p>Utilizamos esses dados para responder solicitações, agendar diagnósticos, enviar informações sobre produtos e serviços (quando houver base legal e, quando aplicável, seu consentimento) e cumprir obrigações legais.</p>
+    <!-- Main Content -->
+    <main class="privacy-content">
+      <p class="privacy-intro">
+        Esta Política de Privacidade descreve como a <strong style="color:var(--text-primary)">ATHENIO</strong> (doravante "Plataforma"), desenvolvida pela Lumus, coleta, processa, armazena e protege dados pessoais em conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 &mdash; LGPD). Este documento é parte integrante do ecossistema agêntico que orquestra marketing, vendas e inteligência operacional para nossos Clientes.
+      </p>
 
-    <h2>4. Base legal (LGPD)</h2>
-    <p>O tratamento fundamenta-se no consentimento, na execução de medidas pré-contratuais a seu pedido e/ou no legítimo interesse, conforme o caso, sempre em conformidade com a Lei nº 13.709/2018 (LGPD).</p>
+      <!-- 01 — Definições -->
+      <section id="definicoes" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <h2>Definições e Escopo de Processamento <span class="article-ref">Art. 5º da LGPD</span></h2>
+        </div>
+        <div class="data-list">
+          <div class="data-item">
+            <span class="data-label">Controlador</span>
+            <span class="data-desc">O Cliente (Empresa) que contrata a Athenio para gerir sua aquisição e vendas.</span>
+          </div>
+          <div class="data-item">
+            <span class="data-label">Operador</span>
+            <span class="data-desc">A Athenio, que processa dados sob instrução do Controlador através de seus Agentes de Marketing, Comercial e Orquestrador.</span>
+          </div>
+          <div class="data-item">
+            <span class="data-label">Titular dos Dados</span>
+            <span class="data-desc">Leads e consumidores finais que interagem com o ecossistema da Athenio.</span>
+          </div>
+          <div class="data-item">
+            <span class="data-label">Agentes Autônomos</span>
+            <span class="data-desc">Sistemas de IA (OpenAI GPT-4o, Anthropic Claude 3.5 Sonnet) que executam tarefas de triagem, consultoria e fechamento.</span>
+          </div>
+        </div>
+      </section>
 
-    <h2>5. Compartilhamento</h2>
-    <p>Não vendemos seus dados. Podemos compartilhar com prestadores de serviço essenciais (ex.: hospedagem, e-mail transacional) sob obrigações de confidencialidade e segurança.</p>
+      <!-- 02 — Dados Coletados -->
+      <section id="dados" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h2>Dados Coletados e Bases Legais <span class="article-ref">Art. 7º da LGPD</span></h2>
+        </div>
+        <p>A Plataforma coleta dados estritamente necessários para o funcionamento do funil de vendas e gestão de tráfego:</p>
+        <ul>
+          <li><strong>Dados Cadastrais e de Acesso (Cliente):</strong> Nome, e-mail, credenciais OAuth 2.0 para Google Ads, Meta Ads e instâncias de WhatsApp.</li>
+          <li><strong>Dados de Prospecção e Interação (Lead):</strong> Nome, número de telefone, mensagens de texto, áudios (convertidos via Whisper) e imagens (processadas via GPT-4o Vision).</li>
+          <li><strong>Dados Comportamentais e de Conversão:</strong> Parâmetros UTM, comportamento de navegação em Landing Pages Dinâmicas, intenção de compra e sentimentos (Interessado, Irritado).</li>
+          <li><strong>Dados Sensíveis e Financeiros:</strong> Identificação de CPFs ou dados de pagamento, que são imediatamente mascarados pelo nosso protocolo PII Scrubber.</li>
+        </ul>
+      </section>
 
-    <h2>6. Seus direitos</h2>
-    <p>Você pode solicitar confirmação de tratamento, acesso, correção, anonimização, portabilidade, eliminação de dados desnecessários, informação sobre compartilhamentos e revogação do consentimento, nos limites da lei, pelo e-mail acima.</p>
+      <!-- 03 — Finalidades -->
+      <section id="finalidades" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <h2>Finalidades do Tratamento <span class="article-ref">Art. 8º e 9º da LGPD</span></h2>
+        </div>
+        <p>Os dados são processados para as seguintes finalidades exclusivas:</p>
+        <ul>
+          <li><strong>Aquisição e Marketing Autônomo:</strong> Varredura de mercado, criação de criativos e gestão de lances a cada 15 minutos via APIs de mídia.</li>
+          <li><strong>Vendas e Negociação (SPIN Selling):</strong> Qualificação de leads e tratamento de objeções através de modelos de linguagem avançados (Claude 3.5 Sonnet).</li>
+          <li><strong>Orquestração Financeira:</strong> Decisões autônomas de escalar ou pausar anúncios baseadas em ROI e gargalos de atendimento.</li>
+          <li><strong>Análise de Performance (LTV e BI):</strong> Cálculo automático de Lifetime Value (LTV), Custo por Aquisição (CAC) e Retorno sobre Investimento em Anúncios (ROAS).</li>
+        </ul>
+      </section>
 
-    <h2>7. Retenção</h2>
-    <p>Mantemos os dados pelo tempo necessário às finalidades descritas ou para cumprimento de obrigações legais.</p>
+      <!-- 04 — Segurança -->
+      <section id="seguranca" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">04</span>
+          <h2>Segurança e Proteção de Dados <span class="article-ref">Art. 46 da LGPD</span></h2>
+        </div>
+        <p>A Athenio adota medidas de segurança robustas para evitar acessos não autorizados e incidentes de segurança:</p>
+        <ul>
+          <li><strong>PII Scrubber:</strong> Limpeza automática de dados sensíveis antes do registro nos logs, garantindo proteção jurídica (LGPD) ao Controlador.</li>
+          <li><strong>Prompt Injection Guard:</strong> Monitoramento rigoroso para detectar e bloquear tentativas de manipular as instruções da IA para extração de dados ou descontos proibidos.</li>
+          <li><strong>Hallucination Guard &amp; Sandbox:</strong> Testes de estresse e simulações de venda sob pressão para garantir que a IA não invente informações (alucinação).</li>
+          <li><strong>Armazenamento Criptografado:</strong> Uso de PostgreSQL com pgvector para memória de longo prazo e Redis para cache de curto prazo, ambos com altos padrões de criptografia.</li>
+        </ul>
+      </section>
 
-    <p class="legal-back"><a href="index.html">← Voltar à página inicial</a> · <a href="termos.html">Termos de Uso</a></p>
-  </main>
+      <!-- 05 — Retenção -->
+      <section id="retencao" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">05</span>
+          <h2>Retenção e Minimização de Dados <span class="article-ref">Art. 15 e 16 da LGPD</span></h2>
+        </div>
+        <ul>
+          <li><strong>Summary Buffer (Otimização de Memória):</strong> A cada 3 turnos de conversa, o sistema gera um resumo executivo para substituir históricos longos, minimizando a quantidade de dados brutos circulantes e reduzindo custos de API.</li>
+          <li><strong>Semantic Cache:</strong> Consultas repetitivas são respondidas via cache semântico em menos de 100ms, sem a necessidade de reprocessar dados pessoais pelas LLMs.</li>
+          <li><strong>Persistência de Estado:</strong> O sistema mantém o histórico necessário para que a conversa continue exatamente de onde parou em caso de falhas de servidor.</li>
+        </ul>
+      </section>
+
+      <!-- 06 — Decisões Automatizadas -->
+      <section id="decisoes" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">06</span>
+          <h2>Decisões Automatizadas e Intervenção Humana <span class="article-ref">Art. 20 da LGPD</span></h2>
+        </div>
+        <p>O Titular e o Controlador ficam cientes de que o Orquestrador Central toma decisões automatizadas sobre a alocação de orçamentos e priorização de leads ("Detecção de Baleias").</p>
+        <p><strong style="color:var(--text-primary)">Human Fallback:</strong> Em casos de irritação do lead, confusão da IA ou dúvidas sem resposta no RAG, o sistema pausa a automação e dispara um alerta imediato para intervenção humana.</p>
+      </section>
+
+      <!-- 07 — Compartilhamento -->
+      <section id="compartilhamento" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">07</span>
+          <h2>Compartilhamento e Transferência Internacional <span class="article-ref">Art. 33 da LGPD</span></h2>
+        </div>
+        <p>Dados podem ser compartilhados com parceiros tecnológicos essenciais (OpenAI, Anthropic, Meta, Google, Stripe, Asaas) para a execução do serviço, respeitando as salvaguardas de transferência internacional de dados.</p>
+      </section>
+
+      <!-- 08 — Direitos -->
+      <section id="direitos" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">08</span>
+          <h2>Direitos do Titular <span class="article-ref">Art. 18 da LGPD</span></h2>
+        </div>
+        <p>A qualquer momento, o Titular ou o Controlador podem solicitar:</p>
+        <ul>
+          <li>A confirmação da existência de tratamento e o acesso aos seus dados.</li>
+          <li>A correção de dados incompletos ou inexatos.</li>
+          <li>A eliminação de dados tratados com consentimento.</li>
+          <li>Informações sobre as entidades públicas ou privadas com as quais os dados foram compartilhados.</li>
+        </ul>
+      </section>
+
+      <!-- 09 — Contato -->
+      <section id="contato" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">09</span>
+          <h2>Contato e Encarregado (DPO)</h2>
+        </div>
+        <p>Para exercer seus direitos ou tirar dúvidas sobre esta política, entre em contato com nosso Encarregado de Proteção de Dados (DPO) através do canal oficial:</p>
+        <div class="dpo-card">
+          <div class="dpo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div class="dpo-info">
+            <strong style="color:var(--text-primary)">Encarregado de Proteção de Dados</strong><br>
+            <a href="mailto:privacidade@athenio.ai">privacidade@athenio.ai</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════
+           POLÍTICA DE COOKIES E RASTREAMENTO DE TRÁFEGO
+           ════════════════════════════════════════════════════ -->
+      <div class="policy-divider" id="cookies">
+        <span class="policy-divider-line"></span>
+        <span class="policy-divider-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M2 12h.01"/><path d="M12 2v.01"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="15" r="1"/><circle cx="10" cy="16" r="1"/></svg>
+          Política de Cookies e Rastreamento
+        </span>
+        <span class="policy-divider-line"></span>
+      </div>
+
+      <!-- 10 — Objetivo do Rastreamento -->
+      <section id="cookies-objetivo" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">10</span>
+          <h2>Objetivo do Rastreamento e Tecnologias Utilizadas</h2>
+        </div>
+        <p>O Agente de Marketing atua como um gestor de tráfego (media buyer) e copywriter ininterrupto. Para cumprir sua função de otimizar orçamentos a cada 15 minutos, ele utiliza as seguintes tecnologias de rastreamento:</p>
+        <ul>
+          <li><strong>APIs de Mídia Profissionais:</strong> Integração direta via Meta Marketing API (Graph API) e Google Ads API para leitura de métricas e publicação automática.</li>
+          <li><strong>Pixels e Tags de Conversão:</strong> Configuração automatizada de regras de rastreio e pixels na conta do cliente para monitorar o Custo por Clique (CPC), Taxa de Cliques (CTR) e Custo por Aquisição (CPA).</li>
+          <li><strong>Identificadores de Sessão:</strong> Uso de caches (Redis) e bancos de dados persistentes (PostgreSQL) para garantir que a jornada do lead seja mapeada do primeiro clique até a venda confirmada.</li>
+        </ul>
+      </section>
+
+      <!-- 11 — Tracking Blindado -->
+      <section id="cookies-tracking" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">11</span>
+          <h2>Tracking Blindado (UTMs e Atribuição de Precisão)</h2>
+        </div>
+        <p>Para evitar falhas na identificação da origem das vendas e garantir a eficiência das decisões de escala, a Athenio utiliza o protocolo de Tracking Blindado:</p>
+        <ul>
+          <li><strong>Parâmetros UTM Dinâmicos:</strong> Cada anúncio gerado pela IA inclui parâmetros UTM (utm_content, utm_campaign) capturados automaticamente pelo front-end das Landing Pages Dinâmicas.</li>
+          <li><strong>Mapeamento em Banco de Dados:</strong> Todos os parâmetros de rastreio são vinculados ao rastro de "intenção de compra" do lead no banco de dados.</li>
+          <li><strong>Espelhamento de Oferta:</strong> O sistema captura o conteúdo do anúncio que gerou o clique para "espelhar" a promessa na página de destino, aumentando a taxa de conversão.</li>
+        </ul>
+      </section>
+
+      <!-- 12 — Atribuição de Conversão -->
+      <section id="cookies-atribuicao" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">12</span>
+          <h2>Atribuição de Conversão, ROAS e ROI Monitor</h2>
+        </div>
+        <p>O sistema não apenas rastreia cliques, mas fecha o ciclo financeiro da operação através da integração entre os agentes de Vendas e Marketing:</p>
+        <ul>
+          <li><strong>Confirmação via Webhook:</strong> Assim que o Agente de Checkout valida um pagamento (via Stripe, Asaas ou similar), um sinal é enviado ao sistema.</li>
+          <li><strong>Cálculo Automático de ROAS:</strong> O Agente de Marketing cruza o valor da venda com o anúncio específico que a originou para calcular o Retorno sobre Investimento em Anúncios (ROAS).</li>
+          <li><strong>ROI Monitor:</strong> A plataforma consolida dados de mensagens recebidas versus vendas e agendamentos confirmados, permitindo que o cliente veja o lucro real gerado pela IA.</li>
+          <li><strong>Lógica "Kill or Scale":</strong> Com base na atribuição correta, a IA escala o orçamento dos anúncios vencedores ou pausa instantaneamente campanhas que ultrapassem o teto de custo por aquisição estipulado.</li>
+        </ul>
+      </section>
+
+      <!-- 13 — Alimentação do LTV -->
+      <section id="cookies-ltv" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">13</span>
+          <h2>Alimentação do LTV e Saúde da Operação</h2>
+        </div>
+        <p>Os dados de rastreio de tráfego alimentam a inteligência de longo prazo da empresa:</p>
+        <ul>
+          <li><strong>Calculadora de LTV:</strong> O sistema utiliza os dados de retenção e tempo de permanência para projetar o valor total que cada cliente traz para o negócio.</li>
+          <li><strong>Health Score:</strong> O monitoramento contínuo analisa se o fluxo de tráfego está convertendo leads em ações reais, disparando alertas se o volume de mensagens cair drasticamente (indicando interrupção de anúncios).</li>
+          <li><strong>Retroalimentação Criativa:</strong> O sucesso de uma conversão (Caminho Positivo) envia a inteligência de volta para a fase de geração de criativos para criar novos anúncios baseados no que efetivamente vendeu.</li>
+        </ul>
+      </section>
+
+      <!-- ════════════════════════════════════════════════════
+           ACORDO DE PROCESSAMENTO DE DADOS (DPA)
+           ════════════════════════════════════════════════════ -->
+      <div class="policy-divider" id="dpa">
+        <span class="policy-divider-line"></span>
+        <span class="policy-divider-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Acordo de Processamento de Dados (DPA)
+        </span>
+        <span class="policy-divider-line"></span>
+      </div>
+
+      <!-- 14 — Objeto e Natureza -->
+      <section id="dpa-objeto" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">14</span>
+          <h2>Objeto e Natureza do Processamento</h2>
+        </div>
+        <p>Este Acordo estabelece as condições sob as quais a Athenio realiza o tratamento de dados pessoais em nome do Cliente (Controlador), visando a execução das operações de marketing, vendas e orquestração financeira via Inteligência Artificial.</p>
+        <p>O processamento inclui a coleta de leads, qualificação via técnica SPIN Selling, gestão de tráfego e processamento de intenções de compra em tempo real.</p>
+      </section>
+
+      <!-- 15 — Obrigações da Athenio -->
+      <section id="dpa-obrigacoes" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">15</span>
+          <h2>Obrigações da Athenio (Operadora)</h2>
+        </div>
+        <ul>
+          <li>Processar dados pessoais apenas sob instruções documentadas do Cliente, incluindo as configurações realizadas no Onboarding e as metas de ROI/CPA estabelecidas.</li>
+          <li>Garantir que todas as pessoas autorizadas a processar os dados pessoais (incluindo o suporte técnico e o time de engenharia) estejam sob estrito compromisso de confidencialidade.</li>
+          <li>Implementar o <strong>PII Scrubber</strong>, um protocolo de limpeza que identifica e mascara automaticamente dados sensíveis como CPF, senhas e números de cartão de crédito nos registros de log, impedindo seu armazenamento em texto claro no banco de dados.</li>
+        </ul>
+      </section>
+
+      <!-- 16 — Segurança Agêntica -->
+      <section id="dpa-seguranca" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">16</span>
+          <h2>Segurança da Informação e Proteção Agêntica</h2>
+        </div>
+        <ul>
+          <li><strong>Prompt Injection Guard:</strong> A Athenio utiliza camadas de filtragem de intenção para bloquear tentativas de "hacking" por parte de usuários/leads que visem extrair dados indevidos ou manipular as instruções da IA para obter vantagens ilícitas.</li>
+          <li><strong>Hallucination Guard:</strong> O sistema executa uma checagem automática final antes do envio de qualquer mensagem para mitigar a geração de informações imprecisas ou alucinações algorítmicas.</li>
+          <li><strong>Criptografia e Persistência:</strong> Os dados são armazenados em ambiente seguro utilizando PostgreSQL com pgvector para memória semântica e Redis para cache, garantindo a integridade dos dados mesmo em casos de reinicialização do sistema.</li>
+        </ul>
+      </section>
+
+      <!-- 17 — Sub-processadores -->
+      <section id="dpa-sub" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">17</span>
+          <h2>Sub-processadores e Transferência Internacional</h2>
+        </div>
+        <p>O Cliente autoriza a Athenio a utilizar Sub-processadores essenciais para a inteligência do sistema, especificamente OpenAI (Modelos GPT) e Anthropic (Modelos Claude).</p>
+        <ul>
+          <li><strong>Transferência Internacional:</strong> O processamento de dados ocorre em servidores de alta segurança localizados globalmente. A Athenio garante a utilização de Cláusulas Contratuais Padrão e criptografia de ponta a ponta durante o trânsito de dados entre o orquestrador e as LLMs.</li>
+          <li><strong>Minimização via Summary Buffer:</strong> Para reduzir a exposição de dados em transferências internacionais, o sistema gera resumos executivos a cada 3 turnos de conversa, enviando apenas o contexto essencial para os sub-processadores, economizando tokens e protegendo o histórico bruto.</li>
+        </ul>
+      </section>
+
+      <!-- 18 — Direitos e Auditoria -->
+      <section id="dpa-direitos" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">18</span>
+          <h2>Direitos dos Titulares e Auditoria</h2>
+        </div>
+        <p>A Athenio auxiliará o Cliente no cumprimento de suas obrigações de responder às solicitações dos titulares de dados (leads), como acesso, correção ou exclusão de informações.</p>
+        <p>O sistema mantém logs detalhados de todas as ações tomadas pelo Orquestrador Central (escalonamento de orçamento, pausas de anúncios) para fins de auditoria e transparência através do Relatório Self-Reflective.</p>
+      </section>
+
+      <!-- 19 — Notificação de Incidentes -->
+      <section id="dpa-incidentes" class="privacy-section">
+        <div class="section-header">
+          <span class="section-number">19</span>
+          <h2>Notificação de Incidentes</h2>
+        </div>
+        <p>Em caso de qualquer incidente de segurança que afete dados pessoais, a Athenio notificará o Cliente sem demora injustificada, fornecendo detalhes sobre a natureza do incidente e as medidas de mitigação adotadas, como o acionamento do Human Fallback ou bloqueios de emergência de IP.</p>
+      </section>
+
+      <!-- Footer Links -->
+      <div class="privacy-footer-links">
+        <a href="termos.html">Termos de Uso e Ética em IA</a>
+      </div>
+    </main>
+  </div>
 
   <footer class="footer footer--legal" aria-label="Rodapé">
-    <div class="container footer-bottom legal-footer-bottom">
-      <p><small>© <time datetime="2026">2026</time> Athenio.</small></p>
+    <div class="container footer-bottom legal-footer-bottom" style="flex-direction:column;align-items:center;gap:12px;padding-top:32px">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false" aria-label="Voltar ao topo"><img src="public/assets/logo-full.svg" alt="Athenio" height="24" style="width:auto;opacity:.6"></a>
+      <p><small>&copy; <time datetime="2026">2026</time> Athenio &middot; Todos os direitos reservados</small></p>
     </div>
   </footer>
+
+  <script>
+    /* Reading progress bar */
+    (function () {
+      var bar = document.querySelector('.reading-progress');
+      if (!bar) return;
+      window.addEventListener('scroll', function () {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+      }, { passive: true });
+    })();
+
+    /* TOC active state */
+    (function () {
+      var links = document.querySelectorAll('.privacy-toc a');
+      var sections = [];
+      links.forEach(function (a) {
+        var id = a.getAttribute('href').slice(1);
+        var el = document.getElementById(id);
+        if (el) sections.push({ el: el, link: a });
+      });
+
+      function update() {
+        var scrollY = window.scrollY + 120;
+        var atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 40);
+        var current = null;
+        if (atBottom && sections.length) {
+          current = sections[sections.length - 1];
+        } else {
+          sections.forEach(function (s) {
+            if (s.el.offsetTop <= scrollY) current = s;
+          });
+        }
+        links.forEach(function (a) { a.classList.remove('active'); });
+        if (current) current.link.classList.add('active');
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+
+    /* Scroll reveal for sections */
+    (function () {
+      var els = document.querySelectorAll('.privacy-section');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
 </body>
 </html>
