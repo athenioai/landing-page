@@ -18,6 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/enhancements.css">
+  <link rel="stylesheet" href="css/features.css">
 
   <style>
     /* ============================================================
@@ -1379,6 +1380,10 @@
         <span>✉️ Zero spam</span>
         <span>↩️ Cancelável a qualquer momento</span>
       </div>
+      <div class="lgpd-badge">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1L2 4v4c0 3.5 2.6 6.4 6 7 3.4-.6 6-3.5 6-7V4L8 1z" stroke="#4FD1C5" stroke-width="1.2" fill="none"/><path d="M5.5 8l2 2 3.5-3.5" stroke="#4FD1C5" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Seus dados protegidos pela LGPD · Criptografia SSL 256-bit
+      </div>
     </form>
   </div>
 </section>
@@ -2280,5 +2285,34 @@
 
 })();
 </script>
+
+<!-- Exit Intent Popup -->
+<div class="exit-popup-overlay" id="exitPopup">
+  <div class="exit-popup">
+    <button class="exit-popup-close" id="exitPopupClose" aria-label="Fechar">✕</button>
+    <h3>Espere! Sua vaga ainda está disponível.</h3>
+    <p>Não perca a chance de ser um dos 200 fundadores com preço exclusivo de lançamento. A lista fecha em breve.</p>
+    <a href="#form" class="btn-exit-cta" id="exitPopupCta">Garantir Minha Vaga Agora →</a>
+  </div>
+</div>
+
+<!-- Social Proof Toast -->
+<div class="social-toast" id="socialToast">
+  <button class="social-toast-close" id="socialToastClose" aria-label="Fechar">✕</button>
+  <div class="social-toast-content">
+    <div class="social-toast-avatar" id="socialToastInitials">CS</div>
+    <div class="social-toast-text">
+      <strong id="socialToastName">Carlos</strong> de <span id="socialToastCity">São Paulo</span>
+      <span class="social-toast-time">entrou na lista há <span id="socialToastTime">2 min</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- Desktop Sticky CTA -->
+<a href="#form" class="desktop-sticky-cta" id="desktopStickyCta">
+  Garantir Vaga →
+</a>
+
+<script src="js/features.js" defer></script>
 </body>
 </html>
