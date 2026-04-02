@@ -2068,7 +2068,7 @@
     var controller = new AbortController();
     var timeout    = setTimeout(function() { controller.abort(); }, 8000);
 
-    fetch(SUPABASE_URL + '/rest/v1/rpc/submit_lead', {
+    fetch(SUPABASE_URL + '/functions/v1/submit-lead', {
       method:  'POST',
       signal:  controller.signal,
       headers: supabaseHeaders(),
