@@ -782,7 +782,7 @@
           <div class="av av-3">JF</div>
           <div class="av av-4">+</div>
         </div>
-        <span>⚡ <strong id="heroCount">…</strong> empresários já na fila · Últimas vagas disponíveis</span>
+        <span id="heroSocialProof">⚡ <strong id="heroCount">…</strong> empresários já na fila · Últimas vagas disponíveis</span>
       </div>
     </div>
 
@@ -1021,7 +1021,7 @@
   <div class="wl-container" style="position:relative;z-index:1">
     <div class="wl-founders-header">
       <p class="section-tag" data-animate>// Por que entrar agora</p>
-      <h2 data-animate>200 vagas. Quando acabarem, acabaram.</h2>
+      <h2 data-animate><span id="sectionTotalSlots">200</span> vagas. Quando acabarem, acabaram.</h2>
       <p data-animate>Os fundadores não são só os primeiros a usar. São os únicos que vão ter condições que nunca mais vão existir.</p>
     </div>
     <div class="scarcity-meter" data-animate>
@@ -1040,8 +1040,11 @@
       </div>
       <div class="progress-labels">
         <span class="pl-taken"><span id="progressTaken">…</span> vagas ocupadas</span>
-        <span>200 total</span>
+        <span id="progressTotal">200 total</span>
       </div>
+      <p class="expanded-slots-msg" id="expandedSlotsMsg" style="display:none;margin:.75rem 0 0;font-size:.95rem;color:#4FD1C5;text-align:center;">
+        Abrimos mais vagas para atender a alta demanda de empresários interessados.
+      </p>
     </div>
     <div class="benefits-grid">
       <div class="benefit-card" data-animate>
@@ -1442,8 +1445,12 @@
     document.querySelectorAll(sel).forEach(function(el){ el.textContent = val; });
   }
 
+  /* Expõe taken para reconciliar com contagem real do Supabase */
+  window.__spotsTaken = taken;
+  window.__spotsTotal = TOTAL;
+
   setSpots('#ubSpots, #navSpots, #scRemaining, #formSpots, #footerSpots, #mobileSpots', remaining);
-  setSpots('#heroCount, #progressTaken', taken);
+  setSpots('#heroCount, #progressTaken, #waitlistCount', taken);
 
   /* Atualiza atributo aria e largura da barra de progresso (animado via CSS) */
   var track = document.querySelector('[role="progressbar"]');
@@ -1620,9 +1627,54 @@
     return null;
   }
 
+  function updateAllSpots(count) {
+    var BASE_TOTAL = 200;
+    /* Se a soma ultrapassar 200, expande o total em blocos de 50 */
+    var total = count > BASE_TOTAL
+      ? Math.ceil(count / 50) * 50
+      : BASE_TOTAL;
+    var remaining = total - count;
+    var pct = (count / total) * 100;
+    function set(sel, val) {
+      document.querySelectorAll(sel).forEach(function(e){ e.textContent = val; });
+    }
+    set('#ubSpots, #navSpots, #scRemaining, #formSpots, #footerSpots, #mobileSpots', remaining);
+    set('#heroCount, #progressTaken, #waitlistCount', count);
+    var tr = document.querySelector('[role="progressbar"]');
+    if (tr) {
+      tr.setAttribute('aria-valuenow', count);
+      tr.setAttribute('aria-valuemax', total);
+    }
+    var pt = document.getElementById('progressTotal');
+    if (pt) pt.textContent = total + ' total';
+    var st = document.getElementById('sectionTotalSlots');
+    if (st) st.textContent = total;
+    var pf = document.getElementById('progressFill');
+    if (pf) pf.style.width = pct + '%';
+    /* Mostra aviso de vagas expandidas + gatilhos de urgência */
+    var msg = document.getElementById('expandedSlotsMsg');
+    if (msg) msg.style.display = count > BASE_TOTAL ? '' : 'none';
+
+    if (count > BASE_TOTAL) {
+      var wl = document.getElementById('waitlistCountLabel');
+      if (wl) wl.innerHTML = 'Já são <strong id="waitlistCount">' + count + '</strong> empresários na fila. A demanda superou nossas expectativas.';
+      var hero = document.getElementById('heroSocialProof');
+      if (hero) hero.innerHTML = '🔥 <strong id="heroCount">' + count + '</strong> empresários na fila · Vagas extras se esgotando rápido';
+      var nav = document.querySelector('.nav-spots-pill');
+      if (nav) nav.innerHTML = '<span id="navSpots">' + remaining + '</span>&nbsp;últimas vagas!';
+      var ubTimerEl = document.getElementById('ubTimer');
+      var ubTimerText = ubTimerEl ? ubTimerEl.textContent : '…';
+      var ub = document.querySelector('.urgency-bar span:not(.ub-pulse)');
+      if (ub) ub.innerHTML = 'Lançamento em <strong class="ub-timer" id="ubTimer">' + ubTimerText + '</strong> · <strong id="ubSpots">' + remaining + '</strong> últimas vagas · Demanda acima do esperado';
+      var foot = document.querySelector('.wl-footer-cta p[data-animate]:not(.section-tag)');
+      if (foot) foot.innerHTML = 'Restam apenas <strong id="footerSpots" style="color:#4FD1C5">' + remaining + '</strong> vagas extras. A demanda explodiu e estamos fechando em breve.';
+      var formP = document.querySelector('.wl-form-header > p:not(.section-tag):not(.wl-waitlist-count)');
+      if (formP) formP.innerHTML = 'A procura superou as 200 vagas iniciais. Abrimos mais <strong style="color:#4FD1C5">' + remaining + '</strong> vagas extras, mas elas estão indo rápido.';
+    }
+  }
+
   function fetchWaitlistCount() {
-    var el = document.getElementById('waitlistCount');
-    if (!el) return;
+    var simulated = window.__spotsTaken || 0;
     var ctrl = new AbortController();
     var t = setTimeout(function() { ctrl.abort(); }, 6000);
     fetch(SUPABASE_URL + '/rest/v1/rpc/get_waitlist_count', {
@@ -1634,16 +1686,14 @@
       .then(function(res) { return res.json().catch(function() { return null; }); })
       .then(function(data) {
         clearTimeout(t);
-        var n = parseRpcCount(data);
-        if (n != null) {
-          el.textContent = n.toLocaleString('pt-BR');
-        } else {
-          el.textContent = '…';
-        }
+        var real = parseRpcCount(data);
+        /* Soma: leads simulados (fórmula) + leads reais (Supabase) */
+        var combined = simulated + (real != null ? real : 0);
+        updateAllSpots(combined);
       })
       .catch(function() {
         clearTimeout(t);
-        el.textContent = '…';
+        /* Em caso de erro, mantém o valor da fórmula (já aplicado) */
       });
   }
 
