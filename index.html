@@ -24,7 +24,7 @@
        WAITLIST, DESIGN SYSTEM EXTENSIONS
        ============================================================ */
 
-    body { padding-top: 116px; overflow-x: hidden; }
+    body { padding-top: 103px; overflow-x: hidden; }
 
     /* ── URGENCY BAR ─────────────────────────────────────────── */
     .urgency-bar {
@@ -49,7 +49,7 @@
 
     /* ── NAVBAR ──────────────────────────────────────────────── */
     .wl-nav {
-      position: fixed; top: 52px; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 39px; left: 0; right: 0; z-index: 100;
       height: 64px;
       display: flex; align-items: center; justify-content: center;
       transition: background .3s, border-color .3s;
@@ -674,10 +674,10 @@
       .teaser-visual { display: none; }
     }
     @media (max-width: 768px) {
-      body { padding-top: 108px; padding-bottom: 90px; }
+      body { padding-top: 97px; padding-bottom: 90px; }
       .urgency-bar { font-size: 11px; padding: 8px 14px; gap: 8px; }
       .urgency-bar .ub-cta { display: none; }
-      .wl-nav { top: 46px; padding: 0 20px; }
+      .wl-nav { top: 33px; padding: 0 20px; }
       .before-after { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .wl-footer-inner { flex-direction: column; align-items: flex-start; }
@@ -691,6 +691,227 @@
     @media (min-width: 769px) {
       .mobile-sticky-cta { display: none !important; }
     }
+
+    /* ── AESTHETIC ENHANCEMENTS ─────────────────────────────────
+       Somente animações, efeitos e transições.
+       Nenhuma alteração em fontes, cores, padding ou background.
+       ───────────────────────────────────────────────────────── */
+
+    /* — Staggered grid reveal delays — */
+    .pain-grid     [data-animate]:nth-child(2),
+    .future-grid   [data-animate]:nth-child(2),
+    .benefits-grid [data-animate]:nth-child(2),
+    .testimonials-grid [data-animate]:nth-child(2) { transition-delay: .08s; }
+
+    .pain-grid     [data-animate]:nth-child(3),
+    .future-grid   [data-animate]:nth-child(3),
+    .benefits-grid [data-animate]:nth-child(3),
+    .testimonials-grid [data-animate]:nth-child(3) { transition-delay: .16s; }
+
+    .pain-grid     [data-animate]:nth-child(4),
+    .future-grid   [data-animate]:nth-child(4),
+    .benefits-grid [data-animate]:nth-child(4) { transition-delay: .24s; }
+
+    .pain-grid     [data-animate]:nth-child(5),
+    .benefits-grid [data-animate]:nth-child(5) { transition-delay: .32s; }
+
+    .pain-grid     [data-animate]:nth-child(6),
+    .benefits-grid [data-animate]:nth-child(6) { transition-delay: .40s; }
+
+    .faq-items .faq-item:nth-child(2) { transition-delay: .06s; }
+    .faq-items .faq-item:nth-child(3) { transition-delay: .12s; }
+    .faq-items .faq-item:nth-child(4) { transition-delay: .18s; }
+    .faq-items .faq-item:nth-child(5) { transition-delay: .24s; }
+    .faq-items .faq-item:nth-child(6) { transition-delay: .30s; }
+
+    /* — Marquee fade edges — */
+    .marquee-strip {
+      mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+
+    /* — Progress bar animated glow — */
+    @keyframes bar-glow {
+      0%, 100% { box-shadow: 0 0 8px rgba(79,209,197,.25); }
+      50%      { box-shadow: 0 0 20px rgba(79,209,197,.45), 0 0 40px rgba(79,209,197,.15); }
+    }
+    .progress-fill { animation: bar-glow 3s ease-in-out infinite; }
+
+    /* — FAQ answer content fade in — */
+    .faq-answer-inner {
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity .35s .1s, transform .35s .1s;
+    }
+    .faq-item.open .faq-answer-inner { opacity: 1; transform: none; }
+
+    /* — Before/After center divider — */
+    .before-after { position: relative; }
+    .before-after::after {
+      content: '';
+      position: absolute; top: 10%; bottom: 10%; left: 50%; width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(79,209,197,.25) 30%, rgba(79,209,197,.25) 70%, transparent);
+      pointer-events: none;
+    }
+    @media (max-width: 768px) {
+      .before-after::after {
+        top: 50%; bottom: auto; left: 10%; right: 10%;
+        width: auto; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(79,209,197,.25) 30%, rgba(79,209,197,.25) 70%, transparent);
+      }
+    }
+
+    /* — Hero avatars staggered entrance — */
+    .wl-avatars .av {
+      opacity: 0; transform: translateX(-8px);
+      transition: opacity .5s var(--ease-out), transform .5s var(--ease-out);
+    }
+    .visible .wl-avatars .av { opacity: 1; transform: none; }
+    .visible .wl-avatars .av:nth-child(2) { transition-delay: .08s; }
+    .visible .wl-avatars .av:nth-child(3) { transition-delay: .16s; }
+    .visible .wl-avatars .av:nth-child(4) { transition-delay: .24s; }
+
+    /* — Teaser blur box: breathing glow — */
+    @keyframes blur-breathe {
+      0%, 100% { box-shadow: 0 0 40px rgba(79,209,197,.04); }
+      50%      { box-shadow: 0 0 60px rgba(79,209,197,.1), 0 0 100px rgba(79,209,197,.03); }
+    }
+    .teaser-blur-box { animation: blur-breathe 5s ease-in-out infinite; }
+
+    /* — Nav spots pill pulse when scrolled — */
+    @keyframes pill-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(79,209,197,.15); }
+      50%      { box-shadow: 0 0 0 6px rgba(79,209,197,.0); }
+    }
+    .wl-nav.scrolled .nav-spots-pill { animation: pill-pulse 2.5s ease-in-out infinite; }
+
+    /* — Urgency bar gradient slide — */
+    @keyframes ub-gradient {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .urgency-bar { background-size: 200% 100%; animation: ub-gradient 12s ease infinite; }
+
+    /* — 1. Card tilt 3D — */
+    .pain-card, .future-card, .benefit-card, .testi-card {
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    /* — 2. Cursor glow — */
+    .cursor-glow {
+      position: fixed; width: 420px; height: 420px; border-radius: 50%;
+      pointer-events: none; z-index: 0;
+      background: radial-gradient(circle, rgba(79,209,197,.07) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      opacity: 0; transition: opacity .4s;
+      mix-blend-mode: screen;
+    }
+    .cursor-glow.active { opacity: 1; }
+
+    /* — 3. Hero text reveal — */
+    .hero-word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(20px);
+      filter: blur(6px);
+      transition: opacity .6s var(--ease-out), transform .6s var(--ease-out), filter .6s var(--ease-out);
+    }
+    .hero-word.revealed {
+      opacity: 1;
+      transform: none;
+      filter: blur(0);
+    }
+
+    /* — 4. Scroll progress bar — */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px; z-index: 300;
+      background: linear-gradient(90deg, rgba(79,209,197,.6), rgba(129,230,217,.8));
+      width: 0%; transition: none;
+      pointer-events: none;
+      box-shadow: 0 0 8px rgba(79,209,197,.4);
+    }
+
+    /* — 5. Magnetic buttons — */
+    .btn-founder, .btn-submit-founder {
+      will-change: transform;
+      transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .2s;
+    }
+
+    /* — 6. Card border gradient rotation — */
+    @keyframes border-rotate {
+      0%   { --border-angle: 0deg; }
+      100% { --border-angle: 360deg; }
+    }
+    @property --border-angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+    .pain-card::before, .future-card::before, .benefit-card::before, .testi-card::before {
+      content: '';
+      position: absolute; inset: -1px;
+      border-radius: inherit;
+      background: conic-gradient(from var(--border-angle), transparent 60%, rgba(79,209,197,.35) 80%, transparent 100%);
+      z-index: -1;
+      opacity: 0;
+      animation: border-rotate 4s linear infinite;
+      transition: opacity .4s;
+    }
+    .pain-card { position: relative; }
+    .benefit-card { position: relative; }
+    .pain-card:hover::before, .future-card:hover::before,
+    .benefit-card:hover::before, .testi-card:hover::before {
+      opacity: 1;
+    }
+
+    /* — 8. Floating particles — */
+    .hero-particles {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+      overflow: hidden;
+    }
+    .hero-particle {
+      position: absolute;
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: rgba(79,209,197,.3);
+      opacity: 0;
+      animation: particle-float linear infinite;
+    }
+    @keyframes particle-float {
+      0%   { opacity: 0; transform: translateY(0) translateX(0); }
+      10%  { opacity: .5; }
+      90%  { opacity: .3; }
+      100% { opacity: 0; transform: translateY(-100vh) translateX(40px); }
+    }
+
+    /* — 9. Section reveal sweep — */
+    @keyframes sweep-line {
+      0%   { transform: translateX(-100%); opacity: .7; }
+      100% { transform: translateX(100%); opacity: 0; }
+    }
+    .section-sweep {
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      overflow: hidden; pointer-events: none;
+    }
+    .section-sweep::after {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(79,209,197,.5), transparent);
+      transform: translateX(-100%);
+    }
+    .section-sweep.animate::after {
+      animation: sweep-line 1.2s cubic-bezier(.16,1,.3,1) forwards;
+    }
+
+    /* — 10. Parallax depth layers — */
+    [data-parallax] {
+      will-change: transform;
+      transition: transform .1s linear;
+    }
   </style>
 </head>
 <body>
@@ -698,6 +919,8 @@
 <!-- ============================================================
      URGENCY BAR
      ============================================================ -->
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
 <div class="urgency-bar">
   <div class="wl-container" style="display:flex;align-items:center;justify-content:center;gap:14px;width:100%">
     <span class="ub-pulse" aria-hidden="true"></span>
@@ -724,6 +947,7 @@
      HERO
      ============================================================ -->
 <section class="wl-hero" id="hero">
+  <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
   <div class="hero-grid-bg" aria-hidden="true"></div>
   <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
   <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
@@ -825,7 +1049,8 @@
 <!-- ============================================================
      DOR
      ============================================================ -->
-<section class="wl-pain">
+<section class="wl-pain" style="position:relative">
+  <div class="section-sweep"></div>
   <div class="wl-container">
     <p class="section-tag" data-animate>// O problema</p>
     <h2 data-animate>Seja honesto: você se reconhece em alguma dessas situações?</h2>
@@ -866,6 +1091,7 @@
      TEASER / CURIOSIDADE
      ============================================================ -->
 <section class="wl-teaser">
+  <div class="section-sweep"></div>
   <div class="wl-container">
     <div class="wl-teaser-inner">
       <div>
@@ -908,7 +1134,8 @@
 <!-- ============================================================
      FUTURE PACING
      ============================================================ -->
-<section class="wl-future">
+<section class="wl-future" style="position:relative">
+  <div class="section-sweep"></div>
   <div class="wl-container">
     <div class="wl-future-header">
       <p class="section-tag" data-animate>// O outro lado</p>
@@ -965,7 +1192,8 @@
 <!-- ============================================================
      TESTIMONIALS
      ============================================================ -->
-<section class="wl-testimonials">
+<section class="wl-testimonials" style="position:relative">
+  <div class="section-sweep"></div>
   <div class="wl-container">
     <div class="wl-testimonials-header">
       <p class="section-tag" style="text-align:center" data-animate>// Quem já está na fila</p>
@@ -1018,6 +1246,7 @@
      FUNDADORES
      ============================================================ -->
 <section class="wl-founders">
+  <div class="section-sweep"></div>
   <div class="wl-container" style="position:relative;z-index:1">
     <div class="wl-founders-header">
       <p class="section-tag" data-animate>// Por que entrar agora</p>
@@ -1518,12 +1747,30 @@
   tick();
 })();
 
-/* ── NAVBAR SCROLL ─────────────────────────────────────────── */
+/* ── NAVBAR SCROLL + HERO PARALLAX ─────────────────────────── */
 (function () {
-  var nav = document.getElementById('wlNav');
-  if (!nav) return;
+  var nav  = document.getElementById('wlNav');
+  var orbs = document.querySelectorAll('.hero-orb');
+  var grid = document.querySelector('.hero-grid-bg');
+  var ticking = false;
+
+  function onScroll() {
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 80);
+
+    /* Parallax sutil nos orbs do hero */
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && orbs.length) {
+      var y = window.scrollY;
+      orbs.forEach(function(orb, i) {
+        var speed = 0.03 + i * 0.015;
+        orb.style.transform = 'translateY(' + (y * speed) + 'px)';
+      });
+      if (grid) grid.style.transform = 'translateY(' + (y * 0.02) + 'px)';
+    }
+    ticking = false;
+  }
+
   window.addEventListener('scroll', function() {
-    nav.classList.toggle('scrolled', window.scrollY > 80);
+    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
   }, { passive: true });
 })();
 
@@ -1859,6 +2106,178 @@
       if (err) { err.style.display = 'none'; input.closest('.form-field').classList.remove('has-error'); }
     });
   });
+})();
+
+/* ── AESTHETIC EFFECTS ─────────────────────────────────────── */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  /* — 1. Card tilt 3D — */
+  var tiltCards = document.querySelectorAll('.pain-card, .future-card, .benefit-card, .testi-card');
+  tiltCards.forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      var rect = card.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width  - 0.5;
+      var y = (e.clientY - rect.top)  / rect.height - 0.5;
+      card.style.transform = 'perspective(600px) rotateY(' + (x * 8) + 'deg) rotateX(' + (-y * 8) + 'deg) translateY(-4px)';
+    });
+    card.addEventListener('mouseleave', function() {
+      card.style.transform = '';
+      card.style.transition = 'transform .4s cubic-bezier(.16,1,.3,1)';
+      setTimeout(function(){ card.style.transition = ''; }, 400);
+    });
+  });
+
+  /* — 2. Cursor glow — */
+  var glow = document.getElementById('cursorGlow');
+  if (glow) {
+    var glowSections = document.querySelectorAll('.wl-hero, .wl-footer-cta, .wl-teaser');
+    var insideGlowZone = false;
+
+    document.addEventListener('mousemove', function(e) {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top  = e.clientY + 'px';
+
+      var hit = false;
+      glowSections.forEach(function(sec) {
+        var r = sec.getBoundingClientRect();
+        if (e.clientY >= r.top && e.clientY <= r.bottom) hit = true;
+      });
+      if (hit && !insideGlowZone) { glow.classList.add('active'); insideGlowZone = true; }
+      else if (!hit && insideGlowZone) { glow.classList.remove('active'); insideGlowZone = false; }
+    }, { passive: true });
+  }
+
+  /* — 3. Hero text reveal — */
+  var heroH1 = document.querySelector('.wl-hero h1');
+  if (heroH1) {
+    var html = heroH1.innerHTML;
+    /* Wrap each word in a span, preserving HTML tags like <span class="text-gradient"> */
+    var parts = html.split(/(<[^>]+>)/);
+    var wordIndex = 0;
+    var result = parts.map(function(part) {
+      if (part.charAt(0) === '<') return part; /* HTML tag — keep as-is */
+      return part.replace(/(\S+)/g, function(word) {
+        return '<span class="hero-word" style="transition-delay:' + (wordIndex++ * 0.05) + 's">' + word + '</span>';
+      });
+    }).join('');
+    heroH1.innerHTML = result;
+    heroH1.style.opacity = '1';
+    heroH1.style.transform = 'none';
+
+    /* Trigger reveal after a short delay */
+    setTimeout(function() {
+      heroH1.querySelectorAll('.hero-word').forEach(function(w) {
+        w.classList.add('revealed');
+      });
+    }, 200);
+  }
+
+  /* — 4. Scroll progress bar — */
+  var progressBar = document.getElementById('scrollProgress');
+  if (progressBar) {
+    window.addEventListener('scroll', function() {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+    }, { passive: true });
+  }
+
+  /* — 5. Magnetic buttons — */
+  var magnetBtns = document.querySelectorAll('.btn-founder');
+  magnetBtns.forEach(function(btn) {
+    btn.addEventListener('mousemove', function(e) {
+      var rect = btn.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.top + rect.height / 2;
+      var dx = (e.clientX - cx) * 0.15;
+      var dy = (e.clientY - cy) * 0.15;
+      btn.style.transform = 'translate(' + dx + 'px,' + dy + 'px) translateY(-3px)';
+    });
+    btn.addEventListener('mouseleave', function() {
+      btn.style.transform = '';
+    });
+  });
+
+  /* — 7. Number count-up — */
+  var countUpEls = document.querySelectorAll('.sc-remaining, .as-number');
+  var countUpObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      var target = parseInt(el.textContent.replace(/\D/g, ''), 10);
+      if (isNaN(target) || target === 0) return;
+      var start = 0;
+      var duration = 1200;
+      var startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3); /* ease-out cubic */
+        el.textContent = Math.floor(eased * target);
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      }
+      el.textContent = '0';
+      requestAnimationFrame(step);
+      countUpObs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  countUpEls.forEach(function(el) { countUpObs.observe(el); });
+
+  /* — 8. Floating particles — */
+  var particleContainer = document.getElementById('heroParticles');
+  if (particleContainer) {
+    for (var i = 0; i < 15; i++) {
+      var p = document.createElement('div');
+      p.className = 'hero-particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.bottom = -(Math.random() * 20) + '%';
+      p.style.animationDuration = (8 + Math.random() * 12) + 's';
+      p.style.animationDelay = -(Math.random() * 15) + 's';
+      p.style.width = (2 + Math.random() * 2) + 'px';
+      p.style.height = p.style.width;
+      particleContainer.appendChild(p);
+    }
+  }
+
+  /* — 9. Section reveal sweep — */
+  var sweeps = document.querySelectorAll('.section-sweep');
+  var sweepObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('animate');
+        sweepObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -80px 0px' });
+  sweeps.forEach(function(el) { sweepObs.observe(el); });
+
+  /* — 10. Parallax depth layers — */
+  var parallaxEls = [
+    { el: document.querySelector('.wl-pain h2'), speed: 0.02 },
+    { el: document.querySelector('.wl-future-header h2'), speed: 0.025 },
+    { el: document.querySelector('.wl-founders-header h2'), speed: 0.02 },
+    { el: document.querySelector('.teaser-blur-box'), speed: -0.03 },
+    { el: document.querySelector('.wl-footer-cta h2'), speed: 0.03 }
+  ].filter(function(p) { return p.el; });
+
+  var parallaxTick = false;
+  window.addEventListener('scroll', function() {
+    if (parallaxTick) return;
+    parallaxTick = true;
+    requestAnimationFrame(function() {
+      parallaxEls.forEach(function(p) {
+        var rect = p.el.getBoundingClientRect();
+        var center = rect.top + rect.height / 2;
+        var offset = (center - window.innerHeight / 2) * p.speed;
+        p.el.style.transform = 'translateY(' + offset + 'px)';
+      });
+      parallaxTick = false;
+    });
+  }, { passive: true });
+
 })();
 </script>
 </body>
