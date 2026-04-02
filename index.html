@@ -1688,29 +1688,37 @@
     document.querySelectorAll(sel).forEach(function(el){ el.textContent = val; });
   }
 
-  /* Expõe taken para reconciliar com contagem real do Supabase */
+  /* Expõe taken para reconciliar com contagem real do Supabase.
+     NÃO exibe os valores da fórmula imediatamente — mantém "…" até
+     o fetch do Supabase resolver (ou falhar), evitando flash 5→15. */
   window.__spotsTaken = taken;
   window.__spotsTotal = TOTAL;
+  window.__spotsApplied = false;
 
-  setSpots('#ubSpots, #navSpots, #scRemaining, #formSpots, #footerSpots, #mobileSpots', remaining);
-  setSpots('#heroCount, #progressTaken, #waitlistCount', taken);
+  /* A barra de progresso será animada em applyFormulaSpots() ou updateAllSpots()
+     para evitar o flash com valor da fórmula antes do fetch resolver. */
 
-  /* Atualiza atributo aria e largura da barra de progresso (animado via CSS) */
-  var track = document.querySelector('[role="progressbar"]');
-  if (track) track.setAttribute('aria-valuenow', taken);
-
-  var progressFill = document.getElementById('progressFill');
-  if (progressFill) {
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) {
-          setTimeout(function(){ progressFill.style.width = pct + '%'; }, 300);
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.3 });
-    obs.observe(progressFill.closest('.scarcity-meter'));
-  }
+  /* Aplica os valores da fórmula como fallback (chamado se fetch falhar/timeout) */
+  window.__applyFormulaSpots = function () {
+    if (window.__spotsApplied) return;
+    window.__spotsApplied = true;
+    setSpots('#ubSpots, #navSpots, #scRemaining, #formSpots, #footerSpots, #mobileSpots', remaining);
+    setSpots('#heroCount, #progressTaken, #waitlistCount', taken);
+    var track = document.querySelector('[role="progressbar"]');
+    if (track) track.setAttribute('aria-valuenow', taken);
+    var progressFill = document.getElementById('progressFill');
+    if (progressFill) {
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            setTimeout(function(){ progressFill.style.width = pct + '%'; }, 300);
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      obs.observe(progressFill.closest('.scarcity-meter'));
+    }
+  };
 })();
 
 /* ── COUNTDOWN ─────────────────────────────────────────────── */
@@ -1950,11 +1958,13 @@
         var real = parseRpcCount(data);
         /* Soma: leads simulados (fórmula) + leads reais (Supabase) */
         var combined = simulated + (real != null ? real : 0);
+        window.__spotsApplied = true;
         updateAllSpots(combined);
       })
       .catch(function() {
         clearTimeout(t);
-        /* Em caso de erro, mantém o valor da fórmula (já aplicado) */
+        /* Em caso de erro, aplica o valor da fórmula como fallback */
+        if (window.__applyFormulaSpots) window.__applyFormulaSpots();
       });
   }
 
@@ -2003,6 +2013,8 @@
   applyAttribution(form);
   maskPhone(form.querySelector('[name="whatsapp"]'));
   fetchWaitlistCount();
+  /* Se após 2s o fetch não resolveu, mostra o valor da fórmula para não ficar "…" */
+  setTimeout(function() { if (window.__applyFormulaSpots) window.__applyFormulaSpots(); }, 2000);
 
   var lastSubmit = 0;
 
