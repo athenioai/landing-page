@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z9TGCQ6WYM"></script>
@@ -665,18 +665,21 @@
     /* ── MOBILE STICKY CTA ───────────────────────────────────── */
     .mobile-sticky-cta {
       display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
-      padding: 12px 16px 20px; background: rgba(7,12,12,.96); backdrop-filter: blur(16px);
+      padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+      background: rgba(7,12,12,.96); backdrop-filter: blur(16px);
       border-top: 1px solid var(--border); transform: translateY(100%);
       transition: transform .4s cubic-bezier(.16,1,.3,1);
     }
     .mobile-sticky-cta.visible { transform: translateY(0); }
     .mobile-sticky-cta a {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      background: #4FD1C5; color: #070C0C; font-family: var(--font-title); font-size: 15px; font-weight: 700;
-      padding: 15px; border-radius: var(--r-pill);
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      background: #4FD1C5; color: #070C0C; font-family: var(--font-title); font-size: 14px; font-weight: 700;
+      padding: 14px 16px; border-radius: var(--r-pill);
       box-shadow: 0 0 32px rgba(79,209,197,.3); text-decoration: none;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      width: 100%; max-width: 100%; box-sizing: border-box;
     }
-    .mobile-sticky-cta .msc-spots { font-size: 11px; font-weight: 600; opacity: .75; }
+    .mobile-sticky-cta .msc-spots { font-size: 11px; font-weight: 600; opacity: .75; flex-shrink: 0; }
 
     /* ── RESPONSIVE ──────────────────────────────────────────── */
     @media (max-width: 900px) {
@@ -684,10 +687,16 @@
       .teaser-visual { display: none; }
     }
     @media (max-width: 768px) {
-      body { padding-top: 97px; padding-bottom: 90px; }
-      .urgency-bar { font-size: 11px; padding: 8px 14px; gap: 8px; }
+      body { padding-top: 84px; padding-bottom: 0; }
+      .urgency-bar { font-size: 11px; padding: 6px 12px; gap: 6px; }
+      .urgency-bar .wl-container { gap: 6px; min-width: 0; }
+      .urgency-bar .wl-container > span:not(.ub-pulse) {
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+      }
       .urgency-bar .ub-cta { display: none; }
-      .wl-nav { top: 33px; padding: 0 20px; }
+      .wl-nav { top: 27px; padding: 0 16px; height: 56px; }
+      .wl-nav .nav-logo img { height: 24px; }
+      .nav-spots-pill { font-size: 11px; padding: 4px 10px; }
       .before-after { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .wl-footer-inner { flex-direction: column; align-items: flex-start; }
@@ -697,6 +706,7 @@
     @media (max-width: 480px) {
       .countdown-wrap { gap: 8px; }
       .cd-sep { font-size: 26px; margin-bottom: 14px; }
+      .urgency-bar { font-size: 10px; padding: 5px 10px; }
     }
     @media (min-width: 769px) {
       .mobile-sticky-cta { display: none !important; }
@@ -1214,7 +1224,7 @@
 
       <div class="testi-card" data-animate>
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"Entrei na lista sem saber exatamente o que era. O que me convenceu foi a promessa de implementação sem TI e a <strong>garantia de 15 dias</strong>. Se não funcionar, peço o dinheiro de volta. É honesto demais para ignorar."</p>
+        <p class="testi-quote">"Já investi em sistema que ninguém do time usou e em consultoria que entregou relatório e sumiu. A garantia de 15 dias me chamou atenção,se não funcionar, cancelo. Simples assim."</p>
         <div class="testi-author">
           <div class="testi-avatar" style="background:linear-gradient(135deg,#0F3D3E,#4FD1C5)">FF</div>
           <div class="testi-info">
@@ -1226,7 +1236,7 @@
 
       <div class="testi-card" data-animate>
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"Passamos anos tentando digitalizar processos. Cada solução exigia consultor, projeto, orçamento. A proposta da Athenio é diferente: <strong>resultado em semanas</strong>. Quero ver isso acontecer de verdade."</p>
+        <p class="testi-quote">"A recepcionista passa boa parte do dia só confirmando consulta por telefone. Se a Athenio resolve isso em semanas, sem precisar de equipe de TI, já compensa. Quero ver na prática."</p>
         <div class="testi-author">
           <div class="testi-avatar" style="background:linear-gradient(135deg,#1F4E5F,#81E6D9)">ML</div>
           <div class="testi-info">
@@ -1238,7 +1248,7 @@
 
       <div class="testi-card" data-animate>
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"Nossa operação vive em planilhas e e-mails. Qualquer coisa que me tire dessa realidade em semanas, <strong>sem precisar de TI, sem consultor</strong>, eu preciso testar. Entrei na lista imediatamente."</p>
+        <p class="testi-quote">"No escritório, a cobrança é sempre a mesma: cliente pergunta do prazo, a gente vai atrás, descobre que ficou parado. Se uma IA organiza esse fluxo sem precisar implantar sistema, preciso testar."</p>
         <div class="testi-author">
           <div class="testi-avatar" style="background:linear-gradient(135deg,#3A3F45,#4FD1C5)">JF</div>
           <div class="testi-info">
