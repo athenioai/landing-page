@@ -1420,48 +1420,6 @@ body::before {
   color: var(--text-primary) !important;
 }
 
-/* ----------------------------------------------------------
-   R5.5  MOBILE STICKY CTA — bottom bar, só em mobile
-   ---------------------------------------------------------- */
-.mobile-sticky-cta {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 8990;
-  padding: 12px 20px;
-  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-  background: rgba(7, 12, 12, 0.92);
-  border-top: 1px solid rgba(79, 209, 197, 0.15);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transform: translateY(100%);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.mobile-sticky-cta.is-visible {
-  transform: translateY(0);
-}
-
-.mobile-sticky-cta .btn-primary {
-  width: 100% !important;
-  display: flex !important;
-  justify-content: center !important;
-  text-align: center !important;
-}
-
-@media (max-width: 768px) {
-  .mobile-sticky-cta {
-    display: block;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mobile-sticky-cta {
-    transition: none !important;
-  }
-}
 
 /* ----------------------------------------------------------
    MOBILE FIXES — sticky-bar, FAB e padding de conteúdo
@@ -1471,12 +1429,12 @@ body::before {
   .sticky-bar { display: none !important; }
 
   /* FAB do WhatsApp: sobe quando a barra CTA está visível */
-  body:has(.mobile-sticky-cta.is-visible) .whatsapp-fab {
+  body:has(.mobile-sticky-cta.visible) .whatsapp-fab {
     bottom: 80px;
   }
 
   /* Evita que o último conteúdo fique oculto atrás da barra fixa */
-  body:has(.mobile-sticky-cta.is-visible) {
+  body:has(.mobile-sticky-cta.visible) {
     padding-bottom: 72px;
   }
 }

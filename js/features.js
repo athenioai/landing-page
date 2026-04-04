@@ -1,6 +1,6 @@
 /* ============================================================
    ATHENIO — FEATURES.JS
-   Exit-intent popup, social proof toasts, desktop sticky CTA,
+   Exit-intent popup, desktop sticky CTA,
    scroll-depth tracking, form interaction tracking.
    ============================================================ */
 
@@ -56,104 +56,6 @@
 })();
 
 
-// ----------------------------------------------------------
-// 2. SOCIAL PROOF TOASTS
-// ----------------------------------------------------------
-(function () {
-  'use strict';
-
-  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
-
-  var toast = document.getElementById('socialToast');
-  if (!toast) return;
-
-  var nameEl     = document.getElementById('socialToastName');
-  var cityEl     = document.getElementById('socialToastCity');
-  var timeEl     = document.getElementById('socialToastTime');
-  var initialsEl = document.getElementById('socialToastInitials');
-  var closeBtn   = document.getElementById('socialToastClose');
-
-  var entries = [
-    { name: 'Carlos',   city: 'São Paulo',       time: '2 min' },
-    { name: 'Ana',      city: 'Belo Horizonte',  time: '5 min' },
-    { name: 'Ricardo',  city: 'Curitiba',         time: '8 min' },
-    { name: 'Fernanda', city: 'Florianópolis',    time: '3 min' },
-    { name: 'Pedro',    city: 'Porto Alegre',     time: '12 min' },
-    { name: 'Juliana',  city: 'Recife',           time: '1 min' },
-    { name: 'Marcos',   city: 'Brasília',         time: '6 min' },
-    { name: 'Camila',   city: 'Salvador',         time: '4 min' }
-  ];
-
-  var shuffled = [];
-  var index = 0;
-  var hideTimer = null;
-
-  function shuffle(arr) {
-    var copy = arr.slice();
-    for (var i = copy.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var tmp = copy[i];
-      copy[i] = copy[j];
-      copy[j] = tmp;
-    }
-    return copy;
-  }
-
-  function getInitials(name) {
-    return name
-      .split(/\s+/)
-      .map(function (w) { return w.charAt(0).toUpperCase(); })
-      .join('');
-  }
-
-  function showToast() {
-    var exitPopup = document.getElementById('exitPopup');
-    if (exitPopup && exitPopup.classList.contains('active')) {
-      scheduleNext();
-      return;
-    }
-
-    if (index >= shuffled.length) {
-      shuffled = shuffle(entries);
-      index = 0;
-    }
-
-    var entry = shuffled[index++];
-
-    if (nameEl)     nameEl.textContent     = entry.name;
-    if (cityEl)     cityEl.textContent     = entry.city;
-    if (timeEl)     timeEl.textContent     = entry.time;
-    if (initialsEl) initialsEl.textContent = getInitials(entry.name);
-
-    toast.classList.add('show');
-
-    clearTimeout(hideTimer);
-    hideTimer = setTimeout(function () {
-      toast.classList.remove('show');
-      scheduleNext();
-    }, 5000);
-  }
-
-  function scheduleNext() {
-    var delay = Math.floor(Math.random() * 10000) + 15000; // 15-25 seconds
-    setTimeout(showToast, delay);
-  }
-
-  if (closeBtn) {
-    closeBtn.addEventListener('click', function () {
-      toast.classList.remove('show');
-      clearTimeout(hideTimer);
-      scheduleNext();
-    });
-  }
-
-  // Start after 8 seconds
-  setTimeout(function () {
-    shuffled = shuffle(entries);
-    showToast();
-  }, 8000);
-})();
 
 
 // ----------------------------------------------------------

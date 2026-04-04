@@ -1,6 +1,6 @@
 /* ============================================================
    ATHENIO — CONVERSION FEATURES CSS
-   Exit Intent Popup · Social Proof Toast · Desktop Sticky CTA · LGPD Badge
+   Exit Intent Popup · Desktop Sticky CTA · LGPD Badge
    ============================================================ */
 
 /* ----------------------------------------------------------
@@ -113,101 +113,6 @@
   border-color: var(--border-strong);
 }
 
-/* ----------------------------------------------------------
-   2. SOCIAL PROOF TOAST
-   ---------------------------------------------------------- */
-.social-toast {
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  z-index: 160;
-  max-width: 320px;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--r-lg);
-  padding: 14px 32px 14px 16px;
-  transform: translateX(-120%);
-  opacity: 0;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.social-toast.show {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-.social-toast-content {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.social-toast-avatar {
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-family: var(--font-title);
-  font-size: 13px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.social-toast-text {
-  font-family: var(--font-body);
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--text-muted);
-}
-
-.social-toast-text strong {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.social-toast-time {
-  display: block;
-  font-size: 11px;
-  color: var(--text-subtle);
-  margin-top: 2px;
-}
-
-.social-toast-close {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  color: var(--text-subtle);
-  font-size: 14px;
-  line-height: 1;
-  cursor: pointer;
-  padding: 0;
-  transition: color 0.2s;
-}
-
-.social-toast-close:hover {
-  color: var(--text-muted);
-}
-
-@media (max-width: 768px) {
-  .social-toast {
-    bottom: 100px;
-    left: 16px;
-    right: 16px;
-    max-width: none;
-  }
-}
 
 /* ----------------------------------------------------------
    3. DESKTOP STICKY CTA
