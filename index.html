@@ -49,6 +49,12 @@
       function gtag() {
         dataLayer.push(arguments);
       }
+      gtag("consent", "default", {
+        analytics_storage: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+      });
       gtag("js", new Date());
       gtag("config", "G-FD8WVMB4L2");
     </script>
@@ -2031,6 +2037,7 @@
           <span>Athenio · Tecnologia LTDA · © 2026</span>
           <span style="display: flex; gap: 24px"
             ><a href="privacidade.html" style="margin: 0">Privacidade</a
+            ><a href="cookies.html" style="margin: 0">Cookies</a
             ><a href="termos.html" style="margin: 0">Termos</a></span
           >
         </div>
@@ -2699,5 +2706,6 @@
         });
       })();
     </script>
+    <script src="js/consent.js" defer></script>
   </body>
 </html>
