@@ -2607,11 +2607,38 @@
         const successEl = document.getElementById("leadSuccess");
         let lastSubmit = 0;
 
+        const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
         const sanitize = (v) => String(v).replace(/<[^>]*>/g, "").trim();
         const setInvalid = (el, bad) => {
           el.classList.toggle("invalid", bad);
           return !bad;
         };
+
+        /* máscara de telefone: (11) 99999-9999 */
+        const maskPhone = (d) => {
+          if (!d) return "";
+          if (d.length <= 2) return "(" + d;
+          if (d.length <= 6) return "(" + d.slice(0, 2) + ") " + d.slice(2);
+          if (d.length <= 10) {
+            return (
+              "(" + d.slice(0, 2) + ") " + d.slice(2, 6) + "-" + d.slice(6)
+            );
+          }
+          return "(" + d.slice(0, 2) + ") " + d.slice(2, 7) + "-" + d.slice(7);
+        };
+        form.whatsapp.addEventListener("input", () => {
+          const digits = form.whatsapp.value.replace(/\D/g, "").slice(0, 11);
+          form.whatsapp.value = maskPhone(digits);
+        });
+
+        /* validação de e-mail ao sair do campo */
+        form.email.addEventListener("blur", () => {
+          const value = sanitize(form.email.value);
+          if (value) setInvalid(form.email, !EMAIL_RE.test(value));
+        });
+        [form.name, form.email, form.message].forEach((el) =>
+          el.addEventListener("input", () => el.classList.remove("invalid")),
+        );
 
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
@@ -2627,11 +2654,7 @@
           const message = sanitize(form.message.value).slice(0, 2000);
 
           let ok = setInvalid(form.name, name.length < 2);
-          ok =
-            setInvalid(
-              form.email,
-              !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email),
-            ) && ok;
+          ok = setInvalid(form.email, !EMAIL_RE.test(email)) && ok;
           ok = setInvalid(form.message, message.length < 10) && ok;
           if (!ok) {
             errEl.textContent = "Preencha os campos destacados.";
