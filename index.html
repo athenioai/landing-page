@@ -2618,11 +2618,13 @@
           if (form._hp.value.trim()) return;
           if (Date.now() - lastSubmit < 10000) return;
 
-          const name = sanitize(form.name.value);
-          const email = sanitize(form.email.value);
-          const company = sanitize(form.company.value);
-          const whatsapp = sanitize(form.whatsapp.value).replace(/\D/g, "");
-          const message = sanitize(form.message.value);
+          const name = sanitize(form.name.value).slice(0, 120);
+          const email = sanitize(form.email.value).slice(0, 160);
+          const company = sanitize(form.company.value).slice(0, 120);
+          const whatsapp = sanitize(form.whatsapp.value)
+            .replace(/\D/g, "")
+            .slice(0, 15);
+          const message = sanitize(form.message.value).slice(0, 2000);
 
           let ok = setInvalid(form.name, name.length < 2);
           ok =
@@ -2649,11 +2651,12 @@
             p_message: message,
             p_company_size: null,
             p_intent: "contact",
-            p_utm_source: utm.get("utm_source"),
-            p_utm_medium: utm.get("utm_medium"),
-            p_utm_campaign: utm.get("utm_campaign"),
-            p_utm_content: utm.get("utm_content"),
-            p_utm_term: utm.get("utm_term"),
+            p_utm_source: (utm.get("utm_source") || "").slice(0, 120) || null,
+            p_utm_medium: (utm.get("utm_medium") || "").slice(0, 120) || null,
+            p_utm_campaign:
+              (utm.get("utm_campaign") || "").slice(0, 160) || null,
+            p_utm_content: (utm.get("utm_content") || "").slice(0, 160) || null,
+            p_utm_term: (utm.get("utm_term") || "").slice(0, 160) || null,
             p_referrer: sanitize(document.referrer).slice(0, 500) || null,
             p_landing_url: sanitize(window.location.href).slice(0, 500),
             p_user_agent: sanitize(navigator.userAgent).slice(0, 500),
