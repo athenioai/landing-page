@@ -953,7 +953,8 @@
       .founder .photo {
         flex: 0 0 124px;
         width: 124px;
-        height: 154px;
+        align-self: stretch;
+        min-height: 154px;
         border-radius: 14px;
         overflow: hidden;
         background: rgba(79, 209, 197, 0.06);
@@ -1327,7 +1328,17 @@
         }
         .founder {
           flex-direction: column;
-          gap: 18px;
+          gap: 20px;
+        }
+        .founder .photo {
+          flex-basis: auto;
+          width: 100%;
+          align-self: auto;
+          height: 210px;
+          min-height: 0;
+        }
+        .founder .photo img {
+          object-position: 50% 22%;
         }
         .sec {
           padding: 84px 0;
