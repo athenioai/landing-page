@@ -1132,31 +1132,6 @@
       .lf-note a:hover {
         color: var(--teal);
       }
-      .lead-success {
-        max-width: 520px;
-        margin: 52px auto 0;
-      }
-      .lead-success .ck {
-        width: 52px;
-        height: 52px;
-        margin: 0 auto 20px;
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        background: rgba(79, 209, 197, 0.12);
-        border: 1px solid rgba(79, 209, 197, 0.4);
-        color: var(--teal);
-        font-size: 1.3rem;
-        font-weight: 700;
-      }
-      .lead-success h3 {
-        font-size: 1.5rem;
-      }
-      .lead-success p {
-        color: var(--muted);
-        margin-top: 12px;
-        font-size: 1.02rem;
-      }
       @media (max-width: 620px) {
         .ff-row {
           grid-template-columns: 1fr;
@@ -1967,14 +1942,6 @@
             <a href="privacidade.html">política de privacidade</a>.
           </p>
         </form>
-        <div class="lead-success" id="leadSuccess" hidden>
-          <div class="ck">✓</div>
-          <h3>Mensagem recebida.</h3>
-          <p>
-            Obrigado pelo contato. A Athenio vai analisar o que você descreveu
-            e responder em até um dia útil.
-          </p>
-        </div>
       </div>
     </section>
 
@@ -2604,7 +2571,6 @@
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx4a2ZqZmNhcGN4em5hbWlwZWxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4NzY5NTMsImV4cCI6MjA5MDQ1Mjk1M30.150Qp950SI_o7JmKKQtMKsUt082baWZB5CLnc-zW0Qs";
         const errEl = document.getElementById("lfError");
         const btn = document.getElementById("lfSubmit");
-        const successEl = document.getElementById("leadSuccess");
         let lastSubmit = 0;
 
         const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -2653,11 +2619,24 @@
             .slice(0, 15);
           const message = sanitize(form.message.value).slice(0, 2000);
 
-          let ok = setInvalid(form.name, name.length < 2);
-          ok = setInvalid(form.email, !EMAIL_RE.test(email)) && ok;
-          ok = setInvalid(form.message, message.length < 10) && ok;
-          if (!ok) {
-            errEl.textContent = "Preencha os campos destacados.";
+          const errors = [];
+          if (name.length < 2) errors.push("Informe seu nome.");
+          setInvalid(form.name, name.length < 2);
+          if (!EMAIL_RE.test(email)) errors.push("Informe um e-mail válido.");
+          setInvalid(form.email, !EMAIL_RE.test(email));
+          if (message.length === 0) {
+            errors.push("Descreva o problema que você quer resolver.");
+          } else if (message.length < 10) {
+            errors.push(
+              "A descrição ficou muito curta. Conte um pouco mais sobre o problema.",
+            );
+          }
+          setInvalid(form.message, message.length < 10);
+          if (errors.length > 0) {
+            errEl.textContent =
+              errors.length === 1
+                ? errors[0]
+                : "Preencha os campos destacados.";
             return;
           }
 
@@ -2710,11 +2689,7 @@
               throw new Error((data && data.error) || "server_error");
             }
             lastSubmit = Date.now();
-            form.hidden = true;
-            successEl.hidden = false;
-            if (typeof gtag === "function") {
-              gtag("event", "generate_lead", { method: "contact_form" });
-            }
+            window.location.href = "obrigado.html";
           } catch (err) {
             btn.disabled = false;
             btn.innerHTML = 'Enviar mensagem <span class="arr">→</span>';

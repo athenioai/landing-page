@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mensagem recebida | Athenio</title>
+    <meta
+      name="description"
+      content="Recebemos sua mensagem. A Athenio vai analisar o problema descrito e responder em até um dia útil."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="/favicon.ico" sizes="any" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-FD8WVMB4L2"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-FD8WVMB4L2");
+      gtag("event", "generate_lead", { method: "contact_form" });
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --teal: #4fd1c5;
+        --teal-hover: #6ee0d6;
+        --obsidian: #070c0c;
+        --elevated: #0c1818;
+        --text: #edf2f2;
+        --muted: #9bb4b4;
+        --subtle: #6a8585;
+        --line: rgba(155, 180, 180, 0.1);
+        --line-strong: rgba(155, 180, 180, 0.2);
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        --serif: "Space Grotesk", system-ui, sans-serif;
+        --sans: "Sora", system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        overflow-x: hidden;
+      }
+      body {
+        background: var(--obsidian);
+        color: var(--text);
+        font-family: var(--sans);
+        font-weight: 300;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      ::selection {
+        background: var(--teal);
+        color: var(--obsidian);
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 22px;
+        width: 100%;
+      }
+
+      header {
+        padding: 20px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      header .wrap {
+        display: flex;
+        justify-content: center;
+      }
+      header img {
+        height: 26px;
+        display: block;
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        padding: 80px 0;
+        text-align: center;
+      }
+      .bg-grid {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(var(--line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--line) 1px, transparent 1px);
+        background-size: 60px 60px;
+        -webkit-mask-image: radial-gradient(
+          ellipse 80% 60% at 50% 0%,
+          #000,
+          transparent 75%
+        );
+        mask-image: radial-gradient(
+          ellipse 80% 60% at 50% 0%,
+          #000,
+          transparent 75%
+        );
+        opacity: 0.5;
+      }
+      .glow {
+        position: absolute;
+        width: 640px;
+        height: 420px;
+        left: 50%;
+        top: -160px;
+        transform: translateX(-50%);
+        background: radial-gradient(
+          ellipse,
+          rgba(79, 209, 197, 0.16),
+          transparent 65%
+        );
+        filter: blur(60px);
+        pointer-events: none;
+      }
+      main .wrap {
+        position: relative;
+        z-index: 2;
+      }
+
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(18px);
+        filter: blur(6px);
+        animation: reveal 0.8s var(--ease) forwards;
+      }
+      [data-reveal][data-delay="1"] {
+        animation-delay: 0.1s;
+      }
+      [data-reveal][data-delay="2"] {
+        animation-delay: 0.2s;
+      }
+      [data-reveal][data-delay="3"] {
+        animation-delay: 0.3s;
+      }
+      @keyframes reveal {
+        to {
+          opacity: 1;
+          transform: none;
+          filter: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        [data-reveal] {
+          animation: none;
+          opacity: 1;
+          transform: none;
+          filter: none;
+        }
+      }
+
+      .ck {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 28px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: rgba(79, 209, 197, 0.12);
+        border: 1px solid rgba(79, 209, 197, 0.4);
+        color: var(--teal);
+        box-shadow: 0 0 40px -8px rgba(79, 209, 197, 0.4);
+      }
+      .ck svg {
+        width: 28px;
+        height: 28px;
+      }
+      h1 {
+        font-family: var(--serif);
+        font-weight: 600;
+        font-size: clamp(2rem, 5vw, 3rem);
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+      }
+      .sub {
+        color: var(--muted);
+        font-size: 1.1rem;
+        max-width: 520px;
+        margin: 20px auto 0;
+        line-height: 1.7;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin: 48px 0 0;
+        text-align: left;
+      }
+      .step {
+        padding: 22px 20px;
+        border-radius: 14px;
+        background: var(--elevated);
+        border: 1px solid var(--line);
+      }
+      .step .n {
+        font-family: var(--serif);
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--teal);
+        letter-spacing: 0.1em;
+      }
+      .step h3 {
+        font-family: var(--serif);
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 10px 0 6px;
+        letter-spacing: -0.01em;
+      }
+      .step p {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.55;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55em;
+        font-family: var(--sans);
+        font-weight: 600;
+        font-size: 0.97rem;
+        padding: 0.82em 1.6em;
+        border-radius: 10px;
+        margin-top: 44px;
+        background: var(--teal);
+        color: #06201d;
+        transition: all 0.3s var(--ease);
+        box-shadow:
+          0 1px 0 rgba(255, 255, 255, 0.25) inset,
+          0 8px 24px -10px rgba(79, 209, 197, 0.5);
+      }
+      .btn:hover {
+        background: var(--teal-hover);
+        transform: translateY(-1px);
+      }
+      .btn .arr {
+        transition: transform 0.3s var(--ease);
+      }
+      .btn:hover .arr {
+        transform: translateX(4px);
+      }
+      .alt {
+        margin-top: 20px;
+        font-size: 0.86rem;
+        color: var(--subtle);
+      }
+      .alt a {
+        color: var(--muted);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.25s;
+      }
+      .alt a:hover {
+        color: var(--teal);
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 22px 0;
+        text-align: center;
+        color: var(--subtle);
+        font-size: 0.82rem;
+      }
+
+      @media (max-width: 640px) {
+        .steps {
+          grid-template-columns: 1fr;
+        }
+        main {
+          padding: 56px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <a href="index.html"
+          ><img src="public/assets/athenio-logo.svg" alt="Athenio"
+        /></a>
+      </div>
+    </header>
+
+    <main>
+      <div class="bg-grid"></div>
+      <div class="glow"></div>
+      <div class="wrap">
+        <div class="ck" data-reveal>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
+        </div>
+        <h1 data-reveal data-delay="1">Mensagem recebida.</h1>
+        <p class="sub" data-reveal data-delay="1">
+          Obrigado pelo contato. A Athenio vai analisar o problema que você
+          descreveu e responder em até um dia útil. Você também recebe um
+          e-mail de confirmação em instantes.
+        </p>
+
+        <div class="steps" data-reveal data-delay="2">
+          <div class="step">
+            <div class="n">01</div>
+            <h3>Análise</h3>
+            <p>
+              Avaliamos o problema descrito, o dado disponível e a viabilidade
+              técnica.
+            </p>
+          </div>
+          <div class="step">
+            <div class="n">02</div>
+            <h3>Resposta</h3>
+            <p>
+              Retornamos em até um dia útil, pelo e-mail ou WhatsApp que você
+              informou.
+            </p>
+          </div>
+          <div class="step">
+            <div class="n">03</div>
+            <h3>Conversa inicial</h3>
+            <p>
+              Uma conversa de diagnóstico, sem custo e sem compromisso, para
+              alinhar os próximos passos.
+            </p>
+          </div>
+        </div>
+
+        <div data-reveal data-delay="3">
+          <a href="index.html" class="btn"
+            >Voltar para o site <span class="arr">→</span></a
+          >
+          <p class="alt">
+            Precisa complementar algo? Escreva para
+            <a href="mailto:contato@athenio.ai">contato@athenio.ai</a>.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">Athenio · Tecnologia LTDA · © 2026</div>
+    </footer>
+  </body>
+</html>
