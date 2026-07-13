@@ -21,6 +21,23 @@
       content="Engenharia de inteligência artificial aplicada. Visão computacional, machine learning e deep learning sob medida."
     />
     <meta property="og:url" content="https://athenio.ai/" />
+    <meta property="og:site_name" content="Athenio" />
+    <meta
+      property="og:image"
+      content="https://athenio.ai/public/assets/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Athenio" />
+    <meta
+      name="twitter:description"
+      content="Engenharia de inteligência artificial aplicada. Visão computacional, machine learning e deep learning sob medida."
+    />
+    <meta
+      name="twitter:image"
+      content="https://athenio.ai/public/assets/og-image.png"
+    />
 
     <!-- Google tag (gtag.js) -->
     <script
@@ -1016,6 +1033,135 @@
         padding: 1em 1.9em;
       }
 
+      /* ---- Formulário de contato ---- */
+      .lead-form {
+        max-width: 640px;
+        margin: 52px auto 0;
+        text-align: left;
+      }
+      .ff-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .ff {
+        margin-bottom: 16px;
+      }
+      .ff label {
+        display: block;
+        font-family: var(--sans);
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      .ff input,
+      .ff textarea {
+        width: 100%;
+        padding: 0.8em 1em;
+        border-radius: 10px;
+        border: 1px solid var(--line-strong);
+        background: rgba(12, 24, 24, 0.6);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 0.95rem;
+        font-weight: 300;
+        transition:
+          border-color 0.25s var(--ease),
+          box-shadow 0.25s var(--ease);
+      }
+      .ff input::placeholder,
+      .ff textarea::placeholder {
+        color: var(--subtle);
+        opacity: 0.7;
+      }
+      .ff input:focus,
+      .ff textarea:focus {
+        outline: none;
+        border-color: rgba(79, 209, 197, 0.55);
+        box-shadow: 0 0 0 3px rgba(79, 209, 197, 0.12);
+      }
+      .ff input.invalid,
+      .ff textarea.invalid {
+        border-color: rgba(255, 138, 138, 0.55);
+      }
+      .ff textarea {
+        resize: vertical;
+        min-height: 110px;
+      }
+      .lead-form .hp {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+      }
+      .lf-error {
+        min-height: 1.4em;
+        font-size: 0.88rem;
+        color: #ff9d9d;
+        margin-bottom: 6px;
+      }
+      .lead-form .btn {
+        width: 100%;
+        justify-content: center;
+        margin-top: 4px;
+      }
+      .lead-form .btn:disabled {
+        opacity: 0.6;
+        cursor: default;
+        transform: none;
+      }
+      .lf-note {
+        margin-top: 18px;
+        font-size: 0.84rem;
+        color: var(--subtle);
+        text-align: center;
+        line-height: 1.6;
+      }
+      .lf-note a {
+        color: var(--muted);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.25s;
+      }
+      .lf-note a:hover {
+        color: var(--teal);
+      }
+      .lead-success {
+        max-width: 520px;
+        margin: 52px auto 0;
+      }
+      .lead-success .ck {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: rgba(79, 209, 197, 0.12);
+        border: 1px solid rgba(79, 209, 197, 0.4);
+        color: var(--teal);
+        font-size: 1.3rem;
+        font-weight: 700;
+      }
+      .lead-success h3 {
+        font-size: 1.5rem;
+      }
+      .lead-success p {
+        color: var(--muted);
+        margin-top: 12px;
+        font-size: 1.02rem;
+      }
+      @media (max-width: 620px) {
+        .ff-row {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+      }
+
       /* ---- Footer ---- */
       footer {
         border-top: 1px solid var(--line);
@@ -1708,10 +1854,95 @@
           técnica antes de propor qualquer solução. A conversa inicial não tem
           custo.
         </p>
-        <div data-reveal data-delay="2">
-          <a href="mailto:contato@athenio.ai" class="btn btn-primary"
-            >Falar com a Athenio <span class="arr">→</span></a
-          >
+        <form
+          class="lead-form"
+          id="leadForm"
+          data-reveal
+          data-delay="2"
+          novalidate
+        >
+          <div class="ff-row">
+            <div class="ff">
+              <label for="lf-name">Nome*</label>
+              <input
+                id="lf-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                maxlength="120"
+              />
+            </div>
+            <div class="ff">
+              <label for="lf-email">E-mail corporativo*</label>
+              <input
+                id="lf-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                maxlength="160"
+              />
+            </div>
+          </div>
+          <div class="ff-row">
+            <div class="ff">
+              <label for="lf-company">Empresa</label>
+              <input
+                id="lf-company"
+                name="company"
+                type="text"
+                autocomplete="organization"
+                maxlength="120"
+              />
+            </div>
+            <div class="ff">
+              <label for="lf-whatsapp">WhatsApp</label>
+              <input
+                id="lf-whatsapp"
+                name="whatsapp"
+                type="tel"
+                inputmode="tel"
+                autocomplete="tel"
+                maxlength="20"
+                placeholder="(11) 99999-9999"
+              />
+            </div>
+          </div>
+          <div class="ff">
+            <label for="lf-message">Qual problema você quer resolver?*</label>
+            <textarea
+              id="lf-message"
+              name="message"
+              rows="4"
+              maxlength="2000"
+              placeholder="Conte em poucas linhas o problema, o dado que você tem hoje (imagens, documentos, planilhas...) e o resultado que espera."
+            ></textarea>
+          </div>
+          <input
+            type="text"
+            name="_hp"
+            class="hp"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+          <div class="lf-error" id="lfError" role="alert"></div>
+          <button type="submit" class="btn btn-primary" id="lfSubmit">
+            Enviar mensagem <span class="arr">→</span>
+          </button>
+          <p class="lf-note">
+            Ou escreva direto para
+            <a href="mailto:contato@athenio.ai">contato@athenio.ai</a>. Seus
+            dados são usados apenas para responder ao contato —
+            <a href="privacidade.html">política de privacidade</a>.
+          </p>
+        </form>
+        <div class="lead-success" id="leadSuccess" hidden>
+          <div class="ck">✓</div>
+          <h3>Mensagem recebida.</h3>
+          <p>
+            Obrigado pelo contato. A Athenio vai analisar o que você descreveu
+            e responder em até um dia útil.
+          </p>
         </div>
       </div>
     </section>
@@ -2332,6 +2563,109 @@
         },
         { passive: true },
       );
+
+      /* ---- Formulário de contato → Supabase submit-lead ---- */
+      (function () {
+        const form = document.getElementById("leadForm");
+        if (!form) return;
+        const SUPABASE_URL = "https://lxkfjfcapcxznamipelp.supabase.co";
+        const SUPABASE_KEY =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx4a2ZqZmNhcGN4em5hbWlwZWxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4NzY5NTMsImV4cCI6MjA5MDQ1Mjk1M30.150Qp950SI_o7JmKKQtMKsUt082baWZB5CLnc-zW0Qs";
+        const errEl = document.getElementById("lfError");
+        const btn = document.getElementById("lfSubmit");
+        const successEl = document.getElementById("leadSuccess");
+        let lastSubmit = 0;
+
+        const sanitize = (v) => String(v).replace(/<[^>]*>/g, "").trim();
+        const setInvalid = (el, bad) => {
+          el.classList.toggle("invalid", bad);
+          return !bad;
+        };
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (form._hp.value.trim()) return;
+          if (Date.now() - lastSubmit < 10000) return;
+
+          const name = sanitize(form.name.value);
+          const email = sanitize(form.email.value);
+          const company = sanitize(form.company.value);
+          const whatsapp = sanitize(form.whatsapp.value).replace(/\D/g, "");
+          const message = sanitize(form.message.value);
+
+          let ok = setInvalid(form.name, name.length < 2);
+          ok =
+            setInvalid(
+              form.email,
+              !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email),
+            ) && ok;
+          ok = setInvalid(form.message, message.length < 10) && ok;
+          if (!ok) {
+            errEl.textContent = "Preencha os campos destacados.";
+            return;
+          }
+
+          errEl.textContent = "";
+          btn.disabled = true;
+          btn.textContent = "Enviando…";
+
+          const utm = new URLSearchParams(window.location.search);
+          const payload = {
+            p_name: name,
+            p_email: email,
+            p_company: company || null,
+            p_whatsapp: whatsapp ? "55" + whatsapp : null,
+            p_message: message,
+            p_company_size: null,
+            p_intent: "contact",
+            p_utm_source: utm.get("utm_source"),
+            p_utm_medium: utm.get("utm_medium"),
+            p_utm_campaign: utm.get("utm_campaign"),
+            p_utm_content: utm.get("utm_content"),
+            p_utm_term: utm.get("utm_term"),
+            p_referrer: sanitize(document.referrer).slice(0, 500) || null,
+            p_landing_url: sanitize(window.location.href).slice(0, 500),
+            p_user_agent: sanitize(navigator.userAgent).slice(0, 500),
+            p_screen_width: screen.width,
+            p_screen_height: screen.height,
+            p_consent: true,
+          };
+
+          try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 8000);
+            const res = await fetch(
+              SUPABASE_URL + "/functions/v1/submit-lead",
+              {
+                method: "POST",
+                signal: controller.signal,
+                headers: {
+                  apikey: SUPABASE_KEY,
+                  Authorization: "Bearer " + SUPABASE_KEY,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+              },
+            );
+            clearTimeout(timeout);
+            const data = await res.json().catch(() => ({}));
+            if (!data || !data.success) {
+              throw new Error((data && data.error) || "server_error");
+            }
+            lastSubmit = Date.now();
+            form.hidden = true;
+            successEl.hidden = false;
+            if (typeof gtag === "function") {
+              gtag("event", "generate_lead", { method: "contact_form" });
+            }
+          } catch (err) {
+            btn.disabled = false;
+            btn.innerHTML = 'Enviar mensagem <span class="arr">→</span>';
+            errEl.textContent =
+              "Não foi possível enviar agora. Tente novamente ou escreva para contato@athenio.ai.";
+          }
+        });
+      })();
     </script>
   </body>
 </html>
