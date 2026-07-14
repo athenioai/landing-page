@@ -69,6 +69,7 @@
       :root {
         --teal: #4fd1c5;
         --teal-hover: #6ee0d6;
+        --red: #f87171;
         --obsidian: #070c0c;
         --elevated: #0c1818;
         --elevated-2: #0f1f1f;
@@ -342,9 +343,8 @@
       }
       .hero-grid {
         display: grid;
-        grid-template-columns: 1.1fr 1fr;
-        gap: 56px;
-        align-items: center;
+        grid-template-columns: 1fr;
+        max-width: 980px;
       }
       .hero-bg {
         position: absolute;
@@ -353,81 +353,51 @@
         pointer-events: none;
         overflow: hidden;
       }
-      .hero-bg .grid {
+      .hero-bg-canvas {
         position: absolute;
         inset: 0;
-        background-image:
-          linear-gradient(var(--line) 1px, transparent 1px),
-          linear-gradient(90deg, var(--line) 1px, transparent 1px);
-        background-size: 60px 60px;
-        -webkit-mask-image: radial-gradient(
-          ellipse 80% 55% at 50% 0%,
-          #000,
-          transparent 75%
+        -webkit-mask-image: linear-gradient(
+          180deg,
+          transparent,
+          #000 18%,
+          #000 78%,
+          transparent
         );
-        mask-image: radial-gradient(
-          ellipse 80% 55% at 50% 0%,
-          #000,
-          transparent 75%
+        mask-image: linear-gradient(
+          180deg,
+          transparent,
+          #000 18%,
+          #000 78%,
+          transparent
         );
-        opacity: 0.5;
       }
-      .blob {
+      .hero-bg-canvas canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .hero-bg-scrim {
         position: absolute;
-        border-radius: 50%;
-        filter: blur(90px);
-        will-change: transform;
-      }
-      .blob.b1 {
-        width: 680px;
-        height: 520px;
-        top: -220px;
-        left: 50%;
-        margin-left: -340px;
-        background: radial-gradient(
-          circle,
-          rgba(79, 209, 197, 0.28),
-          transparent 65%
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          var(--obsidian) 0%,
+          rgba(7, 12, 12, 0.75) 30%,
+          transparent 62%
         );
-        animation: drift1 16s ease-in-out infinite alternate;
       }
-      .blob.b2 {
-        width: 520px;
-        height: 420px;
-        top: -120px;
-        left: 18%;
-        background: radial-gradient(
-          circle,
-          rgba(31, 78, 95, 0.5),
-          transparent 68%
-        );
-        animation: drift2 20s ease-in-out infinite alternate;
-      }
-      .blob.b3 {
-        width: 480px;
-        height: 380px;
-        top: -80px;
-        right: 14%;
-        background: radial-gradient(
-          circle,
-          rgba(15, 61, 62, 0.55),
-          transparent 68%
-        );
-        animation: drift1 22s ease-in-out infinite alternate;
-      }
-      @keyframes drift1 {
-        to {
-          transform: translate(30px, 30px) scale(1.08);
-        }
-      }
-      @keyframes drift2 {
-        to {
-          transform: translate(-34px, 20px) scale(1.05);
+      @media (max-width: 960px) {
+        .hero-bg-scrim {
+          background: linear-gradient(
+            180deg,
+            rgba(7, 12, 12, 0.55),
+            var(--obsidian) 55%
+          );
         }
       }
       @media (prefers-reduced-motion: reduce) {
-        .blob {
-          animation: none;
+        .hero-bg-canvas {
+          display: none;
         }
       }
 
@@ -439,6 +409,8 @@
         font-size: clamp(2.2rem, 3.8vw, 3.7rem);
         margin: 0 0 26px;
         letter-spacing: -0.04em;
+        text-align: justify;
+        text-align-last: left;
       }
       .hero h1 .hl {
         color: var(--teal);
@@ -467,34 +439,28 @@
           filter: none;
         }
       }
-      .hero p.sub {
-        font-size: clamp(1rem, 1.25vw, 1.12rem);
-        color: var(--muted);
-        max-width: 560px;
-        margin: 0;
-        line-height: 1.65;
-      }
-      .hero p.sub b {
-        color: var(--text);
-        font-weight: 500;
-      }
       .hero-actions {
         display: flex;
-        gap: 14px;
+        align-items: center;
+        gap: 18px;
         justify-content: flex-start;
-        margin-top: 38px;
+        margin-top: 64px;
         flex-wrap: wrap;
+      }
+      .hero-actions .btn {
+        font-size: 1.05rem;
+        padding: 1em 1.9em;
       }
 
       /* ---- CNN 3D (convolução no hero) ---- */
       .cnn-visual {
-        --cell: clamp(14px, 1.7vw, 23px);
+        --cell: 11px;
         --gap: 2px;
         --step: calc(var(--cell) + var(--gap));
         position: relative;
-        height: clamp(300px, 28vw, 420px);
-        margin: 0;
-        perspective: 1200px;
+        height: 170px;
+        margin-top: 24px;
+        perspective: 800px;
       }
       .cnn-scene {
         position: absolute;
@@ -634,29 +600,68 @@
         color: var(--text);
         font-weight: 500;
       }
-      .sector-tags {
+      /* ---- Esteira de setores (Capacidade horizontal) ---- */
+      .sector-carousel {
+        margin-top: 48px;
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(
+          90deg,
+          transparent,
+          #000 8%,
+          #000 92%,
+          transparent
+        );
+        mask-image: linear-gradient(
+          90deg,
+          transparent,
+          #000 8%,
+          #000 92%,
+          transparent
+        );
+      }
+      .sector-track {
         display: flex;
+        width: max-content;
+        animation: sector-scroll 28s linear infinite;
+      }
+      @keyframes sector-scroll {
+        to {
+          transform: translateX(var(--sector-shift, -50%));
+        }
+      }
+      .sector-group {
+        display: flex;
+        gap: 56px;
+        padding-right: 56px;
+      }
+      .sector-item {
+        display: flex;
+        align-items: center;
         gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 40px;
-      }
-      .sector-tag {
+        flex: 0 0 auto;
         font-family: var(--sans);
-        font-size: 0.84rem;
-        font-weight: 400;
+        font-weight: 500;
+        font-size: 1.02rem;
         color: var(--muted);
-        padding: 7px 16px;
-        border: 1px solid var(--line-strong);
-        border-radius: 100px;
-        background: rgba(12, 24, 24, 0.6);
-        transition:
-          border-color 0.3s,
-          color 0.3s;
+        white-space: nowrap;
       }
-      .sector-tag:hover {
-        border-color: rgba(79, 209, 197, 0.4);
-        color: var(--text);
+      .sector-item svg {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .sector-carousel {
+          overflow-x: auto;
+          -webkit-mask-image: none;
+          mask-image: none;
+        }
+        .sector-track {
+          animation: none;
+        }
+        .sector-group[aria-hidden="true"] {
+          display: none;
+        }
       }
 
       /* ---- Cards (capacidades / por que) ---- */
@@ -757,16 +762,7 @@
         line-height: 1.6;
       }
 
-      /* ---- Desenho de traço (SVG) + canvases das capacidades ---- */
-      .draw {
-        stroke-dasharray: var(--len, 300);
-        stroke-dashoffset: var(--len, 300);
-      }
-      @keyframes dash-draw {
-        to {
-          stroke-dashoffset: 0;
-        }
-      }
+      /* ---- Canvases das capacidades ---- */
       .cards .card {
         display: flex;
         flex-direction: column;
@@ -801,27 +797,6 @@
         }
       }
 
-      /* ---- Mini-visualizações (loss curve / soberania) ---- */
-      .mini-viz {
-        max-width: 340px;
-        margin: 52px auto 0;
-        color: var(--teal);
-      }
-      .mini-viz svg {
-        width: 100%;
-        height: auto;
-        display: block;
-      }
-      .mini-viz.in .draw {
-        animation: dash-draw 1s var(--ease) 0.35s forwards;
-      }
-      .mini-viz .after {
-        opacity: 0;
-        transition: opacity 0.5s var(--ease) 1.1s;
-      }
-      .mini-viz.in .after {
-        opacity: 1;
-      }
       .viz-caption {
         display: block;
         text-align: center;
@@ -833,15 +808,38 @@
         color: var(--subtle);
       }
 
-      @media (prefers-reduced-motion: reduce) {
-        .draw {
-          stroke-dashoffset: 0;
-          animation: none !important;
-        }
-        .mini-viz .after {
-          opacity: 1;
-          transition: none;
-        }
+      /* ---- Soberania de dados: fluxo de dado + banco do cliente ---- */
+      .sovereignty {
+        padding: 120px 0;
+      }
+      .sovereignty-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.05fr;
+        gap: 64px;
+        align-items: center;
+      }
+      .sovereignty-viz {
+        color: var(--teal);
+        max-width: 400px;
+      }
+      .sovereignty-canvas {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .sovereignty-copy h2 {
+        font-size: clamp(2rem, 3.6vw, 3rem);
+        margin: 20px 0 0;
+      }
+      .sovereignty-copy p {
+        font-size: 1.05rem;
+        color: var(--muted);
+        margin-top: 22px;
+        line-height: 1.7;
+      }
+      .sovereignty-copy p .em {
+        color: var(--text);
+        font-weight: 500;
       }
 
       /* ---- Grade numerada (como trabalhamos / por que) ---- */
@@ -931,6 +929,105 @@
         color: var(--muted);
         font-size: 1rem;
         line-height: 1.6;
+      }
+      .prin-deliv {
+        margin-top: 18px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+        font-size: 0.8rem;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .prin-deliv span {
+        display: block;
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin-bottom: 4px;
+      }
+
+      /* ---- Comparativo prateleira vs. Athenio ---- */
+      .compare {
+        margin-top: 24px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+      }
+      .compare-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-bottom: 1px solid var(--line);
+      }
+      .compare-row:last-child {
+        border-bottom: 0;
+      }
+      .compare-row > div {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 20px 28px;
+        font-size: 0.98rem;
+        line-height: 1.5;
+      }
+      /* coluna prateleira: apagada, tom levemente vermelho */
+      .compare-row > div:first-child {
+        background: rgba(248, 113, 113, 0.03);
+        color: var(--subtle);
+      }
+      /* coluna Athenio: viva, tom teal */
+      .compare-row > div:last-child {
+        border-left: 1px solid var(--line);
+        background: rgba(79, 209, 197, 0.07);
+        color: var(--text);
+        font-weight: 500;
+      }
+      .compare-header > div {
+        font-family: var(--sans);
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding: 15px 28px;
+      }
+      .compare-header > div:first-child {
+        background: rgba(248, 113, 113, 0.05);
+        color: rgba(248, 113, 113, 0.75);
+      }
+      .compare-header > div:last-child {
+        background: rgba(79, 209, 197, 0.1);
+        color: var(--teal);
+      }
+      .compare svg {
+        width: 24px;
+        height: 24px;
+        padding: 5px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        flex-shrink: 0;
+      }
+      .compare .x {
+        color: var(--red);
+        background: rgba(248, 113, 113, 0.12);
+      }
+      .compare .ok {
+        color: var(--teal);
+        background: rgba(79, 209, 197, 0.14);
+      }
+      @media (max-width: 620px) {
+        .compare-row > div {
+          padding: 14px 14px;
+          font-size: 0.82rem;
+          gap: 9px;
+        }
+        .compare-header > div {
+          padding: 12px 14px;
+        }
+        .compare svg {
+          width: 20px;
+          height: 20px;
+          padding: 4px;
+        }
       }
 
       /* ---- Quem somos ---- */
@@ -1245,17 +1342,19 @@
           grid-template-columns: 1fr;
           gap: 40px;
         }
-        .hero p.sub {
-          margin: 0 auto;
-        }
         .hero-actions {
           justify-content: center;
         }
-        .cnn-visual {
-          height: clamp(260px, 60vw, 340px);
-          max-width: 480px;
+        .sovereignty-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .sovereignty-viz {
+          max-width: 340px;
           margin: 0 auto;
-          width: 100%;
+        }
+        .sovereignty-copy {
+          text-align: center;
         }
         .team {
           grid-template-columns: 1fr;
@@ -1373,58 +1472,35 @@
     <!-- ===================== HERO ===================== -->
     <section class="hero" id="top">
       <div class="hero-bg">
-        <div class="blob b2" data-px="0.05"></div>
-        <div class="blob b3" data-px="0.04"></div>
-        <div class="blob b1" data-px="0.06"></div>
-        <div class="grid"></div>
+        <div class="hero-bg-canvas" id="heroDottedSurface"></div>
+        <div class="hero-bg-scrim"></div>
       </div>
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <h1
-            aria-label="Engenharia de visão computacional e aprendizado de máquina."
+            aria-label="O problema que a IA de prateleira não resolve, a Athenio constrói do zero."
           >
-            <span class="w" style="--i: 0" aria-hidden="true">Engenharia</span>
-            <span class="w" style="--i: 1" aria-hidden="true">de</span>
-            <span class="w hl" style="--i: 2" aria-hidden="true">visão</span>
-            <span class="w hl" style="--i: 3" aria-hidden="true"
-              >computacional</span
-            >
-            <span class="w" style="--i: 4" aria-hidden="true">e</span>
-            <span class="w" style="--i: 5" aria-hidden="true">aprendizado</span>
-            <span class="w" style="--i: 6" aria-hidden="true">de</span>
-            <span class="w" style="--i: 7" aria-hidden="true">máquina.</span>
+            <span class="w" style="--i: 0" aria-hidden="true">O</span>
+            <span class="w" style="--i: 1" aria-hidden="true">problema</span>
+            <span class="w" style="--i: 2" aria-hidden="true">que</span>
+            <span class="w" style="--i: 3" aria-hidden="true">a</span>
+            <span class="w" style="--i: 4" aria-hidden="true">IA</span>
+            <span class="w" style="--i: 5" aria-hidden="true">de</span>
+            <span class="w" style="--i: 6" aria-hidden="true">prateleira</span>
+            <span class="w" style="--i: 7" aria-hidden="true">não</span>
+            <span class="w" style="--i: 8" aria-hidden="true">resolve,</span>
+            <span class="w" style="--i: 9" aria-hidden="true">a</span>
+            <span class="w hl" style="--i: 10" aria-hidden="true">Athenio</span>
+            <span class="w" style="--i: 11" aria-hidden="true">constrói</span>
+            <span class="w" style="--i: 12" aria-hidden="true">do</span>
+            <span class="w" style="--i: 13" aria-hidden="true">zero.</span>
           </h1>
-          <p class="sub" data-reveal data-delay="1">
-            A Athenio é uma empresa brasileira de inteligência artificial
-            aplicada. Desenvolvemos <b>modelos próprios</b> de visão
-            computacional, machine learning e deep learning para resolver
-            problemas específicos de cada empresa. E construímos o software
-            que roda essa IA como core do sistema, com treinamento e
-            inteligência próprios.
-          </p>
-          <div class="hero-actions" data-reveal data-delay="2">
+          <div class="hero-actions" data-reveal data-delay="1">
             <a href="#contato" class="btn btn-primary"
               >Falar sobre um projeto <span class="arr">→</span></a
             >
             <a href="#fazemos" class="btn btn-ghost">Conhecer a Athenio</a>
           </div>
-        </div>
-
-        <!-- Convolução 3D: kernel deslizando sobre a imagem, feature map acima -->
-        <div
-          class="cnn-visual"
-          id="cnnVisual"
-          data-reveal
-          data-delay="3"
-          aria-hidden="true"
-        >
-          <div class="cnn-scene">
-            <div class="cnn-grid cnn-input" id="cnnInput">
-              <div class="cnn-kernel" id="cnnKernel"></div>
-            </div>
-            <div class="cnn-grid cnn-output" id="cnnOutput"></div>
-          </div>
-          <div class="cnn-caption">conv2d · kernel 3×3 · stride 1</div>
         </div>
       </div>
     </section>
@@ -1438,13 +1514,20 @@
           dele.
         </h2>
         <p data-reveal data-delay="2">
-          A Athenio desenvolve soluções de inteligência artificial sob medida.
+          A Athenio é uma empresa brasileira de inteligência artificial
+          aplicada. Desenvolvemos <b>modelos próprios</b> de visão
+          computacional, machine learning e deep learning para resolver
+          problemas específicos de cada empresa. E construímos o software que
+          roda essa IA como core do sistema, com treinamento e inteligência
+          próprios.
+        </p>
+        <p data-reveal data-delay="3">
           Cada projeto parte do problema real da empresa: a inspeção que hoje
           é feita no olho, o documento que se lê à mão, o dado que ninguém
           consegue processar em escala. E resulta em um
           <span class="em">modelo treinado para aquele caso específico</span>.
         </p>
-        <p data-reveal data-delay="3">
+        <p data-reveal data-delay="4">
           O trabalho é baseado em tecnologia própria: a Athenio constrói e
           treina seus modelos de visão computacional e aprendizado de máquina,
           em vez de apenas integrar ferramentas de terceiros. Isso permite
@@ -1479,13 +1562,35 @@
             por trás de cada solução.</span
           >
         </p>
-        <div class="sector-tags" data-reveal data-delay="4">
-          <span class="sector-tag">Indústria</span>
-          <span class="sector-tag">Financeiro e jurídico</span>
-          <span class="sector-tag">Saúde</span>
-          <span class="sector-tag">Agronegócio</span>
-          <span class="sector-tag">Infraestrutura</span>
-          <span class="sector-tag">Análise de vídeo</span>
+      </div>
+      <div class="sector-carousel" data-reveal data-delay="4">
+        <div class="sector-track" id="sectorTrack">
+          <div class="sector-group">
+            <span class="sector-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l6 4v-4l6 4v-4l6 4v7H3Z"/><path d="M3 21h18"/></svg>
+              Indústria
+            </span>
+            <span class="sector-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 7l-3 6a3 3 0 0 0 6 0l-3-6ZM19 7l-3 6a3 3 0 0 0 6 0l-3-6ZM5 7h14M9 21h6"/></svg>
+              Financeiro e jurídico
+            </span>
+            <span class="sector-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.65-9.5 9-9.5 9Z"/></svg>
+              Saúde
+            </span>
+            <span class="sector-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c6-4 8-8 8-13a8 8 0 0 0-16 0c0 5 2 9 8 13Z"/><path d="M12 22V11"/></svg>
+              Agronegócio
+            </span>
+            <span class="sector-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6M4 21h16"/></svg>
+              Infraestrutura
+            </span>
+            <span class="sector-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="14" height="13" rx="2"/><path d="M16.5 10.5 21.5 7v10l-5-3.5Z"/></svg>
+              Análise de vídeo
+            </span>
+          </div>
         </div>
       </div>
     </section>
@@ -1521,13 +1626,15 @@
               vídeo. Aplicável a inspeção, contagem, leitura, monitoramento e
               análise de conteúdo visual.
             </p>
-            <canvas
-              class="cap-canvas"
-              id="cvCanvas"
-              width="340"
-              height="120"
-              aria-hidden="true"
-            ></canvas>
+            <div class="cnn-visual" id="cnnVisual" aria-hidden="true">
+              <div class="cnn-scene">
+                <div class="cnn-grid cnn-input" id="cnnInput">
+                  <div class="cnn-kernel" id="cnnKernel"></div>
+                </div>
+                <div class="cnn-grid cnn-output" id="cnnOutput"></div>
+              </div>
+              <div class="cnn-caption">conv2d · kernel 3×3 · stride 1</div>
+            </div>
           </div>
           <div class="card" data-reveal data-delay="1">
             <div class="idx">02</div>
@@ -1646,6 +1753,10 @@
               A Athenio começa pelo entendimento do problema e do dado
               disponível, antes de propor qualquer solução.
             </p>
+            <div class="prin-deliv">
+              <span>Entregável</span> relatório de viabilidade e proposta de
+              solução
+            </div>
           </div>
           <div class="prin" data-reveal data-delay="1">
             <div class="n">02</div>
@@ -1654,6 +1765,9 @@
               Um projeto inicial de escopo reduzido valida a viabilidade
               técnica e o resultado esperado, com baixo risco para o cliente.
             </p>
+            <div class="prin-deliv">
+              <span>Entregável</span> modelo validado com métrica acordada
+            </div>
           </div>
           <div class="prin" data-reveal>
             <div class="n">03</div>
@@ -1662,6 +1776,10 @@
               Construção e treinamento do modelo sob medida, integrado ao
               ambiente e ao fluxo de trabalho da empresa.
             </p>
+            <div class="prin-deliv">
+              <span>Entregável</span> sistema em produção, integrado à
+              operação
+            </div>
           </div>
           <div class="prin" data-reveal data-delay="1">
             <div class="n">04</div>
@@ -1670,51 +1788,47 @@
               Acompanhamento contínuo do modelo em produção, com recalibração
               conforme o dado e a operação evoluem.
             </p>
+            <div class="prin-deliv">
+              <span>Entregável</span> monitoramento contínuo e recalibração
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===================== SOBERANIA DE DADOS ===================== -->
-    <section class="sec mission" id="soberania">
-      <div class="wrap">
-        <span class="eyebrow" data-reveal>Soberania de dados</span>
-        <h2 data-reveal data-delay="1">O dado permanece com quem o gera.</h2>
-        <p data-reveal data-delay="2">
-          Os modelos da Athenio podem operar na infraestrutura do próprio
-          cliente, em ambiente on-premise ou em nuvem privada. O dado sensível
-          não precisa ser enviado a serviços externos, o que
-          <span class="em"
-            >preserva o sigilo da operação e mantém a conformidade com a
-            LGPD</span
-          >.
-        </p>
-        <p data-reveal data-delay="3">
-          Para empresas que lidam com informação estratégica ou regulada, essa
-          é uma diferença central em relação a soluções baseadas em nuvem
-          pública de terceiros.
-        </p>
-        <div class="mini-viz" data-reveal data-delay="4" aria-hidden="true">
-          <svg viewBox="0 0 320 132" fill="none">
-            <rect
-              class="draw"
-              style="--len: 800"
-              x="24"
-              y="10"
-              width="272"
-              height="112"
-              rx="16"
-              stroke="currentColor"
-              stroke-width="1.3"
-              opacity="0.55"
-            />
-            <g class="after" stroke="currentColor" stroke-width="1.6">
-              <ellipse cx="160" cy="46" rx="26" ry="9" />
-              <path d="M134 46v34c0 5 11.6 9 26 9s26-4 26-9V46" />
-              <path d="M134 63c0 5 11.6 9 26 9s26-4 26-9" opacity="0.5" />
-            </g>
-          </svg>
-          <span class="viz-caption">dado na infraestrutura do cliente</span>
+    <section class="sec sovereignty" id="soberania">
+      <div class="wrap sovereignty-grid">
+        <div class="sovereignty-viz" data-reveal aria-hidden="true">
+          <canvas
+            class="sovereignty-canvas"
+            id="sovereigntyCanvas"
+            width="360"
+            height="300"
+          ></canvas>
+          <span class="viz-caption"
+            >dado processado e salvo na infraestrutura do cliente</span
+          >
+        </div>
+        <div class="sovereignty-copy">
+          <span class="eyebrow" data-reveal>Soberania de dados</span>
+          <h2 data-reveal data-delay="1">
+            O dado permanece com quem o gera.
+          </h2>
+          <p data-reveal data-delay="2">
+            Os modelos da Athenio podem operar na infraestrutura do próprio
+            cliente, em ambiente on-premise ou em nuvem privada. O dado
+            sensível não precisa ser enviado a serviços externos, o que
+            <span class="em"
+              >preserva o sigilo da operação e mantém a conformidade com a
+              LGPD</span
+            >.
+          </p>
+          <p data-reveal data-delay="3">
+            Para empresas que lidam com informação estratégica ou regulada,
+            essa é uma diferença central em relação a soluções baseadas em
+            nuvem pública de terceiros.
+          </p>
         </div>
       </div>
     </section>
@@ -1796,6 +1910,53 @@
               Cada solução é avaliada pelo que entrega em operação, não pela
               tecnologia empregada.
             </p>
+          </div>
+        </div>
+
+        <div class="compare" data-reveal data-delay="2">
+          <div class="compare-row compare-header">
+            <div>IA de prateleira</div>
+            <div>IA da Athenio</div>
+          </div>
+          <div class="compare-row">
+            <div>
+              <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              Modelo genérico, o mesmo para qualquer empresa
+            </div>
+            <div>
+              <svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Modelo treinado no dado da sua operação
+            </div>
+          </div>
+          <div class="compare-row">
+            <div>
+              <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              O dado sai da empresa para a nuvem de terceiros
+            </div>
+            <div>
+              <svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              O dado permanece na sua infraestrutura
+            </div>
+          </div>
+          <div class="compare-row">
+            <div>
+              <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              Caixa-preta de fornecedor externo
+            </div>
+            <div>
+              <svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Controle e propriedade sobre a solução
+            </div>
+          </div>
+          <div class="compare-row">
+            <div>
+              <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              Resolve o caso médio, falha no específico
+            </div>
+            <div>
+              <svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Construída para o seu caso específico
+            </div>
           </div>
         </div>
       </div>
@@ -2251,53 +2412,6 @@
           ).observe(canvas);
         }
 
-        /* -- 01 Visão computacional: detecção com bounding box -- */
-        const cvClusters = [
-          { cx: 64, cy: 66, rx: 26, ry: 15, conf: "0.97" },
-          { cx: 172, cy: 44, rx: 22, ry: 13, conf: "0.94" },
-          { cx: 268, cy: 74, rx: 24, ry: 14, conf: "0.91" },
-        ];
-        const cvPoints = [];
-        cvClusters.forEach((c) => {
-          for (let i = 0; i < 30; i++) {
-            const a = Math.random() * Math.PI * 2,
-              r = Math.sqrt(Math.random());
-            cvPoints.push([
-              c.cx + Math.cos(a) * r * c.rx,
-              c.cy + Math.sin(a) * r * c.ry,
-            ]);
-          }
-        });
-        const easeOut = (u) => 1 - Math.pow(1 - u, 3);
-        function drawCv(ctx, W, H, time, still) {
-          ctx.clearRect(0, 0, W, H);
-          ctx.fillStyle = `rgba(${TEAL}, 0.35)`;
-          cvPoints.forEach((p) => {
-            ctx.beginPath();
-            ctx.arc(p[0], p[1], 1.1, 0, Math.PI * 2);
-            ctx.fill();
-          });
-          const PER = 2600;
-          const k = still ? 0 : Math.floor(time / PER) % 3;
-          const prev = cvClusters[(k + 2) % 3],
-            cur = cvClusters[k];
-          const u = still ? 1 : Math.min(1, (time % PER) / (PER * 0.38));
-          const e = easeOut(u);
-          const L = (a, b) => a + (b - a) * e;
-          const x = L(prev.cx - prev.rx, cur.cx - cur.rx) - 8;
-          const y = L(prev.cy - prev.ry, cur.cy - cur.ry) - 8;
-          const w = L(prev.rx, cur.rx) * 2 + 16;
-          const h = L(prev.ry, cur.ry) * 2 + 16;
-          ctx.strokeStyle = `rgba(${TEAL}, 0.9)`;
-          ctx.lineWidth = 1.4;
-          ctx.strokeRect(x, y, w, h);
-          if (u > 0.9) {
-            ctx.font = "500 9px Sora, sans-serif";
-            ctx.fillStyle = `rgba(${TEAL}, 0.95)`;
-            ctx.fillText("obj · " + cur.conf, x + 1, y - 5);
-          }
-        }
-
         /* -- 02 ML preditivo: série deslizando + previsão com banda -- */
         const mlData = [];
         let mlV = 0.5,
@@ -2535,10 +2649,224 @@
           ctx.restore();
         }
 
-        setup("cvCanvas", drawCv);
+        /* -- 05 Soberania de dados: fluxo de dado contido na infraestrutura do cliente -- */
+        const svUsers = [
+          { x: 64, y: 104 },
+          { x: 64, y: 196 },
+        ];
+        const svModel = { x: 186, y: 150, w: 84, h: 60 };
+        const svDb = { x: 302, cy: 150, rx: 24, ry: 7, depth: 30 };
+        const SV_PERIOD = 3600;
+        const svEase = (t) =>
+          t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        const svLerp = (a, b, t) => a + (b - a) * t;
+        function svPacket(ctx, x, y, alpha) {
+          ctx.save();
+          ctx.shadowColor = `rgba(${TEAL}, ${alpha})`;
+          ctx.shadowBlur = 8;
+          ctx.fillStyle = `rgba(${TEAL}, ${0.95 * alpha})`;
+          ctx.beginPath();
+          ctx.arc(x, y, 3.6, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+        function svLabel(ctx, text, x, y) {
+          ctx.font = "500 9.5px Sora, sans-serif";
+          ctx.textAlign = "center";
+          ctx.fillStyle = "rgba(200, 222, 220, 0.75)";
+          ctx.fillText(text, x, y);
+          ctx.textAlign = "left";
+        }
+        function drawSovereignty(ctx, W, H, time, still) {
+          ctx.clearRect(0, 0, W, H);
+          const m = svModel;
+          const db = svDb;
+
+          /* perímetro: infraestrutura do cliente */
+          ctx.strokeStyle = "rgba(155, 180, 180, 0.35)";
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([5, 5]);
+          ctx.beginPath();
+          ctx.roundRect(12, 26, W - 24, H - 40, 18);
+          ctx.stroke();
+          ctx.setLineDash([]);
+          ctx.font = "600 9.5px Sora, sans-serif";
+          ctx.fillStyle = "rgba(200, 222, 220, 0.8)";
+          ctx.fillText("INFRAESTRUTURA DO CLIENTE", 26, 20);
+
+          /* trilhas estáticas: usuários → modelo → banco */
+          ctx.strokeStyle = "rgba(155, 180, 180, 0.3)";
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([3, 4]);
+          svUsers.forEach((u) => {
+            ctx.beginPath();
+            ctx.moveTo(u.x + 16, u.y);
+            ctx.lineTo(m.x - m.w / 2, m.y);
+            ctx.stroke();
+          });
+          ctx.beginPath();
+          ctx.moveTo(m.x + m.w / 2, m.y);
+          ctx.lineTo(db.x - db.rx - 4, db.cy);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          /* usuários (ícones maiores e mais visíveis) */
+          svUsers.forEach((u) => {
+            ctx.strokeStyle = "rgba(210, 232, 230, 0.9)";
+            ctx.lineWidth = 1.6;
+            /* cabeça */
+            ctx.beginPath();
+            ctx.arc(u.x, u.y - 5, 4.5, 0, Math.PI * 2);
+            ctx.stroke();
+            /* ombros */
+            ctx.beginPath();
+            ctx.arc(u.x, u.y + 8, 8, Math.PI * 1.05, Math.PI * 1.95);
+            ctx.stroke();
+          });
+          svLabel(ctx, "usuários", svUsers[0].x, svUsers[1].y + 30);
+
+          /* modelo de IA (processamento) */
+          const pulse = still ? 0 : (Math.sin(time / 300) + 1) / 2;
+          ctx.fillStyle = `rgba(79, 209, 197, ${0.08 + pulse * 0.05})`;
+          ctx.strokeStyle = `rgba(${TEAL}, ${0.75 + pulse * 0.25})`;
+          ctx.lineWidth = 1.6;
+          ctx.beginPath();
+          ctx.roundRect(m.x - m.w / 2, m.y - m.h / 2, m.w, m.h, 12);
+          ctx.fill();
+          ctx.stroke();
+          /* selo "IA" dentro do bloco */
+          ctx.font = "600 17px 'Space Grotesk', sans-serif";
+          ctx.textAlign = "center";
+          ctx.fillStyle = `rgba(${TEAL}, 0.95)`;
+          ctx.fillText("IA", m.x, m.y - 2);
+          ctx.font = "500 8px Sora, sans-serif";
+          ctx.fillStyle = "rgba(200, 222, 220, 0.65)";
+          ctx.fillText("processamento", m.x, m.y + 14);
+          ctx.textAlign = "left";
+          svLabel(ctx, "modelo de IA", m.x, m.y + m.h / 2 + 18);
+
+          /* banco de dados do cliente (cilindro) */
+          ctx.strokeStyle = "rgba(210, 232, 230, 0.9)";
+          ctx.fillStyle = "rgba(79, 209, 197, 0.08)";
+          ctx.lineWidth = 1.6;
+          ctx.beginPath();
+          ctx.moveTo(db.x - db.rx, db.cy - db.depth / 2);
+          ctx.lineTo(db.x - db.rx, db.cy + db.depth / 2);
+          ctx.ellipse(
+            db.x,
+            db.cy + db.depth / 2,
+            db.rx,
+            db.ry,
+            0,
+            Math.PI,
+            0,
+            true,
+          );
+          ctx.lineTo(db.x + db.rx, db.cy - db.depth / 2);
+          ctx.fill();
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.ellipse(db.x, db.cy - db.depth / 2, db.rx, db.ry, 0, 0, Math.PI * 2);
+          ctx.stroke();
+          /* linha interna do cilindro */
+          ctx.strokeStyle = "rgba(210, 232, 230, 0.4)";
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.ellipse(db.x, db.cy, db.rx, db.ry, 0, Math.PI, 0, true);
+          ctx.stroke();
+          svLabel(ctx, "banco do cliente", db.x, db.cy + db.depth / 2 + 24);
+
+          if (still) return;
+
+          svUsers.forEach((u, i) => {
+            const offset = i * (SV_PERIOD / 2);
+            const t = ((time + offset) % SV_PERIOD) / SV_PERIOD;
+            const inX = m.x - m.w / 2;
+            const outX = m.x + m.w / 2;
+
+            if (t < 0.3) {
+              /* dado do usuário chega ao modelo */
+              const p = svEase(t / 0.3);
+              svPacket(ctx, svLerp(u.x + 16, inX, p), svLerp(u.y, m.y, p), 1);
+            } else if (t < 0.42) {
+              /* modelo processa: anel expandindo */
+              const p = (t - 0.3) / 0.12;
+              ctx.strokeStyle = `rgba(${TEAL}, ${0.7 * (1 - p)})`;
+              ctx.lineWidth = 1.6;
+              ctx.beginPath();
+              ctx.roundRect(
+                m.x - m.w / 2 - 7 * p,
+                m.y - m.h / 2 - 7 * p,
+                m.w + 14 * p,
+                m.h + 14 * p,
+                14,
+              );
+              ctx.stroke();
+            } else if (t < 0.72) {
+              /* resposta volta ao usuário; cópia vai ao banco */
+              const p = svEase((t - 0.42) / 0.3);
+              svPacket(ctx, svLerp(inX, u.x + 16, p), svLerp(m.y, u.y, p), 1);
+              svPacket(
+                ctx,
+                svLerp(outX, db.x - db.rx - 4, p),
+                svLerp(m.y, db.cy, p),
+                0.9,
+              );
+            } else if (t < 0.85) {
+              /* gravação no banco: anel no cilindro */
+              const p = (t - 0.72) / 0.13;
+              ctx.strokeStyle = `rgba(${TEAL}, ${0.8 * (1 - p)})`;
+              ctx.lineWidth = 1.6;
+              ctx.beginPath();
+              ctx.ellipse(
+                db.x,
+                db.cy - db.depth / 2,
+                db.rx + 5 * p,
+                db.ry + 2.5 * p,
+                0,
+                0,
+                Math.PI * 2,
+              );
+              ctx.stroke();
+            }
+          });
+        }
+
         setup("mlCanvas", drawMl);
         setup("dlCanvas", drawDl);
         setup("opsCanvas", drawOps);
+        setup("sovereigntyCanvas", drawSovereignty);
+      })();
+
+      /* ---- Esteira de setores: clona o grupo até cobrir a tela com folga ---- */
+      (function () {
+        const track = document.getElementById("sectorTrack");
+        if (!track) return;
+        const original = track.querySelector(".sector-group");
+        if (!original) return;
+
+        function build() {
+          track.querySelectorAll(".sector-group").forEach((g, i) => {
+            if (i > 0) g.remove();
+          });
+          const carousel = track.parentElement;
+          const targetWidth = carousel.clientWidth * 3;
+          let groupWidth = original.getBoundingClientRect().width;
+          while (track.scrollWidth < targetWidth) {
+            const clone = original.cloneNode(true);
+            clone.setAttribute("aria-hidden", "true");
+            track.appendChild(clone);
+          }
+          groupWidth = original.getBoundingClientRect().width;
+          track.style.setProperty("--sector-shift", `-${groupWidth}px`);
+        }
+
+        build();
+        let resizeTimer = null;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(build, 200);
+        });
       })();
 
       /* ---- Cursor spotlight (cards, etapas, founders) ---- */
@@ -2707,5 +3035,17 @@
       })();
     </script>
     <script src="js/consent.js" defer></script>
+    <script type="module">
+      const mount = document.getElementById('heroDottedSurface');
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches;
+
+      if (mount && !prefersReducedMotion && window.innerWidth >= 768) {
+        import('./js/dotted-surface.js')
+          .then(({ initDottedSurface }) => initDottedSurface(mount))
+          .catch(() => {});
+      }
+    </script>
   </body>
 </html>
