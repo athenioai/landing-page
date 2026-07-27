@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mensagem recebida | Athenio</title>
+    <title data-i18n="meta.thanks.title">Mensagem recebida | Athenio</title>
     <meta
       name="description"
+      data-i18n-attr="content:meta.thanks.description"
       content="Recebemos sua mensagem. A Athenio vai analisar o problema descrito e responder em até um dia útil."
     />
     <meta name="robots" content="noindex, nofollow" />
@@ -39,6 +40,7 @@
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+    <script src="js/i18n.js"></script>
     <style>
       :root {
         --teal: #4fd1c5;
@@ -295,6 +297,9 @@
         color: var(--subtle);
         font-size: 0.82rem;
       }
+      .foot-lang {
+        margin-top: 12px;
+      }
 
       @media (max-width: 640px) {
         .steps {
@@ -331,8 +336,10 @@
             <path d="M20 6L9 17l-5-5" />
           </svg>
         </div>
-        <h1 data-reveal data-delay="1">Mensagem recebida.</h1>
-        <p class="sub" data-reveal data-delay="1">
+        <h1 data-reveal data-delay="1" data-i18n="thanks.title">
+          Mensagem recebida.
+        </h1>
+        <p class="sub" data-reveal data-delay="1" data-i18n="thanks.sub">
           Obrigado pelo contato. A Athenio vai analisar o problema que você
           descreveu e responder em até um dia útil. Você também recebe um
           e-mail de confirmação em instantes.
@@ -341,24 +348,24 @@
         <div class="steps" data-reveal data-delay="2">
           <div class="step">
             <div class="n">01</div>
-            <h3>Análise</h3>
-            <p>
+            <h3 data-i18n="thanks.s1.title">Análise</h3>
+            <p data-i18n="thanks.s1.text">
               Avaliamos o problema descrito, o dado disponível e a viabilidade
               técnica.
             </p>
           </div>
           <div class="step">
             <div class="n">02</div>
-            <h3>Resposta</h3>
-            <p>
+            <h3 data-i18n="thanks.s2.title">Resposta</h3>
+            <p data-i18n="thanks.s2.text">
               Retornamos em até um dia útil, pelo e-mail ou WhatsApp que você
               informou.
             </p>
           </div>
           <div class="step">
             <div class="n">03</div>
-            <h3>Conversa inicial</h3>
-            <p>
+            <h3 data-i18n="thanks.s3.title">Conversa inicial</h3>
+            <p data-i18n="thanks.s3.text">
               Uma conversa de diagnóstico, sem custo e sem compromisso, para
               alinhar os próximos passos.
             </p>
@@ -367,9 +374,10 @@
 
         <div data-reveal data-delay="3">
           <a href="index.html" class="btn"
-            >Voltar para o site <span class="arr">→</span></a
+            ><span data-i18n="thanks.back">Voltar para o site</span>
+            <span class="arr">→</span></a
           >
-          <p class="alt">
+          <p class="alt" data-i18n-html="thanks.alt">
             Precisa complementar algo? Escreva para
             <a href="mailto:contato@athenio.ai">contato@athenio.ai</a>.
           </p>
@@ -378,7 +386,12 @@
     </main>
 
     <footer>
-      <div class="wrap">Athenio · Tecnologia LTDA · © 2026</div>
+      <div class="wrap">
+        <span data-i18n="footer.copyright"
+          >Athenio · Tecnologia LTDA · © 2026</span
+        >
+        <div class="foot-lang"><span data-i18n-switcher></span></div>
+      </div>
     </footer>
     <script src="js/consent.js" defer></script>
   </body>

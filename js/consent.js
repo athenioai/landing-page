@@ -52,17 +52,32 @@
   ].join("");
   document.head.appendChild(style);
 
+  /* falls back to the source-language string when i18n is unavailable */
+  function t(key, fallback) {
+    return window.I18N ? window.I18N.t(key, fallback) : fallback;
+  }
+
   var banner = document.createElement("div");
   banner.id = "cookieBanner";
   banner.setAttribute("role", "dialog");
-  banner.setAttribute("aria-label", "Consentimento de cookies");
+  banner.setAttribute("data-i18n-attr", "aria-label:consent.aria");
+  banner.setAttribute("aria-label", t("consent.aria", "Consentimento de cookies"));
   banner.innerHTML =
-    "<p>Usamos cookies para entender como o site é utilizado e melhorar a experiência. " +
-    "Cookies não essenciais só são ativados com o seu consentimento. " +
-    'Saiba mais na <a href="cookies.html">Política de Cookies</a>.</p>' +
+    '<p data-i18n-html="consent.text">' +
+    t(
+      "consent.text",
+      "Usamos cookies para entender como o site é utilizado e melhorar a experiência. " +
+        "Cookies não essenciais só são ativados com o seu consentimento. " +
+        'Saiba mais na <a href="cookies.html">Política de Cookies</a>.',
+    ) +
+    "</p>" +
     '<div class="cb-actions">' +
-    '<button type="button" class="cb-accept">Aceitar</button>' +
-    '<button type="button" class="cb-reject">Recusar</button>' +
+    '<button type="button" class="cb-accept" data-i18n="consent.accept">' +
+    t("consent.accept", "Aceitar") +
+    "</button>" +
+    '<button type="button" class="cb-reject" data-i18n="consent.reject">' +
+    t("consent.reject", "Recusar") +
+    "</button>" +
     "</div>";
 
   function close(choice) {
@@ -84,6 +99,7 @@
 
   function mount() {
     document.body.appendChild(banner);
+    if (window.I18N) window.I18N.apply();
     /* force a layout pass so the entry transition always runs (rAF can be throttled) */
     void banner.offsetHeight;
     banner.classList.add("show");

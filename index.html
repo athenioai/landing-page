@@ -3,9 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Athenio | Engenharia de visão computacional e machine learning</title>
+    <title data-i18n="meta.home.title">
+      Athenio | Engenharia de visão computacional e machine learning
+    </title>
     <meta
       name="description"
+      data-i18n-attr="content:meta.home.description"
       content="A Athenio é uma empresa brasileira de inteligência artificial aplicada. Desenvolvemos modelos próprios de visão computacional, machine learning e deep learning para resolver problemas específicos de cada empresa."
     />
     <meta name="robots" content="index, follow" />
@@ -18,6 +21,7 @@
     <meta property="og:title" content="Athenio" />
     <meta
       property="og:description"
+      data-i18n-attr="content:meta.home.social"
       content="Engenharia de inteligência artificial aplicada. Visão computacional, machine learning e deep learning sob medida."
     />
     <meta property="og:url" content="https://athenio.ai/" />
@@ -32,6 +36,7 @@
     <meta name="twitter:title" content="Athenio" />
     <meta
       name="twitter:description"
+      data-i18n-attr="content:meta.home.social"
       content="Engenharia de inteligência artificial aplicada. Visão computacional, machine learning e deep learning sob medida."
     />
     <meta
@@ -65,6 +70,7 @@
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+    <script src="js/i18n.js"></script>
     <style>
       :root {
         --teal: #4fd1c5;
@@ -938,7 +944,7 @@
         color: var(--muted);
         line-height: 1.5;
       }
-      .prin-deliv span {
+      .prin-deliv > span:first-child {
         display: block;
         font-size: 0.68rem;
         letter-spacing: 0.16em;
@@ -1455,14 +1461,20 @@
           ><img src="public/assets/athenio-logo.svg" alt="Athenio"
         /></a>
         <nav class="nav-links" id="navLinks">
-          <a href="#fazemos">O que fazemos</a>
-          <a href="#capacidades">Capacidades</a>
-          <a href="#processo">Como trabalhamos</a>
-          <a href="#empresa">Empresa</a>
-          <a href="#contato">Contato</a>
+          <a href="#fazemos" data-i18n="nav.services">O que fazemos</a>
+          <a href="#capacidades" data-i18n="nav.capabilities">Capacidades</a>
+          <a href="#processo" data-i18n="nav.process">Como trabalhamos</a>
+          <a href="#empresa" data-i18n="nav.company">Empresa</a>
+          <a href="#contato" data-i18n="nav.contact">Contato</a>
         </nav>
         <div class="nav-cta">
-          <button class="menu-btn" id="menuBtn" aria-label="Menu">
+          <div data-i18n-switcher></div>
+          <button
+            class="menu-btn"
+            id="menuBtn"
+            data-i18n-attr="aria-label:a11y.menu"
+            aria-label="Menu"
+          >
             <span></span><span></span><span></span>
           </button>
         </div>
@@ -1478,6 +1490,7 @@
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <h1
+            data-i18n-words="hero.title"
             aria-label="O problema que a IA de prateleira não resolve, a Athenio constrói do zero."
           >
             <span class="w" style="--i: 0" aria-hidden="true">O</span>
@@ -1497,9 +1510,12 @@
           </h1>
           <div class="hero-actions" data-reveal data-delay="1">
             <a href="#contato" class="btn btn-primary"
-              >Falar sobre um projeto <span class="arr">→</span></a
+              ><span data-i18n="hero.ctaPrimary">Falar sobre um projeto</span>
+              <span class="arr">→</span></a
             >
-            <a href="#fazemos" class="btn btn-ghost">Conhecer a Athenio</a>
+            <a href="#fazemos" class="btn btn-ghost" data-i18n="hero.ctaSecondary"
+              >Conhecer a Athenio</a
+            >
           </div>
         </div>
       </div>
@@ -1508,12 +1524,14 @@
     <!-- ===================== O QUE FAZEMOS ===================== -->
     <section class="sec mission" id="fazemos">
       <div class="wrap">
-        <span class="eyebrow" data-reveal>O que fazemos</span>
-        <h2 data-reveal data-delay="1">
+        <span class="eyebrow" data-reveal data-i18n="mission.eyebrow"
+          >O que fazemos</span
+        >
+        <h2 data-reveal data-delay="1" data-i18n="mission.title">
           Inteligência artificial construída para o problema, não adaptada
           dele.
         </h2>
-        <p data-reveal data-delay="2">
+        <p data-reveal data-delay="2" data-i18n-html="mission.p1">
           A Athenio é uma empresa brasileira de inteligência artificial
           aplicada. Desenvolvemos <b>modelos próprios</b> de visão
           computacional, machine learning e deep learning para resolver
@@ -1521,13 +1539,13 @@
           roda essa IA como core do sistema, com treinamento e inteligência
           próprios.
         </p>
-        <p data-reveal data-delay="3">
+        <p data-reveal data-delay="3" data-i18n-html="mission.p2">
           Cada projeto parte do problema real da empresa: a inspeção que hoje
           é feita no olho, o documento que se lê à mão, o dado que ninguém
           consegue processar em escala. E resulta em um
           <span class="em">modelo treinado para aquele caso específico</span>.
         </p>
-        <p data-reveal data-delay="4">
+        <p data-reveal data-delay="4" data-i18n="mission.p3">
           O trabalho é baseado em tecnologia própria: a Athenio constrói e
           treina seus modelos de visão computacional e aprendizado de máquina,
           em vez de apenas integrar ferramentas de terceiros. Isso permite
@@ -1542,16 +1560,18 @@
     <!-- ===================== CAPACIDADE HORIZONTAL ===================== -->
     <section class="sec mission" id="horizontal">
       <div class="wrap">
-        <span class="eyebrow" data-reveal>Capacidade horizontal</span>
-        <h2 data-reveal data-delay="1">
+        <span class="eyebrow" data-reveal data-i18n="horizontal.eyebrow"
+          >Capacidade horizontal</span
+        >
+        <h2 data-reveal data-delay="1" data-i18n="horizontal.title">
           Uma competência técnica, muitos setores.
         </h2>
-        <p data-reveal data-delay="2">
+        <p data-reveal data-delay="2" data-i18n="horizontal.p1">
           A capacidade da Athenio é horizontal: onde existem dados, imagens,
           vídeos ou sinais a serem processados, existe um problema que a
           empresa pode resolver, independentemente do setor.
         </p>
-        <p data-reveal data-delay="3">
+        <p data-reveal data-delay="3" data-i18n-html="horizontal.p2">
           A mesma base técnica se aplica à inspeção de qualidade na indústria,
           à leitura de documentos no setor financeiro e jurídico, à análise de
           imagem na saúde, à avaliação de área e cultura no agronegócio, ao
@@ -1568,27 +1588,27 @@
           <div class="sector-group">
             <span class="sector-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l6 4v-4l6 4v-4l6 4v7H3Z"/><path d="M3 21h18"/></svg>
-              Indústria
+              <span data-i18n="sectors.industry">Indústria</span>
             </span>
             <span class="sector-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 7l-3 6a3 3 0 0 0 6 0l-3-6ZM19 7l-3 6a3 3 0 0 0 6 0l-3-6ZM5 7h14M9 21h6"/></svg>
-              Financeiro e jurídico
+              <span data-i18n="sectors.finance">Financeiro e jurídico</span>
             </span>
             <span class="sector-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.65-9.5 9-9.5 9Z"/></svg>
-              Saúde
+              <span data-i18n="sectors.health">Saúde</span>
             </span>
             <span class="sector-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c6-4 8-8 8-13a8 8 0 0 0-16 0c0 5 2 9 8 13Z"/><path d="M12 22V11"/></svg>
-              Agronegócio
+              <span data-i18n="sectors.agro">Agronegócio</span>
             </span>
             <span class="sector-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6M4 21h16"/></svg>
-              Infraestrutura
+              <span data-i18n="sectors.infra">Infraestrutura</span>
             </span>
             <span class="sector-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="14" height="13" rx="2"/><path d="M16.5 10.5 21.5 7v10l-5-3.5Z"/></svg>
-              Análise de vídeo
+              <span data-i18n="sectors.video">Análise de vídeo</span>
             </span>
           </div>
         </div>
@@ -1599,8 +1619,12 @@
     <section class="sec" id="capacidades">
       <div class="wrap">
         <div class="sec-head">
-          <span class="eyebrow" data-reveal>Capacidades</span>
-          <h2 data-reveal data-delay="1">O que a Athenio desenvolve.</h2>
+          <span class="eyebrow" data-reveal data-i18n="caps.eyebrow"
+            >Capacidades</span
+          >
+          <h2 data-reveal data-delay="1" data-i18n="caps.title">
+            O que a Athenio desenvolve.
+          </h2>
         </div>
         <div class="cards four">
           <div class="card" data-reveal>
@@ -1620,8 +1644,8 @@
                 <circle cx="12" cy="12" r="3" />
               </svg>
             </div>
-            <h3>Visão computacional</h3>
-            <p>
+            <h3 data-i18n="caps.c1.title">Visão computacional</h3>
+            <p data-i18n="caps.c1.text">
               Detecção, classificação, segmentação e rastreamento em imagem e
               vídeo. Aplicável a inspeção, contagem, leitura, monitoramento e
               análise de conteúdo visual.
@@ -1653,8 +1677,10 @@
                 <path d="M5 21V9M10 21V4M15 21v-9M20 21V7" />
               </svg>
             </div>
-            <h3>Machine learning e análise de dados</h3>
-            <p>
+            <h3 data-i18n="caps.c2.title">
+              Machine learning e análise de dados
+            </h3>
+            <p data-i18n="caps.c2.text">
               Modelos preditivos, detecção de anomalia, classificação e análise
               de grandes volumes de dado, aplicados a previsão, risco, fraude e
               otimização.
@@ -1691,8 +1717,8 @@
                 <path class="e e4" d="M13.7 13.2L17.3 16.8" />
               </svg>
             </div>
-            <h3>Deep learning sob medida</h3>
-            <p>
+            <h3 data-i18n="caps.c3.title">Deep learning sob medida</h3>
+            <p data-i18n="caps.c3.text">
               Redes neurais treinadas para problemas específicos, quando a
               solução exige mais do que modelos prontos.
             </p>
@@ -1721,8 +1747,10 @@
                 <path d="M21 3v6h-6" />
               </svg>
             </div>
-            <h3>Operação e sustentação de modelos</h3>
-            <p>
+            <h3 data-i18n="caps.c4.title">
+              Operação e sustentação de modelos
+            </h3>
+            <p data-i18n="caps.c4.text">
               Implantação, monitoramento e recalibração dos modelos em
               produção, garantindo que continuem precisos ao longo do tempo.
             </p>
@@ -1742,54 +1770,62 @@
     <section class="sec principles" id="processo">
       <div class="wrap">
         <div class="sec-head">
-          <span class="eyebrow" data-reveal>Como trabalhamos</span>
-          <h2 data-reveal data-delay="1">Do diagnóstico à operação.</h2>
+          <span class="eyebrow" data-reveal data-i18n="process.eyebrow"
+            >Como trabalhamos</span
+          >
+          <h2 data-reveal data-delay="1" data-i18n="process.title">
+            Do diagnóstico à operação.
+          </h2>
         </div>
         <div class="prin-grid">
           <div class="prin" data-reveal>
             <div class="n">01</div>
-            <h3>Diagnóstico</h3>
-            <p>
+            <h3 data-i18n="process.s1.title">Diagnóstico</h3>
+            <p data-i18n="process.s1.text">
               A Athenio começa pelo entendimento do problema e do dado
               disponível, antes de propor qualquer solução.
             </p>
             <div class="prin-deliv">
-              <span>Entregável</span> relatório de viabilidade e proposta de
-              solução
+              <span data-i18n="process.deliverable">Entregável</span>
+              <span data-i18n="process.s1.deliv">relatório de viabilidade e proposta de
+              solução</span>
             </div>
           </div>
           <div class="prin" data-reveal data-delay="1">
             <div class="n">02</div>
-            <h3>Prova de conceito</h3>
-            <p>
+            <h3 data-i18n="process.s2.title">Prova de conceito</h3>
+            <p data-i18n="process.s2.text">
               Um projeto inicial de escopo reduzido valida a viabilidade
               técnica e o resultado esperado, com baixo risco para o cliente.
             </p>
             <div class="prin-deliv">
-              <span>Entregável</span> modelo validado com métrica acordada
+              <span data-i18n="process.deliverable">Entregável</span>
+              <span data-i18n="process.s2.deliv">modelo validado com métrica acordada</span>
             </div>
           </div>
           <div class="prin" data-reveal>
             <div class="n">03</div>
-            <h3>Desenvolvimento</h3>
-            <p>
+            <h3 data-i18n="process.s3.title">Desenvolvimento</h3>
+            <p data-i18n="process.s3.text">
               Construção e treinamento do modelo sob medida, integrado ao
               ambiente e ao fluxo de trabalho da empresa.
             </p>
             <div class="prin-deliv">
-              <span>Entregável</span> sistema em produção, integrado à
-              operação
+              <span data-i18n="process.deliverable">Entregável</span>
+              <span data-i18n="process.s3.deliv">sistema em produção, integrado à
+              operação</span>
             </div>
           </div>
           <div class="prin" data-reveal data-delay="1">
             <div class="n">04</div>
-            <h3>Sustentação</h3>
-            <p>
+            <h3 data-i18n="process.s4.title">Sustentação</h3>
+            <p data-i18n="process.s4.text">
               Acompanhamento contínuo do modelo em produção, com recalibração
               conforme o dado e a operação evoluem.
             </p>
             <div class="prin-deliv">
-              <span>Entregável</span> monitoramento contínuo e recalibração
+              <span data-i18n="process.deliverable">Entregável</span>
+              <span data-i18n="process.s4.deliv">monitoramento contínuo e recalibração</span>
             </div>
           </div>
         </div>
@@ -1806,16 +1842,18 @@
             width="360"
             height="300"
           ></canvas>
-          <span class="viz-caption"
+          <span class="viz-caption" data-i18n="sov.caption"
             >dado processado e salvo na infraestrutura do cliente</span
           >
         </div>
         <div class="sovereignty-copy">
-          <span class="eyebrow" data-reveal>Soberania de dados</span>
-          <h2 data-reveal data-delay="1">
+          <span class="eyebrow" data-reveal data-i18n="sov.eyebrow"
+            >Soberania de dados</span
+          >
+          <h2 data-reveal data-delay="1" data-i18n="sov.title">
             O dado permanece com quem o gera.
           </h2>
-          <p data-reveal data-delay="2">
+          <p data-reveal data-delay="2" data-i18n-html="sov.p1">
             Os modelos da Athenio podem operar na infraestrutura do próprio
             cliente, em ambiente on-premise ou em nuvem privada. O dado
             sensível não precisa ser enviado a serviços externos, o que
@@ -1824,7 +1862,7 @@
               LGPD</span
             >.
           </p>
-          <p data-reveal data-delay="3">
+          <p data-reveal data-delay="3" data-i18n="sov.p2">
             Para empresas que lidam com informação estratégica ou regulada,
             essa é uma diferença central em relação a soluções baseadas em
             nuvem pública de terceiros.
@@ -1839,8 +1877,12 @@
     <section class="sec" id="porque">
       <div class="wrap">
         <div class="sec-head">
-          <span class="eyebrow" data-reveal>Por que a Athenio</span>
-          <h2 data-reveal data-delay="1">O que distingue a Athenio.</h2>
+          <span class="eyebrow" data-reveal data-i18n="why.eyebrow"
+            >Por que a Athenio</span
+          >
+          <h2 data-reveal data-delay="1" data-i18n="why.title">
+            O que distingue a Athenio.
+          </h2>
         </div>
         <div class="cards">
           <div class="card" data-reveal>
@@ -1859,8 +1901,8 @@
                 <path d="M12 2l3 5.5 6 .9-4.4 4.3 1 6.1-5.6-3-5.6 3 1-6.1L3 8.4l6-.9L12 2z" />
               </svg>
             </div>
-            <h3>Tecnologia própria</h3>
-            <p>
+            <h3 data-i18n="why.c1.title">Tecnologia própria</h3>
+            <p data-i18n="why.c1.text">
               Modelos construídos e treinados internamente. A competência
               técnica é da empresa, não de um fornecedor externo.
             </p>
@@ -1883,8 +1925,8 @@
                 <circle cx="12" cy="12" r="1" />
               </svg>
             </div>
-            <h3>Especialização em IA de alta complexidade</h3>
-            <p>
+            <h3 data-i18n="why.c2.title">Especialização em IA de alta complexidade</h3>
+            <p data-i18n="why.c2.text">
               Foco em visão computacional e deep learning, a engenharia
               difícil, que exige competência específica e escassa no mercado.
             </p>
@@ -1905,8 +1947,8 @@
                 <path d="M20 6L9 17l-5-5" />
               </svg>
             </div>
-            <h3>Compromisso com o resultado</h3>
-            <p>
+            <h3 data-i18n="why.c3.title">Compromisso com o resultado</h3>
+            <p data-i18n="why.c3.text">
               Cada solução é avaliada pelo que entrega em operação, não pela
               tecnologia empregada.
             </p>
@@ -1915,47 +1957,47 @@
 
         <div class="compare" data-reveal data-delay="2">
           <div class="compare-row compare-header">
-            <div>IA de prateleira</div>
-            <div>IA da Athenio</div>
+            <div data-i18n="compare.head.left">IA de prateleira</div>
+            <div data-i18n="compare.head.right">IA da Athenio</div>
           </div>
           <div class="compare-row">
             <div>
               <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-              Modelo genérico, o mesmo para qualquer empresa
+              <span data-i18n="compare.r1.left">Modelo genérico, o mesmo para qualquer empresa</span>
             </div>
             <div>
               <svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              Modelo treinado no dado da sua operação
-            </div>
-          </div>
-          <div class="compare-row">
-            <div>
-              <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-              O dado sai da empresa para a nuvem de terceiros
-            </div>
-            <div>
-              <svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              O dado permanece na sua infraestrutura
+              <span data-i18n="compare.r1.right">Modelo treinado no dado da sua operação</span>
             </div>
           </div>
           <div class="compare-row">
             <div>
               <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-              Caixa-preta de fornecedor externo
+              <span data-i18n="compare.r2.left">O dado sai da empresa para a nuvem de terceiros</span>
             </div>
             <div>
               <svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              Controle e propriedade sobre a solução
+              <span data-i18n="compare.r2.right">O dado permanece na sua infraestrutura</span>
             </div>
           </div>
           <div class="compare-row">
             <div>
               <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-              Resolve o caso médio, falha no específico
+              <span data-i18n="compare.r3.left">Caixa-preta de fornecedor externo</span>
             </div>
             <div>
               <svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              Construída para o seu caso específico
+              <span data-i18n="compare.r3.right">Controle e propriedade sobre a solução</span>
+            </div>
+          </div>
+          <div class="compare-row">
+            <div>
+              <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              <span data-i18n="compare.r4.left">Resolve o caso médio, falha no específico</span>
+            </div>
+            <div>
+              <svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              <span data-i18n="compare.r4.right">Construída para o seu caso específico</span>
             </div>
           </div>
         </div>
@@ -1966,9 +2008,11 @@
     <section class="sec" id="empresa">
       <div class="wrap">
         <div class="sec-head">
-          <span class="eyebrow" data-reveal>Empresa</span>
-          <h2 data-reveal data-delay="1">A Athenio.</h2>
-          <p class="lead" data-reveal data-delay="2">
+          <span class="eyebrow" data-reveal data-i18n="team.eyebrow"
+            >Empresa</span
+          >
+          <h2 data-reveal data-delay="1" data-i18n="team.title">A Athenio.</h2>
+          <p class="lead" data-reveal data-delay="2" data-i18n="team.lead">
             A Athenio reúne formação técnica em inteligência artificial e
             experiência em gestão e conformidade.
           </p>
@@ -1983,9 +2027,9 @@
               />
             </div>
             <div class="info">
-              <div class="role">Cofundador & CTO</div>
+              <div class="role" data-i18n="team.f1.role">Cofundador & CTO</div>
               <h3>Lucas Couto</h3>
-              <p>
+              <p data-i18n="team.f1.bio">
                 Mestre em Ciência da Computação, especializado em inteligência
                 artificial, com papers publicados internacionalmente na área.
                 Responsável pela arquitetura técnica e pelo desenvolvimento dos
@@ -2002,9 +2046,9 @@
               />
             </div>
             <div class="info">
-              <div class="role">Cofundador & CEO</div>
+              <div class="role" data-i18n="team.f2.role">Cofundador & CEO</div>
               <h3>Fernando Cavalaro</h3>
-              <p>
+              <p data-i18n="team.f2.bio">
                 Bacharel em Direito, com formação em LGPD e em fraudes
                 digitais, além de experiência em gestão comercial. Responsável
                 pela condução dos negócios e pela conformidade.
@@ -2019,10 +2063,10 @@
     <section class="cta-final" id="contato">
       <div class="glow-c"></div>
       <div class="wrap">
-        <h2 data-reveal>
+        <h2 data-reveal data-i18n="cta.title">
           Tem um problema que a inteligência artificial pode resolver?
         </h2>
-        <p data-reveal data-delay="1">
+        <p data-reveal data-delay="1" data-i18n="cta.text">
           A Athenio avalia o problema, o dado disponível e a viabilidade
           técnica antes de propor qualquer solução. A conversa inicial não tem
           custo.
@@ -2036,7 +2080,7 @@
         >
           <div class="ff-row">
             <div class="ff">
-              <label for="lf-name">Nome*</label>
+              <label for="lf-name" data-i18n="form.name">Nome*</label>
               <input
                 id="lf-name"
                 name="name"
@@ -2046,7 +2090,7 @@
               />
             </div>
             <div class="ff">
-              <label for="lf-email">E-mail corporativo*</label>
+              <label for="lf-email" data-i18n="form.email">E-mail corporativo*</label>
               <input
                 id="lf-email"
                 name="email"
@@ -2058,7 +2102,7 @@
           </div>
           <div class="ff-row">
             <div class="ff">
-              <label for="lf-company">Empresa</label>
+              <label for="lf-company" data-i18n="form.company">Empresa</label>
               <input
                 id="lf-company"
                 name="company"
@@ -2068,7 +2112,7 @@
               />
             </div>
             <div class="ff">
-              <label for="lf-whatsapp">WhatsApp</label>
+              <label for="lf-whatsapp" data-i18n="form.whatsapp">WhatsApp</label>
               <input
                 id="lf-whatsapp"
                 name="whatsapp"
@@ -2076,17 +2120,21 @@
                 inputmode="tel"
                 autocomplete="tel"
                 maxlength="20"
+                data-i18n-attr="placeholder:form.whatsappPlaceholder"
                 placeholder="(11) 99999-9999"
               />
             </div>
           </div>
           <div class="ff">
-            <label for="lf-message">Qual problema você quer resolver?*</label>
+            <label for="lf-message" data-i18n="form.message"
+              >Qual problema você quer resolver?*</label
+            >
             <textarea
               id="lf-message"
               name="message"
               rows="4"
               maxlength="2000"
+              data-i18n-attr="placeholder:form.messagePlaceholder"
               placeholder="Conte em poucas linhas o problema, o dado que você tem hoje (imagens, documentos, planilhas...) e o resultado que espera."
             ></textarea>
           </div>
@@ -2100,9 +2148,10 @@
           />
           <div class="lf-error" id="lfError" role="alert"></div>
           <button type="submit" class="btn btn-primary" id="lfSubmit">
-            Enviar mensagem <span class="arr">→</span>
+            <span data-i18n="form.submit">Enviar mensagem</span>
+            <span class="arr">→</span>
           </button>
-          <p class="lf-note">
+          <p class="lf-note" data-i18n-html="form.note">
             Ou escreva direto para
             <a href="mailto:contato@athenio.ai">contato@athenio.ai</a>. Seus
             dados são usados apenas para responder ao contato. Veja a
@@ -2118,30 +2167,33 @@
         <div class="foot">
           <div class="f-brand">
             <img src="public/assets/athenio-logo.svg" alt="Athenio" />
-            <p>
+            <p data-i18n="footer.tagline">
               Athenio, engenharia de inteligência artificial aplicada. Visão
               computacional, machine learning e deep learning sob medida.
             </p>
           </div>
           <div class="f-cols">
             <div>
-              <h5>Empresa</h5>
-              <a href="#fazemos">O que fazemos</a>
-              <a href="#capacidades">Capacidades</a>
-              <a href="#processo">Como trabalhamos</a>
-              <a href="#empresa">Quem somos</a>
+              <h5 data-i18n="footer.col1">Empresa</h5>
+              <a href="#fazemos" data-i18n="nav.services">O que fazemos</a>
+              <a href="#capacidades" data-i18n="nav.capabilities">Capacidades</a>
+              <a href="#processo" data-i18n="nav.process">Como trabalhamos</a>
+              <a href="#empresa" data-i18n="footer.about">Quem somos</a>
             </div>
             <div>
-              <h5>Contato</h5>
-              <a href="mailto:contato@athenio.ai">Falar sobre um projeto</a>
+              <h5 data-i18n="footer.col2">Contato</h5>
+              <a href="mailto:contato@athenio.ai" data-i18n="hero.ctaPrimary"
+                >Falar sobre um projeto</a
+              >
             </div>
             <div>
-              <h5>Conecte</h5>
+              <h5 data-i18n="footer.col3">Conecte</h5>
               <div class="f-socials">
                 <a
                   href="https://www.linkedin.com/company/athenioai"
                   target="_blank"
                   rel="noopener"
+                  data-i18n-attr="aria-label:a11y.linkedin"
                   aria-label="Athenio no LinkedIn"
                 >
                   <svg
@@ -2158,6 +2210,7 @@
                   href="https://x.com/athenioai"
                   target="_blank"
                   rel="noopener"
+                  data-i18n-attr="aria-label:a11y.x"
                   aria-label="Athenio no X (Twitter)"
                 >
                   <svg
@@ -2174,6 +2227,7 @@
                   href="https://www.instagram.com/athenio.ai"
                   target="_blank"
                   rel="noopener"
+                  data-i18n-attr="aria-label:a11y.instagram"
                   aria-label="Athenio no Instagram"
                 >
                   <svg
@@ -2195,11 +2249,17 @@
           </div>
         </div>
         <div class="foot-bottom">
-          <span>Athenio · Tecnologia LTDA · © 2026</span>
+          <span data-i18n="footer.copyright"
+            >Athenio · Tecnologia LTDA · © 2026</span
+          >
           <span style="display: flex; gap: 24px"
-            ><a href="privacidade.html" style="margin: 0">Privacidade</a
-            ><a href="cookies.html" style="margin: 0">Cookies</a
-            ><a href="termos.html" style="margin: 0">Termos</a></span
+            ><a href="privacidade.html" style="margin: 0" data-i18n="footer.privacy"
+              >Privacidade</a
+            ><a href="cookies.html" style="margin: 0" data-i18n="footer.cookies"
+              >Cookies</a
+            ><a href="termos.html" style="margin: 0" data-i18n="footer.terms"
+              >Termos</a
+            ></span
           >
         </div>
       </div>
@@ -2906,6 +2966,9 @@
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx4a2ZqZmNhcGN4em5hbWlwZWxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4NzY5NTMsImV4cCI6MjA5MDQ1Mjk1M30.150Qp950SI_o7JmKKQtMKsUt082baWZB5CLnc-zW0Qs";
         const errEl = document.getElementById("lfError");
         const btn = document.getElementById("lfSubmit");
+        /* falls back to the source-language string when i18n is unavailable */
+        const t = (key, fallback) =>
+          window.I18N ? window.I18N.t(key, fallback) : fallback;
         let lastSubmit = 0;
 
         const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -2955,15 +3018,25 @@
           const message = sanitize(form.message.value).slice(0, 2000);
 
           const errors = [];
-          if (name.length < 2) errors.push("Informe seu nome.");
+          if (name.length < 2) errors.push(t("form.err.name", "Informe seu nome."));
           setInvalid(form.name, name.length < 2);
-          if (!EMAIL_RE.test(email)) errors.push("Informe um e-mail válido.");
+          if (!EMAIL_RE.test(email)) {
+            errors.push(t("form.err.email", "Informe um e-mail válido."));
+          }
           setInvalid(form.email, !EMAIL_RE.test(email));
           if (message.length === 0) {
-            errors.push("Descreva o problema que você quer resolver.");
+            errors.push(
+              t(
+                "form.err.messageEmpty",
+                "Descreva o problema que você quer resolver.",
+              ),
+            );
           } else if (message.length < 10) {
             errors.push(
-              "A descrição ficou muito curta. Conte um pouco mais sobre o problema.",
+              t(
+                "form.err.messageShort",
+                "A descrição ficou muito curta. Conte um pouco mais sobre o problema.",
+              ),
             );
           }
           setInvalid(form.message, message.length < 10);
@@ -2971,13 +3044,13 @@
             errEl.textContent =
               errors.length === 1
                 ? errors[0]
-                : "Preencha os campos destacados.";
+                : t("form.err.multiple", "Preencha os campos destacados.");
             return;
           }
 
           errEl.textContent = "";
           btn.disabled = true;
-          btn.textContent = "Enviando…";
+          btn.textContent = t("form.sending", "Enviando…");
 
           const utm = new URLSearchParams(window.location.search);
           const payload = {
@@ -3027,9 +3100,14 @@
             window.location.href = "obrigado.html";
           } catch (err) {
             btn.disabled = false;
-            btn.innerHTML = 'Enviar mensagem <span class="arr">→</span>';
-            errEl.textContent =
-              "Não foi possível enviar agora. Tente novamente ou escreva para contato@athenio.ai.";
+            btn.innerHTML =
+              '<span data-i18n="form.submit">' +
+              t("form.submit", "Enviar mensagem") +
+              '</span> <span class="arr">→</span>';
+            errEl.textContent = t(
+              "form.err.network",
+              "Não foi possível enviar agora. Tente novamente ou escreva para contato@athenio.ai.",
+            );
           }
         });
       })();
