@@ -13,11 +13,11 @@ window.I18N.register("pt", {
 
   /* ---------- meta ---------- */
   "meta.home.title":
-    "Athenio | Engenharia de visão computacional e machine learning",
+    "Athenio | Engenharia de Visão Computacional e Machine Learning",
   "meta.home.description":
-    "A Athenio é uma empresa brasileira de inteligência artificial aplicada. Desenvolvemos modelos próprios de visão computacional, machine learning e deep learning para resolver problemas específicos de cada empresa.",
+    "A Athenio é uma empresa brasileira de inteligência artificial aplicada. Desenvolvemos modelos próprios de Visão Computacional, Machine Learning e Deep Learning para resolver problemas específicos de cada empresa.",
   "meta.home.social":
-    "Engenharia de inteligência artificial aplicada. Visão computacional, machine learning e deep learning sob medida.",
+    "Engenharia de inteligência artificial aplicada. Visão Computacional, Machine Learning e Deep Learning sob medida.",
   "meta.thanks.title": "Mensagem recebida | Athenio",
   "meta.thanks.description":
     "Recebemos sua mensagem. A Athenio vai analisar o problema descrito e responder em até um dia útil.",
@@ -49,11 +49,11 @@ window.I18N.register("pt", {
   "mission.title":
     "Inteligência artificial construída para o problema, não adaptada dele.",
   "mission.p1":
-    "A Athenio é uma empresa brasileira de inteligência artificial aplicada. Desenvolvemos <b>modelos próprios</b> de visão computacional, machine learning e deep learning para resolver problemas específicos de cada empresa. E construímos o software que roda essa IA como core do sistema, com treinamento e inteligência próprios.",
+    "A Athenio é uma empresa brasileira de inteligência artificial aplicada. Desenvolvemos <b>modelos próprios</b> de Visão Computacional, Machine Learning e Deep Learning para resolver problemas específicos de cada empresa. E construímos o software que roda essa IA como core do sistema, com treinamento e inteligência próprios.",
   "mission.p2":
     "Cada projeto parte do problema real da empresa: a inspeção que hoje é feita no olho, o documento que se lê à mão, o dado que ninguém consegue processar em escala. E resulta em um <span class=\"em\">modelo treinado para aquele caso específico</span>.",
   "mission.p3":
-    "O trabalho é baseado em tecnologia própria: a Athenio constrói e treina seus modelos de visão computacional e aprendizado de máquina, em vez de apenas integrar ferramentas de terceiros. Isso permite atacar problemas que soluções genéricas não resolvem e manter o controle sobre a solução entregue.",
+    "O trabalho é baseado em tecnologia própria: a Athenio constrói e treina seus modelos de Visão Computacional e Aprendizado de Máquina, em vez de apenas integrar ferramentas de terceiros. Isso permite atacar problemas que soluções genéricas não resolvem e manter o controle sobre a solução entregue.",
 
   /* ---------- capacidade horizontal ---------- */
   "horizontal.eyebrow": "Capacidade horizontal",
@@ -72,13 +72,13 @@ window.I18N.register("pt", {
   /* ---------- capacidades ---------- */
   "caps.eyebrow": "Capacidades",
   "caps.title": "O que a Athenio desenvolve.",
-  "caps.c1.title": "Visão computacional",
+  "caps.c1.title": "Visão Computacional",
   "caps.c1.text":
     "Detecção, classificação, segmentação e rastreamento em imagem e vídeo. Aplicável a inspeção, contagem, leitura, monitoramento e análise de conteúdo visual.",
-  "caps.c2.title": "Machine learning e análise de dados",
+  "caps.c2.title": "Machine Learning e análise de dados",
   "caps.c2.text":
     "Modelos preditivos, detecção de anomalia, classificação e análise de grandes volumes de dado, aplicados a previsão, risco, fraude e otimização.",
-  "caps.c3.title": "Deep learning sob medida",
+  "caps.c3.title": "Deep Learning sob medida",
   "caps.c3.text":
     "Redes neurais treinadas para problemas específicos, quando a solução exige mais do que modelos prontos.",
   "caps.c4.title": "Operação e sustentação de modelos",
@@ -123,7 +123,7 @@ window.I18N.register("pt", {
     "Modelos construídos e treinados internamente. A competência técnica é da empresa, não de um fornecedor externo.",
   "why.c2.title": "Especialização em IA de alta complexidade",
   "why.c2.text":
-    "Foco em visão computacional e deep learning, a engenharia difícil, que exige competência específica e escassa no mercado.",
+    "Foco em Visão Computacional e Deep Learning, a engenharia difícil, que exige competência específica e escassa no mercado.",
   "why.c3.title": "Compromisso com o resultado",
   "why.c3.text":
     "Cada solução é avaliada pelo que entrega em operação, não pela tecnologia empregada.",
@@ -177,7 +177,7 @@ window.I18N.register("pt", {
 
   /* ---------- rodapé ---------- */
   "footer.tagline":
-    "Athenio, engenharia de inteligência artificial aplicada. Visão computacional, machine learning e deep learning sob medida.",
+    "Athenio, engenharia de inteligência artificial aplicada. Visão Computacional, Machine Learning e Deep Learning sob medida.",
   "footer.col1": "Empresa",
   "footer.about": "Quem somos",
   "footer.col2": "Contato",

@@ -12,11 +12,11 @@ window.I18N.register("en", {
 
   /* ---------- meta ---------- */
   "meta.home.title":
-    "Athenio | Computer vision and machine learning engineering",
+    "Athenio | Computer Vision and Machine Learning engineering",
   "meta.home.description":
-    "Athenio is a Brazilian applied artificial intelligence company. We build our own computer vision, machine learning and deep learning models to solve each company's specific problems.",
+    "Athenio is a Brazilian applied artificial intelligence company. We build our own Computer Vision, Machine Learning and Deep Learning models to solve each company's specific problems.",
   "meta.home.social":
-    "Applied artificial intelligence engineering. Custom computer vision, machine learning and deep learning.",
+    "Applied artificial intelligence engineering. Custom Computer Vision, Machine Learning and Deep Learning.",
   "meta.thanks.title": "Message received | Athenio",
   "meta.thanks.description":
     "We received your message. Athenio will review the problem you described and reply within one business day.",
@@ -48,11 +48,11 @@ window.I18N.register("en", {
   "mission.title":
     "Artificial intelligence built for the problem, not adapted to it.",
   "mission.p1":
-    "Athenio is a Brazilian applied artificial intelligence company. We develop <b>our own models</b> in computer vision, machine learning and deep learning to solve each company's specific problems. And we build the software that runs this AI as the core of the system, with proprietary training and intelligence.",
+    "Athenio is a Brazilian applied artificial intelligence company. We develop <b>our own models</b> in Computer Vision, Machine Learning and Deep Learning to solve each company's specific problems. And we build the software that runs this AI as the core of the system, with proprietary training and intelligence.",
   "mission.p2":
     "Every project starts from the company's real problem: the inspection still done by eye, the document still read by hand, the data nobody can process at scale. And it results in a <span class=\"em\">model trained for that specific case</span>.",
   "mission.p3":
-    "The work is based on proprietary technology: Athenio builds and trains its own computer vision and machine learning models instead of merely integrating third-party tools. That makes it possible to tackle problems generic solutions cannot solve, and to retain control over what is delivered.",
+    "The work is based on proprietary technology: Athenio builds and trains its own Computer Vision and Machine Learning models instead of merely integrating third-party tools. That makes it possible to tackle problems generic solutions cannot solve, and to retain control over what is delivered.",
 
   /* ---------- horizontal capability ---------- */
   "horizontal.eyebrow": "Horizontal capability",
@@ -71,13 +71,13 @@ window.I18N.register("en", {
   /* ---------- capabilities ---------- */
   "caps.eyebrow": "Capabilities",
   "caps.title": "What Athenio builds.",
-  "caps.c1.title": "Computer vision",
+  "caps.c1.title": "Computer Vision",
   "caps.c1.text":
     "Detection, classification, segmentation and tracking in image and video. Applicable to inspection, counting, reading, monitoring and visual content analysis.",
-  "caps.c2.title": "Machine learning and data analysis",
+  "caps.c2.title": "Machine Learning and data analysis",
   "caps.c2.text":
     "Predictive models, anomaly detection, classification and analysis of large data volumes, applied to forecasting, risk, fraud and optimization.",
-  "caps.c3.title": "Custom deep learning",
+  "caps.c3.title": "Custom Deep Learning",
   "caps.c3.text":
     "Neural networks trained for specific problems, when the solution demands more than off-the-shelf models.",
   "caps.c4.title": "Model operation and maintenance",
@@ -122,7 +122,7 @@ window.I18N.register("en", {
     "Models built and trained in house. The technical competence belongs to the company, not to an outside vendor.",
   "why.c2.title": "Specialization in high-complexity AI",
   "why.c2.text":
-    "Focus on computer vision and deep learning, the hard engineering, which demands specific and scarce expertise.",
+    "Focus on Computer Vision and Deep Learning, the hard engineering, which demands specific and scarce expertise.",
   "why.c3.title": "Commitment to the result",
   "why.c3.text":
     "Every solution is judged by what it delivers in operation, not by the technology used.",
@@ -176,7 +176,7 @@ window.I18N.register("en", {
 
   /* ---------- footer ---------- */
   "footer.tagline":
-    "Athenio, applied artificial intelligence engineering. Custom computer vision, machine learning and deep learning.",
+    "Athenio, applied artificial intelligence engineering. Custom Computer Vision, Machine Learning and Deep Learning.",
   "footer.col1": "Company",
   "footer.about": "Who we are",
   "footer.col2": "Contact",
