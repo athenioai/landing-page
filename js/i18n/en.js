@@ -54,6 +54,16 @@ window.I18N.register("en", {
   "mission.p3":
     "The work is based on proprietary technology: Athenio builds and trains its own Computer Vision and Machine Learning models instead of merely integrating third-party tools. That makes it possible to tackle problems generic solutions cannot solve, and to retain control over what is delivered.",
 
+  /* ---------- clients and partners ---------- */
+  "clients.eyebrow": "Clients and partners",
+  "clients.title": "AI engineering for companies in Brazil and Europe.",
+  "clients.p1":
+    "Athenio builds models and systems for Brazilian and European clients, with the same team, the same engineering rigor and compliance with LGPD and GDPR.",
+  "clients.labelClients": "Clients",
+  "clients.labelProgram": "Program",
+  "clients.portugal": "Portugal",
+  "clients.googleMeta": "Startup in the program",
+
   /* ---------- horizontal capability ---------- */
   "horizontal.eyebrow": "Horizontal capability",
   "horizontal.title": "One technical competence, many sectors.",

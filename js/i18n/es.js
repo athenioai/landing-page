@@ -55,6 +55,16 @@ window.I18N.register("es", {
   "mission.p3":
     "El trabajo se basa en tecnología propia: Athenio construye y entrena sus modelos de Visión por Computadora y aprendizaje automático, en lugar de solo integrar herramientas de terceros. Eso permite atacar problemas que las soluciones genéricas no resuelven y mantener el control sobre la solución entregada.",
 
+  /* ---------- clientes y socios ---------- */
+  "clients.eyebrow": "Clientes y socios",
+  "clients.title": "Ingeniería de IA para empresas de Brasil y Europa.",
+  "clients.p1":
+    "Athenio desarrolla modelos y sistemas para clientes brasileños y europeos, con el mismo equipo, el mismo rigor de ingeniería y conformidad con la LGPD y el GDPR.",
+  "clients.labelClients": "Clientes",
+  "clients.labelProgram": "Programa",
+  "clients.portugal": "Portugal",
+  "clients.googleMeta": "Startup participante del programa",
+
   /* ---------- capacidad horizontal ---------- */
   "horizontal.eyebrow": "Capacidad horizontal",
   "horizontal.title": "Una competencia técnica, muchos sectores.",
